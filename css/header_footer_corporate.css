@@ -1,0 +1,23 @@
+/*Header*/
+form.ecl-search-form > div {
+  display: inline-flex;
+  width: 100%;
+}
+.ecl-breadcrumbs li a.active {
+  color: #ffffff;
+}
+
+/*Footer*/
+.ecl-footer {
+  font-size: 1rem;
+}
+.ecl-footer__label {
+  margin-right: 0.5em;
+}
+.ecl-h4 {
+  font-weight: bold !important;
+  font-style: normal;
+}
+.ecl-h4 .ecl-link.ecl-footer__link {
+  text-decoration: none;
+}

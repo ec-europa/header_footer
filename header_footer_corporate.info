@@ -1,0 +1,8 @@
+name = FPFIS - Header and Footer corporate
+description = Gives variables $header__ec_corporate and $footer__ec_corporate in page.tpl.php.
+core = 7.x
+package = FPFIS
+features[features_api][] = api:2
+dependencies[] = easy_breadcrumb
+php = 5.6
+multisite_version = 2.5
