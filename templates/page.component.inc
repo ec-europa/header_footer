@@ -21,12 +21,12 @@ function header_footer_corporate_preprocess_page(&$variables) {
       ));
     drupal_add_css($path_module . '/assets/europa/styles/europa.min.css',
       array(
-        'group' => 300,
+        'group' => 300, // more than CSS_THEME (=100) to not be overrided.
         'weight' => 100,
       ));
     drupal_add_css($path_module . '/css/header_footer_corporate.css',
       array(
-        'group' => 300,
+        'group' => 300, // more than CSS_THEME (=100) to not be overrided.
         'weight' => 101,
         'cache' => FALSE,
       ));

@@ -1,3 +1,7 @@
+.glyphicon[aria-hidden=true] {
+  display: inline-block;
+}
+
 /*Header*/
 form.ecl-search-form > div {
   display: inline-flex;
