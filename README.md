@@ -27,5 +27,8 @@ Copy it in your **resources/site.make** file :
 
 It is better to specify the tag to download, to know in your sources what version of the module you had downloaded.
 
-## Mangeable links
-Social links of the footer are manageable in `/admin/structure/menu/manage/menu-footer-follow-us` and Links of the Right footer are manageable in `/admin/structure/menu/manage/menu-footer-right`.
+## Manageable links
+### Social links
+Social links of the footer are manageable in `/admin/structure/menu/manage/menu-footer-follow-us`.
+### Right footer links
+Links of the right footer are manageable in `/admin/structure/menu/manage/menu-footer-right`.
