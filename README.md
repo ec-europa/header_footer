@@ -19,7 +19,7 @@ You just have to print them at the right place (before and after the main conten
 
 Copy it in your **resources/site.make** file :
 
-    projects[header_footer_corporate][subdir] = ec_europa
+    projects[header_footer_corporate][subdir] = custom/ec_europa
     projects[header_footer_corporate][download][type] = git
     projects[header_footer_corporate][download][url] = "https://github.com/ec-europa/header_footer_corporate.git"
     projects[header_footer_corporate][download][tag] = "v1.0.1"
