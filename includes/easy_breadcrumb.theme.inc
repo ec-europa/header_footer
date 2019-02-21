@@ -32,7 +32,7 @@ function _header_footer_corporate_theme_easy_breadcrumb(&$variables) {
         $html .= l($value['#title'], $value['#href'], array('attributes' => array('class' => array('ecl-breadcrumbs__link ecl-link--inverted'))));
       }
       else {
-        $html .= l($value['#title'], '#', $value['#href'], array('attributes' => array('class' => array('ecl-breadcrumbs__link ecl-link--inverted'))));
+        $html .= $content;
       }
       $html .= '</li>';
     }
