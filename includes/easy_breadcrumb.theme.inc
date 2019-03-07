@@ -50,7 +50,7 @@ function _header_footer_corporate_theme_easy_breadcrumb(&$variables) {
         $html .= l($content, $it['url'], array('attributes' => array('class' => $it['class'])));
       }
       else {
-        $html .= l($content, '#', array('attributes' => array('class' => $it['class'])));
+        $html .= $content;
       }
       $html .= '</li>';
     }
