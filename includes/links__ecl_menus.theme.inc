@@ -13,7 +13,7 @@
 function _header_footer_corporate_theme_links__ecl_menus($variables) {
   $links = $variables['links'];
   $attributes = $variables['attributes'];
-  $heading = $variables['heading'];
+  $heading = (isset($variables['heading'])) ? $variables['heading'] : '';
   global $language_url;
   $output = '';
   // Conditional classes.
