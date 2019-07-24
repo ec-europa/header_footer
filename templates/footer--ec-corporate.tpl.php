@@ -11,7 +11,7 @@
       <div class="ecl-row">
         <div class="ecl-col-sm ecl-footer__column">
           <h4 class="ecl-h4">
-            <a class="ecl-link ecl-footer__link" href="#"><?php print $site_name; ?></a>
+            <?php print $site_name; ?>
           </h4>
         </div>
         <div class="ecl-col-sm ecl-footer__column">
