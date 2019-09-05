@@ -11,21 +11,6 @@
 function header_footer_corporate_preprocess_header__ec_corporate(&$variables) {
   global $language;
 
-  // Site language switcher menu.
-  $ecl_site_switcher = menu_navigation_links('menu-nexteuropa-site-links');
-  $variables['ecl_site_switcher'] = theme('links__ecl_menus', array(
-    'links' => $ecl_site_switcher,
-    'attributes' => array(
-      'id' => 'ecl-site-switcher',
-      'class' => array('ecl-site-switcher__list', 'ecl-container'),
-    ),
-    'heading' => array(
-      'text' => t('ECL site switcher'),
-      'level' => 'h2',
-      'class' => array('ecl-u-sr-only'),
-    ),
-  ));
-
   // Language switcher.
   $variables['language_switcher_url'] = url(
     'language-selector/site-language', array(
@@ -46,5 +31,4 @@ function header_footer_corporate_preprocess_header__ec_corporate(&$variables) {
 
   $easy_breadcrumb_block = module_invoke('easy_breadcrumb', 'block_view', 'easy_breadcrumb');
   $variables['easy_breadcrumb_block'] = render($easy_breadcrumb_block['content']);
-
 }

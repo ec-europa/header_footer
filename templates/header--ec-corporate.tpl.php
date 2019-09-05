@@ -6,9 +6,6 @@
  */
 ?>
 <header class="ecl-site-header" role="banner">
-  <div class="ecl-site-switcher ecl-site-switcher--header">
-    <?php echo $ecl_site_switcher; ?>
-  </div>
   <div class="ecl-container ecl-site-header__banner">
     <a href="https://ec.europa.eu" class="ecl-logo ecl-logo--logotype ecl-site-header__logo" title="<?php print t('Home - European Commission'); ?>">
       <span class="ecl-u-sr-only"><?php print t('Home - European Commission'); ?></span>
