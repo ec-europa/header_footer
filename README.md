@@ -1,5 +1,6 @@
 
 
+
 # Header Footer Corporate
 
 ## Description
@@ -22,10 +23,11 @@ Copy it in your **resources/site.make** file :
     projects[header_footer_corporate][subdir] = custom/ec_europa
     projects[header_footer_corporate][download][type] = git
     projects[header_footer_corporate][download][url] = "https://github.com/ec-europa/header_footer_corporate.git"
-    projects[header_footer_corporate][download][tag] = "v1.0.5"
-> *"v1.0.5" is just an example*
+    projects[header_footer_corporate][download][tag] = "v1.0.7"
+and run the command `./toolkit/phing build-subsite-dev`
 
-It is better to specify the tag to download, to know in your sources what version of the module you had downloaded.
+> *"v1.0.7" is just an example
+It is better to specify the tag to download, to know in your sources what version of the module you had downloaded.*
 
 ## Manageable links
 ### Social links
