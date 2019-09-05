@@ -4,10 +4,12 @@
  * @file
  * Templating for the header EC corporate.
  */
+
+global $language;
 ?>
 <header class="ecl-site-header" role="banner">
   <div class="ecl-container ecl-site-header__banner">
-    <a href="https://ec.europa.eu" class="ecl-logo ecl-logo--logotype ecl-site-header__logo" title="<?php print t('Home - European Commission'); ?>">
+    <a href="https://ec.europa.eu/info/index_<?php print $language->language; ?>" class="ecl-logo ecl-logo--logotype ecl-site-header__logo" title="<?php print t('Home - European Commission'); ?>">
       <span class="ecl-u-sr-only"><?php print t('Home - European Commission'); ?></span>
     </a>
     <div class="ecl-language-list ecl-language-list--overlay ecl-site-header__language-list">
