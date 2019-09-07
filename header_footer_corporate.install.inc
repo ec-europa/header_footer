@@ -5,9 +5,46 @@
  */
 
 /**
+ * Footer left links: Delete existing and set according config.
+ */
+function _footer__left_links__clean_set(){
+  // The item to add.
+  $link = array(
+    'link_title' => 'European Commission website',
+    'link_path' => 'https://ec.europa.eu/info/index',
+    'menu_name' => 'menu-nexteuropa-site-links',
+    'weight' => 0,
+    'expanded' => 0,
+    'options' => array(),
+  );
+  
+  // Delete existing menu items.
+  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $link['menu_name']))->fetchAll();
+  if(!empty($mlids)){
+    foreach($mlids as $record){
+      menu_link_delete($record->mlid);
+    }
+  }
+  // Adding new menu item.
+  $languages = language_list('enabled')[1];
+  if(!empty($languages)){
+    $original_link = $link;
+    foreach($languages as $language){
+      $link = $original_link;
+      $link['language'] = $language->language;
+      $link['link_path'] .= '_'.$language->language;
+      menu_link_save($link);
+    }
+  }
+  else{
+    menu_link_save($link);
+  }
+}
+
+/**
  * Footer links: Copy links from custom menus (used in MARE sites) to our menus.
  */
-function _footer__copy_links(){
+function _footer__center_right_copy_links(){
   $migration_menus = array(
     array(
       'old' => 'menu-improved-follow-us',

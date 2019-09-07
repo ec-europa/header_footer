@@ -280,50 +280,23 @@ function header_footer_corporate_enable() {
       ->condition('i18n_mode', 0)
       ->execute();
   }
+  // Clean and set footer left links.
+  _footer__left_links__clean_set();
+  
   // Copy footer links from custom menus (used in MARE sites) to our menus.
-  _footer__copy_links();
+  _footer__center_right_copy_links();
 }
 
 /**
  * Footer left links: Two links relative to EC homepage become once.
  */
 function header_footer_corporate_update_7001() {
-  // The item to add.
-  $link = array(
-    'link_title' => 'European Commission website',
-    'link_path' => 'https://ec.europa.eu/info/index',
-    'menu_name' => 'menu-nexteuropa-site-links',
-    'weight' => 0,
-    'expanded' => 0,
-    'options' => array(),
-  );
-  
-  // Delete existing menu items.
-  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $link['menu_name']))->fetchAll();
-  if(!empty($mlids)){
-    foreach($mlids as $record){
-      menu_link_delete($record->mlid);
-    }
-  }
-  // Adding new menu item.
-  $languages = language_list('enabled')[1];
-  if(!empty($languages)){
-    $original_link = $link;
-    foreach($languages as $language){
-      $link = $original_link;
-      $link['language'] = $language->language;
-      $link['link_path'] .= '_'.$language->language;
-      menu_link_save($link);
-    }
-  }
-  else{
-    menu_link_save($link);
-  }
+  _footer__left_links__clean_set();
 }
 
 /**
  * Footer links: Copy links from custom menus (used in MARE sites) to our menus.
  */
 function header_footer_corporate_update_7002() {
-  _footer__copy_links();
+  _footer__center_right_copy_links();
 }
