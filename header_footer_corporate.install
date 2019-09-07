@@ -4,6 +4,8 @@
  * Contains install/update/enable hooks.
  */
 
+include_once 'header_footer_corporate.install.inc';
+
 /**
  * Implements hook_enable().
  *
@@ -278,12 +280,14 @@ function header_footer_corporate_enable() {
       ->condition('i18n_mode', 0)
       ->execute();
   }
+  // Copy footer links from custom menus (used in MARE sites) to our menus.
+  _footer__copy_links();
 }
 
 /**
- * Footer: Two links going to the existing homepages.
+ * Footer left links: Two links relative to EC homepage become once.
  */
-function header_footer_corporate_update_7101() {
+function header_footer_corporate_update_7001() {
   // The item to add.
   $link = array(
     'link_title' => 'European Commission website',
@@ -315,5 +319,11 @@ function header_footer_corporate_update_7101() {
   else{
     menu_link_save($link);
   }
-  
+}
+
+/**
+ * Footer links: Copy links from custom menus (used in MARE sites) to our menus.
+ */
+function header_footer_corporate_update_7002() {
+  _footer__copy_links();
 }
