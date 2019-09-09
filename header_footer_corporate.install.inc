@@ -9,13 +9,26 @@
  */
 function _footer__left_links__clean_set(){
   // The item to add.
+  $path = 'https://ec.europa.eu/info/index_[language:language-content:language]';
   $link = array(
     'link_title' => 'European Commission website',
-    'link_path' => 'https://ec.europa.eu/info/index',
+    'link_path' => $path,
     'menu_name' => 'menu-nexteuropa-site-links',
     'weight' => 0,
+    'language' => 'und',
     'expanded' => 0,
-    'options' => array(),
+    'menu_token_enabled' => 1,
+    'options' => array(
+      'menu_token_link_path' => $path,
+      'menu_token_data' => array(),
+      'menu_token_options' => array(
+        'title_localize' => 1,
+        'clear' => 0,
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
   );
   
   // Delete existing menu items.
@@ -26,19 +39,7 @@ function _footer__left_links__clean_set(){
     }
   }
   // Adding new menu item.
-  $languages = language_list('enabled')[1];
-  if(!empty($languages)){
-    $original_link = $link;
-    foreach($languages as $language){
-      $link = $original_link;
-      $link['language'] = $language->language;
-      $link['link_path'] .= '_'.$language->language;
-      menu_link_save($link);
-    }
-  }
-  else{
-    menu_link_save($link);
-  }
+  menu_link_save($link);
 }
 
 /**
@@ -61,6 +62,7 @@ function _footer__center_right_copy_links(){
     if(isset($old_menu)){
       $old_mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $migration_menu['old']))->fetchAll();
       if(!empty($old_mlids)){
+        // Missing migration of ecisting translations (in .po files).
         // Clean existing items in new menu.
         $new_mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $migration_menu['new']))->fetchAll();
         if(!empty($new_mlids)){
