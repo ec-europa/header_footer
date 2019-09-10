@@ -22,7 +22,7 @@ function _footer__left_links__clean_set(){
       'menu_token_link_path' => $path,
       'menu_token_data' => array(),
       'menu_token_options' => array(
-        'title_localize' => 1,
+        'title_localize' => 0,
         'clear' => 0,
       ),
       'attributes' => array(
