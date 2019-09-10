@@ -15,9 +15,9 @@ function _footer__left_links__clean_set(){
     'link_path' => $path,
     'menu_name' => 'menu-nexteuropa-site-links',
     'weight' => 0,
-    'language' => 'und',
     'expanded' => 0,
     'menu_token_enabled' => 1,
+    'customized' => 1,
     'options' => array(
       'menu_token_link_path' => $path,
       'menu_token_data' => array(),
@@ -56,13 +56,11 @@ function _footer__center_right_copy_links(){
       'new' => 'menu-footer-right',
     ),
   );
-  
   foreach($migration_menus as $migration_menu){
     $old_menu = menu_load($migration_menu['old']);
     if(isset($old_menu)){
       $old_mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $migration_menu['old']))->fetchAll();
       if(!empty($old_mlids)){
-        // Missing migration of ecisting translations (in .po files).
         // Clean existing items in new menu.
         $new_mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $migration_menu['new']))->fetchAll();
         if(!empty($new_mlids)){
@@ -73,15 +71,30 @@ function _footer__center_right_copy_links(){
         // Copy old to new menu.
         foreach($old_mlids as $record){
           $old_menu_item = menu_link_load($record->mlid);
-          $new_menu_item = array(
+          $new_menu_item_config = array(
             'link_title' => $old_menu_item['link_title'],
             'link_path' => $old_menu_item['link_path'],
             'menu_name' => $migration_menu['new'],
+            'customized' => 1,
             'weight' => $old_menu_item['weight'],
             'expanded' => $old_menu_item['expanded'],
             'options' => $old_menu_item['options'],
           );
+          $new_menu_item = $new_menu_item_config;
           menu_link_save($new_menu_item);
+          
+          // Migrate translations.
+          $languages = language_list('enabled')[1];
+          foreach($languages as $lang_code => $language_object){
+            if ($lang_code == language_default('language')) {
+              continue;
+            }
+            
+            $translation_value = i18n_string_translate('menu:item:'.$old_menu_item['mlid'].':title', $old_menu_item['link_title'], array('langcode' => $lang_code));
+            if($translation_value != $old_menu_item['link_title']){
+              i18n_string_translation_update('menu:item:'.$new_menu_item['mlid'].':title', $translation_value, $lang_code, $old_menu_item['link_title']);
+            }
+          }
         }
       }
       // Delete old menu.
