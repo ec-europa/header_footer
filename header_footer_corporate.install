@@ -285,6 +285,9 @@ function header_footer_corporate_enable() {
   
   // Copy footer links from custom menus (used in MARE sites) to our menus.
   _footer__center_right_copy_links();
+  
+  // Breadcrumb: Update the root link path.
+  _breadcrumb__main_link();
 }
 
 /**
@@ -305,16 +308,5 @@ function header_footer_corporate_update_7002() {
  * Breadcrumb main link path.
  */
 function header_footer_corporate_update_7003() {
-  // Update path of the Info website (using token).
-  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name AND weight=0", array(':menu_name' => 'menu-breadcrumb-menu'))->fetchAll();
-  if(!empty($mlids)){
-    $path = 'https://ec.europa.eu/info/index_[language:language-content:language]';
-    foreach($mlids as $record){
-      $menu_item = menu_link_load($record->mlid);
-      $menu_item['link_path'] = $path;
-      $menu_item['menu_token_enabled'] = 1;
-      $menu_item['options']['menu_token_link_path'] = $path;
-      menu_link_save($menu_item);
-    }
-  }
+  _breadcrumb__main_link();
 }

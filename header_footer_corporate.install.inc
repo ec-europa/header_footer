@@ -102,3 +102,20 @@ function _footer__center_right_copy_links(){
     }
   }
 }
+
+/**
+ * Breadcrumb: Update path of the Info website (using token).
+ */
+function _breadcrumb__main_link(){
+  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name AND weight=0", array(':menu_name' => 'menu-breadcrumb-menu'))->fetchAll();
+  if(!empty($mlids)){
+    $path = 'https://ec.europa.eu/info/index_[language:language-content:language]';
+    foreach($mlids as $record){
+      $menu_item = menu_link_load($record->mlid);
+      $menu_item['link_path'] = $path;
+      $menu_item['menu_token_enabled'] = 1;
+      $menu_item['options']['menu_token_link_path'] = $path;
+      menu_link_save($menu_item);
+    }
+  }
+}
