@@ -230,8 +230,7 @@ function header_footer_corporate_enable() {
     ),
   );
 
-  t('Commission and its priorities');
-  t('Policies, information and services');
+  t('European Commission website');
   t('EU institutions');
   t('European Union');
   t("About the Commission's new web presence");
