@@ -7,15 +7,14 @@
 
 global $language;
 ?>
-<header class="ecl-site-header" role="banner">
-  <div class="ecl-container ecl-site-header__banner">
-    <a href="https://ec.europa.eu/info/index_<?php print $language->language; ?>" class="ecl-logo ecl-logo--logotype ecl-site-header__logo" title="<?php print t('Home - European Commission'); ?>">
-      <span class="ecl-u-sr-only"><?php print t('Home - European Commission'); ?></span>
-    </a>
-    <div class="ecl-language-list ecl-language-list--overlay ecl-site-header__language-list">
-      <div id="ecl-overlay-language-list" class="ecl-dialog__overlay ecl-dialog__overlay--blue" aria-hidden="true"></div>
-      <div class="ecl-lang-select-sites ecl-link" data-ecl-dialog="ecl-dialog" id="ecl-lang-select-sites__overlay">
-        <a href="<?php print $language_switcher_url; ?>" class="ecl-lang-select-sites__link"><span class="ecl-lang-select-sites__label"><?php print $language_switcher_label; ?></span><span class="ecl-lang-select-sites__code"><span class="ecl-icon ecl-icon--language ecl-lang-select-sites__icon"></span><span class="ecl-lang-select-sites__code-text"><?php print $language_switcher_code; ?></span></span></a>
+<header data-ecl-auto-init="SiteHeader" class="ecl-site-header" data-ecl-site-header="true">
+  <div class="ecl-site-header__container ecl-container">
+    <div class="ecl-site-header__banner">
+      <a class="ecl-link ecl-link--standalone" href="https://ec.europa.eu/info/index_<?php print $language->language; ?>" aria-label="<?php print t('European Commission'); ?>">
+        <img alt="<?php print t('European Commission logo'); ?>" title="<?php print t('European Commission'); ?>" class="ecl-site-header__logo-image" src="https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/images/logo/logo--<?php print $language->language; ?>.svg"/>
+      </a>
+      <div class="ecl-site-header__selector">
+        <a class="ecl-link ecl-link--standalone ecl-site-header__selector-link" href="<?php print $language_switcher_url; ?>" data-ecl-language-selector="true"><?php print $language_switcher_label; ?><span class="ecl-site-header__language-icon"><svg focusable="false" aria-hidden="true" class="ecl-icon ecl-icon--m"><use xlink:href="https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/images/icons/sprites/icons.svg#general--language"></use></svg><span class="ecl-site-header__language-code"><?php print $language_switcher_code; ?></span></span></a>
       </div>
     </div>
     <?php print $ecl_search_block; ?>

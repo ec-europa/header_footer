@@ -80,19 +80,30 @@ function header_footer_corporate_theme_registry_alter(&$theme_registry) {
  * Implenents hook_form_FORM_ID_alter().
  */
 function header_footer_corporate_form_nexteuropa_europa_search_search_form_alter(&$form, &$form_state, $form_id) {
-  $form['search_input_group']['QueryText']['#attributes']['placeholder'] = '';
-  $form['search_input_group']['europa_search_submit']['#value'] = t('Search', array(), array('context' => 'nexteuropa_search_form:button'));
-
-  unset($form['search_input_group']['QueryText']['#title']);
-  unset($form['search_input_group']['QueryText']['#attributes']);
-  $form['search_input_group']['QueryText']['#attributes']['class'] = array('ecl-text-input', 'ecl-search-form__textfield');
-  $form['search_input_group']['QueryText']['#attributes']['size'] = '10';
+  // Form element.
+  $form['#attributes']['class'] = array(
+    'ecl-site-header__search',
+    'ecl-search-form',
+  );
+  $form['#attributes']['role'] = array('search');
+  // Wrapper
   $form['search_input_group']['#prefix'] = '';
   $form['search_input_group']['#suffix'] = '';
-  $form['search_input_group']['europa_search_submit']['#type'] = 'submit';
+  // Textfield.
+  // Flag to contextualize in HOOK_process_textfield.
+  $form['search_input_group']['QueryText']['#ecl-header_footer_corporate']['header'] = TRUE;
+  // Button (also managed in button.theme.inc).
   $form['search_input_group']['europa_search_submit']['#ecl-buttontype'] = 'button';
-  $form['#attributes']['class'][0] = 'ecl-search-form';
-  $form['#attributes']['class'][1] = 'ecl-site-header__search';
+  $form['search_input_group']['europa_search_submit']['#attributes']['class'] = array(
+    'ecl-button',
+    'ecl-search-form__button',
+    'ecl-button--search',
+  );
+  $form['search_input_group']['europa_search_submit']['#value'] = 
+  '<span class="ecl-button__container">'.
+  '<span class="ecl-button__label" data-ecl-label="true">'. t('Search', array(), array('context' => 'nexteuropa_search_form:button')).'</span>'.
+  '<svg focusable="false" aria-hidden="true" data-ecl-icon="true" class="ecl-button__icon ecl-button__icon--after ecl-icon ecl-icon--xs"><use xlink:href="https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/images/icons/sprites/icons.svg#general--search"></use></svg>'.
+  '</span></button>';
 }
 
 /**
@@ -119,28 +130,45 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
   switch($hook){
     case 'page':
     case 'maintenance_page':
-    
       if (!path_is_admin(current_path())) {
-        // Adding CSS and JS files.
-        $path_module = drupal_get_path('module', 'header_footer_corporate');
-        drupal_add_js($path_module . '/assets/europa/scripts/europa.min.js',
+        // JS.
+        drupal_add_js('https://unpkg.com/svg4everybody@2.1.9/dist/svg4everybody.js', array(
+          'type' => 'external',
+          'scope' => 'footer',
+          'group' => JS_THEME,
+        ));
+        drupal_add_js('https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/scripts/ecl-ec-preset-legacy-website.js', array(
+          'type' => 'external',
+          'scope' => 'footer',
+          'group' => JS_THEME,
+        ));
+        drupal_add_js('svg4everybody({ polyfill: true });ECL.autoInit();', array(
+          'type' => 'inline',
+          'scope' => 'footer',
+          'group' => JS_THEME,
+        ));
+        // CSS.
+        drupal_add_css('https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/styles/ecl-ec-preset-legacy-website.css',
           array(
-            'type' => 'file',
-            'scope' => 'footer',
-            'group' => JS_THEME,
-          ));
-        drupal_add_css($path_module . '/assets/europa/styles/europa.min.css',
-          array(
+            'type' => 'external',
             'group' => 300, // more than CSS_THEME (=100) to not be overrided.
             'weight' => 100,
           ));
-        drupal_add_css($path_module . '/css/header_footer_corporate.css',
+        drupal_add_css('https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/styles/ecl-ec-preset-legacy-website-print.css',
+          array(
+            'type' => 'external',
+            'group' => 300, // more than CSS_THEME (=100) to not be overrided.
+            'weight' => 100,
+            'media' => 'print',
+        ));
+        
+        drupal_add_css( drupal_get_path('module', 'header_footer_corporate') . '/css/header_footer_corporate.css',
           array(
             'group' => 300, // more than CSS_THEME (=100) to not be overrided.
             'weight' => 101,
             'cache' => FALSE,
           ));
-    
+
         // Define custom variables to be used in .tpl files.
         $variables['header__ec_corporate'] = theme('header__ec_corporate', array(
           'site_name' => $variables['site_name'],
