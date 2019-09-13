@@ -1,3 +1,9 @@
 html {
   font-size: medium;
 }
+.ecl-page-header h1 {
+  color: inherit;
+}
+.ecl-breadcrumb__current-page {
+  color: #bfd0e4 !important;
+}

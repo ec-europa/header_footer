@@ -23,6 +23,9 @@ function header_footer_corporate_theme() {
     'footer__ec_corporate' => array(
       'template' => 'footer--ec-corporate',
     ),
+    'breadcrumb__ec_corporate' => array(
+      'template' => 'breadcrumb--ec-corporate',
+    ),
     'links__ecl_menus' => array(
       'file' => 'includes/links__ecl_menus.theme.inc',
       'function' => '_header_footer_corporate_theme_links__ecl_menus',
@@ -72,7 +75,7 @@ function header_footer_corporate_theme_registry_alter(&$theme_registry) {
   $theme_registry['button']['function'] = '_header_footer_corporate_theme_button';
   $theme_registry['button']['includes'] = array($module_path . '/includes/button.theme.inc');
   // Redefine the theme_easy_breadcrumb() from easy_breadcrumb.module.
-  $theme_registry['easy_breadcrumb']['function'] = '_header_footer_corporate_theme_easy_breadcrumb';
+  $theme_registry['easy_breadcrumb']['function'] = '_header_footer_corporate_theme_breadcrumb';
   $theme_registry['easy_breadcrumb']['includes'] = array($module_path . '/includes/easy_breadcrumb.theme.inc');
 }
 

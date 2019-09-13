@@ -10,18 +10,22 @@
  */
 function header_footer_corporate_preprocess_header__ec_corporate(&$variables) {
   global $language;
-
-  // Language switcher.
-  $variables['language_switcher_url'] = url(
-    'language-selector/site-language', array(
-      'html' => TRUE,
-      'query' => array(
-        drupal_get_destination(),
-      ),
-    )
-  );
-  $variables['language_switcher_label'] = $language->native;
-  $variables['language_switcher_code'] = $language->language;
+  
+  // Test if multilingual.
+  $variables['is_multilingual_website'] = count(language_list('enabled')[1]) > 1;
+  if($variables['is_multilingual_website']){
+    // Language switcher.
+    $variables['language_switcher_url'] = url(
+      'language-selector/site-language', array(
+        'html' => TRUE,
+        'query' => array(
+          drupal_get_destination(),
+        ),
+      )
+    );
+    $variables['language_switcher_label'] = $language->native;
+    $variables['language_switcher_code'] = $language->language;
+  }
 
   // Search form.
   $search_form = drupal_get_form('nexteuropa_europa_search_search_form');
