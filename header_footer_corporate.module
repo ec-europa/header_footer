@@ -4,6 +4,9 @@
  * Drupal needs this blank file.
  */
 
+use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
+include_once 'header_footer_corporate.helpers.inc';
+
 // Import differents '.component.inc' files (as Atomium theme) from templates/.
 $directory = new RecursiveDirectoryIterator(__DIR__ . '/templates/');
 $iterator = new RecursiveIteratorIterator($directory);
@@ -26,9 +29,8 @@ function header_footer_corporate_theme() {
     'breadcrumb__ec_corporate' => array(
       'template' => 'breadcrumb--ec-corporate',
     ),
-    'links__ecl_menus' => array(
-      'file' => 'includes/links__ecl_menus.theme.inc',
-      'function' => '_header_footer_corporate_theme_links__ecl_menus',
+    'menu_items_ec_corporate__lists' => array(
+      'file' => 'includes/menu_items_ec_corporate__lists.theme.inc',
       'arguments' => array(
         'variables' => array(
           'links' => array(
@@ -41,6 +43,26 @@ function header_footer_corporate_theme() {
           ),
           'heading' => array(
             'class',
+          ),
+        ),
+      ),
+    ),
+    'menu_items_ec_corporate__links' => array(
+      'template' => 'menu-items-ec-corporate--links',
+      'arguments' => array(
+        'variables' => array(
+          'links' => array(
+            'href',
+            'language',
+          ),
+          'attributes' => array(
+            'id',
+            'class',
+          ),
+          'heading' => array(
+            'class',
+            'level',
+            'text',
           ),
         ),
       ),
@@ -109,6 +131,24 @@ function header_footer_corporate_form_nexteuropa_europa_search_search_form_alter
   '</span></button>';
 }
 
+/**
+ * Implenents hook_form_FORM_ID_alter().
+ */
+function header_footer_corporate_form_menu_edit_item_alter(&$form, &$form_state, $form_id) {
+  // Set predefined values for the menu "Footer - Follow us".
+  if($form['parent']['#default_value'] == 'menu-footer-follow-us:0'){
+    $options = array();
+    foreach(HeaderFooterCorporateHelpers::getSocialMediaNetworksValues() as $opt){
+      $options[$opt['title']] = $opt['title'];
+    }
+    
+    $form['original_item']['#value']['options']['attributes']['class'] = array();
+    $form['link_title'] = array_merge($form['link_title'], array(
+      '#type' => 'select',
+      '#options' => $options
+    ));
+  }
+}
 /**
  * Implements hook_context_load_alter().
  */

@@ -7,3 +7,6 @@ html {
 .ecl-breadcrumb__current-page {
   color: #bfd0e4 !important;
 }
+.ecl-footer__identity-title{
+  color: inherit;
+}

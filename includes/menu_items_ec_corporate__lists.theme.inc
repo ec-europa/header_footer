@@ -10,7 +10,7 @@
  *
  * Same as theme_links() in /includes/themes.inc but with some changes.
  */
-function _header_footer_corporate_theme_links__ecl_menus($variables) {
+function theme_menu_items_ec_corporate__lists($variables) {
   $links = $variables['links'];
   $attributes = $variables['attributes'];
   $heading = (isset($variables['heading'])) ? $variables['heading'] : '';
