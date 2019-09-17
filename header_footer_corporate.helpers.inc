@@ -40,16 +40,16 @@ abstract class HeaderFooterCorporateHelpers {
     }
     // Process.
     $icon_rules = self::getSocialMediaNetworksValues() + array(
-      'EU institutions' => 'external',
-      'European Union' => 'external',
-      'Facebook' => 'facebook',
-      'Instagram' => 'instagram',
-      'LinkedIn' => 'linkedin',
-      'Other social networks' => 'external',
-      'Other social media' => 'external',
-      'RSS' => 'rss',
-      'Twitter' => 'twitter',
-      'YouTube' => 'youtube',
+      'EU institutions'       => 'ui--external',
+      'European Union'        => 'ui--external',
+      'Facebook'              => 'branded--facebook',
+      'Instagram'             => 'branded--instagram',
+      'LinkedIn'              => 'branded--linkedin',
+      'Other social networks' => 'ui--external',
+      'Other social media'    => 'ui--external',
+      'RSS'                   => 'branded--rss',
+      'Twitter'               => 'branded--twitter',
+      'YouTube'               => 'branded--youtube',
     );
     
     $default = array('ecl-link ecl-link--standalone');
@@ -59,15 +59,35 @@ abstract class HeaderFooterCorporateHelpers {
       $link['title'] = '<span class="ecl-link__label">' . $link['title'] . '</span>';
       $link['html'] = TRUE;
       $link['attributes']['class'][] = 'ecl-link--icon';
-      $fixed_url = '<svg focusable="false" aria-hidden="true" class="ecl-link__icon ecl-icon ecl-icon--xs"><use xlink:href="https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/images/icons/sprites/icons.svg#branded--__MY_ICON_NAME"></use></svg>';
-      if($icon_name == 'external'){
+      $fixed_url = '<svg focusable="false" aria-hidden="true" class="ecl-link__icon ecl-icon ecl-icon--xs"><use xlink:href="'.static::getAssetsPath().'/images/icons/sprites/icons.svg#__MY_ICON_NAME"></use></svg>';
+      if($icon_name == 'ui--external'){
         $link['attributes']['class'][] = 'ecl-link--icon-after';
-        $link['title'] .= str_replace('__MY_ICON_NAME', $icon_name, $fixed_url);
+        $link['title'] .= '&nbsp;'. str_replace('__MY_ICON_NAME', $icon_name, $fixed_url);
       }
       else{
         $link['attributes']['class'][] = 'ecl-link--icon-before';
-        $link['title'] = str_replace('__MY_ICON_NAME', $icon_name, $fixed_url) . $link['title'];
+        $link['title'] = str_replace('__MY_ICON_NAME', $icon_name, $fixed_url) . '&nbsp;' . $link['title'];
       }
     }
   }
+  
+  /**
+   * Get assets path.
+   * 
+   * It should be :
+   * https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website.
+   */
+  public static function getAssetsPath($type = 'url') {
+    // return 'https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website';
+    switch($type){
+      case 'path':
+        return drupal_get_path('module', 'header_footer_corporate') . '/assets/europa';
+        break;
+      case 'url':
+        global $base_url;
+        return $base_url . '/' . drupal_get_path('module', 'header_footer_corporate') .'/assets/europa';
+        break;
+    }
+  }
+    
 }

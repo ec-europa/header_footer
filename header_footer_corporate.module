@@ -127,7 +127,7 @@ function header_footer_corporate_form_nexteuropa_europa_search_search_form_alter
   $form['search_input_group']['europa_search_submit']['#value'] = 
   '<span class="ecl-button__container">'.
   '<span class="ecl-button__label" data-ecl-label="true">'. t('Search', array(), array('context' => 'nexteuropa_search_form:button')).'</span>'.
-  '<svg focusable="false" aria-hidden="true" data-ecl-icon="true" class="ecl-button__icon ecl-button__icon--after ecl-icon ecl-icon--xs"><use xlink:href="https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/images/icons/sprites/icons.svg#general--search"></use></svg>'.
+  '<svg focusable="false" aria-hidden="true" data-ecl-icon="true" class="ecl-button__icon ecl-button__icon--after ecl-icon ecl-icon--xs"><use xlink:href="' . HeaderFooterCorporateHelpers::getAssetsPath() . '/images/icons/sprites/icons.svg#general--search"></use></svg>'.
   '</span></button>';
 }
 
@@ -180,8 +180,8 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
           'scope' => 'footer',
           'group' => JS_THEME,
         ));
-        drupal_add_js('https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/scripts/ecl-ec-preset-legacy-website.js', array(
-          'type' => 'external',
+        drupal_add_js(HeaderFooterCorporateHelpers::getAssetsPath('path').'/scripts/ecl-ec-preset-website.js', array(
+          'type' => 'file',
           'scope' => 'footer',
           'group' => JS_THEME,
         ));
@@ -191,15 +191,15 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
           'group' => JS_THEME,
         ));
         // CSS.
-        drupal_add_css('https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/styles/ecl-ec-preset-legacy-website.css',
+        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path').'/styles/ecl-ec-preset-website.css',
           array(
-            'type' => 'external',
+            'type' => 'file',
             'group' => 300, // more than CSS_THEME (=100) to not be overrided.
             'weight' => 100,
           ));
-        drupal_add_css('https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website/styles/ecl-ec-preset-legacy-website-print.css',
+        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path').'/styles/ecl-ec-preset-website-print.css',
           array(
-            'type' => 'external',
+            'type' => 'file',
             'group' => 300, // more than CSS_THEME (=100) to not be overrided.
             'weight' => 100,
             'media' => 'print',

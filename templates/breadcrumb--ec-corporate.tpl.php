@@ -4,6 +4,8 @@
  * @file
  * Templating for the breadcrumb EC corporate.
  */
+ 
+use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
 ?>
 <div class="ecl-page-header">
   <div class="ecl-container">
@@ -15,7 +17,7 @@
               <?php print l($value['content'], $value['url'], $value['options']); ?>
               <svg focusable="false" aria-hidden="true"
                 role="presentation" class="ecl-breadcrumb__icon ecl-icon ecl-icon--xs ecl-icon--rotate-90">
-                <use xlink:href="/component-library/dist/media/icons.a11fa655.svg#ui--corner-arrow"></use>
+                <use xlink:href="<?php print HeaderFooterCorporateHelpers::getAssetsPath();  ?>/images/icons/sprites/icons.svg#ui--corner-arrow"></use>
               </svg>
             </li>
             <?php else: ?>
