@@ -5,47 +5,175 @@
  */
 
 /**
- * Footer left links: Delete existing and set according config.
+ * Get links config.
  */
-function _footer__left_links__clean_set(){
-  // The item to add.
-  $path = 'https://ec.europa.eu/info/index_[language:language-content:language]';
-  $link = array(
-    'link_title' => 'European Commission website',
-    'link_path' => $path,
-    'menu_name' => 'menu-nexteuropa-site-links',
-    'weight' => 0,
-    'expanded' => 0,
-    'menu_token_enabled' => 1,
-    'customized' => 1,
-    'options' => array(
-      'menu_token_link_path' => $path,
-      'menu_token_data' => array(),
-      'menu_token_options' => array(
-        'title_localize' => 0,
-        'clear' => 0,
+function _get_links_config(){
+  return array(
+    array(
+      array(
+        'link_title' => 'RSS',
+        'link_path' => 'https://ec.europa.eu/YOUR_DG/rss.xml',
+        'menu_name' => 'menu-footer-follow-us',
+        'weight' => 0,
+        'expanded' => 0,
       ),
-      'attributes' => array(
-        'title' => '',
+      array(
+        'link_title' => 'Twitter',
+        'link_path' => 'https://twitter.com/YOUR_DG',
+        'menu_name' => 'menu-footer-follow-us',
+        'weight' => 0,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'Facebook',
+        'link_path' => 'https://www.facebook.com/YOUR_DG',
+        'menu_name' => 'menu-footer-follow-us',
+        'weight' => 1,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'YouTube',
+        'link_path' => 'https://www.youtube.com/user/YOUR_DG',
+        'menu_name' => 'menu-footer-follow-us',
+        'weight' => 1,
+        'expanded' => 0,
+      ),
+    ),
+    array(
+      array(
+        'link_title' => 'European Commission website',
+        'link_path' => 'https://ec.europa.eu/info/index_[language:language-content:language]',
+        'menu_name' => 'menu-nexteuropa-site-links',
+        'weight' => 0,
+        'expanded' => 0,
+        'menu_token_enabled' => 1,
+        'customized' => 1,
+        'options' => array(
+          'menu_token_link_path' => 'https://ec.europa.eu/info/index_[language:language-content:language]',
+          'menu_token_data' => array(),
+          'menu_token_options' => array(
+            'title_localize' => 0,
+            'clear' => 0,
+          ),
+          'attributes' => array(
+            'title' => '',
+          ),
+        ),
+      ),
+    ),
+    array(
+      array(
+        'link_title' => 'Facebook',
+        'link_path' => 'https://www.facebook.com/EuropeanCommission',
+        'menu_name' => 'menu-nexteuropa-social-media',
+        'weight' => 0,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'Twitter',
+        'link_path' => 'https://twitter.com/eu_commission',
+        'menu_name' => 'menu-nexteuropa-social-media',
+        'weight' => 1,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'Other social networks',
+        'link_path' => 'http://ec.europa.eu/dgs/communication/services/journalist/social-media_en.htm',
+        'menu_name' => 'menu-nexteuropa-social-media',
+        'weight' => 2,
+        'expanded' => 0,
+      ),
+    ),
+    array(
+      array(
+        'link_title' => 'European Union',
+        'link_path' => 'https://europa.eu/european-union/index',
+        'menu_name' => 'menu-nexteuropa-inst-links',
+        'weight' => 0,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'EU institutions',
+        'link_path' => 'https://europa.eu/european-union/about-eu/institutions-bodies',
+        'menu_name' => 'menu-nexteuropa-inst-links',
+        'weight' => 1,
+        'expanded' => 0,
+      ),
+    ),
+    array(
+      array(
+        'link_title' => 'About the Commission\'s new web presence',
+        'link_path' => 'https://ec.europa.eu/info/about-commissions-new-web-presence',
+        'menu_name' => 'menu-nexteuropa-service-links',
+        'weight' => -100,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'Language policy',
+        'link_path' => 'https://ec.europa.eu/info/language-policy',
+        'menu_name' => 'menu-nexteuropa-service-links',
+        'weight' => -90,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'Resources for partners',
+        'link_path' => 'http://ec.europa.eu/info/resources-partners',
+        'menu_name' => 'menu-nexteuropa-service-links',
+        'weight' => -80,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'Cookies',
+        'link_path' => 'https://ec.europa.eu/info/cookies',
+        'menu_name' => 'menu-nexteuropa-service-links',
+        'weight' => -70,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'Privacy policy',
+        'link_path' => 'https://ec.europa.eu/info/privacy-policy',
+        'menu_name' => 'menu-nexteuropa-service-links',
+        'weight' => -60,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'Legal notice',
+        'link_path' => 'https://ec.europa.eu/info/legal-notice',
+        'menu_name' => 'menu-nexteuropa-service-links',
+        'weight' => -50,
+        'expanded' => 0,
+      ),
+      array(
+        'link_title' => 'Contact',
+        'link_path' => 'https://ec.europa.eu/info/contact',
+        'menu_name' => 'menu-nexteuropa-service-links',
+        'weight' => -40,
+        'expanded' => 0,
       ),
     ),
   );
-  
-  // Delete existing menu items.
-  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $link['menu_name']))->fetchAll();
-  if(!empty($mlids)){
-    foreach($mlids as $record){
-      menu_link_delete($record->mlid);
+}
+
+/**
+ * Get links config by menu name.
+ */
+function _get_links_config_of_menu($menu_name){
+  foreach(_get_links_config() as $config_menu){
+    foreach($config_menu as $config_item){
+      if($config_item['menu_name'] != $menu_name){
+        continue;
+      }
+      else{
+        return $config_menu;
+      }
     }
   }
-  // Adding new menu item.
-  menu_link_save($link);
 }
 
 /**
  * Footer links: Copy links from custom menus (used in MARE sites) to our menus.
  */
-function _footer__center_right_copy_links(){
+function _footer__custom_right_copy_links(){
   $migration_menus = array(
     array(
       'old' => 'menu-improved-follow-us',
@@ -117,5 +245,22 @@ function _breadcrumb__main_link(){
       $menu_item['options']['menu_token_link_path'] = $path;
       menu_link_save($menu_item);
     }
+  }
+}
+/**
+ * Reset menu according actual config.
+ */
+function _reset_menu_to_config($menu_name){
+  // Delete existing menu items.
+  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $menu_name))->fetchAll();
+  if(!empty($mlids)){
+    foreach($mlids as $record){
+      menu_link_delete($record->mlid);
+    }
+  }
+  // Adding new menu items according config.
+  $items = _get_links_config_of_menu($menu_name);
+  foreach($items as $link){
+    menu_link_save($link);
   }
 }

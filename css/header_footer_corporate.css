@@ -10,6 +10,6 @@ html {
 .ecl-footer__identity-title{
   color: inherit;
 }
-.ecl-footer__section-link:visited {
+.ecl-footer a:visited {
   color: #fff;
 }
