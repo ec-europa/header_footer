@@ -4,6 +4,7 @@
  * @file
  * Redefines theme_links().
  */
+use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
 
 /**
  * Returns HTML for a set of links.
@@ -11,27 +12,22 @@
  * Same as theme_links() in /includes/themes.inc but with some changes.
  */
 function theme_menu_items_ec_corporate__lists($variables) {
-  $links = $variables['links'];
+  $links = $variables['links']['items'];
+  $variables['attributes'] = isset($variables['attributes']) ? $variables['attributes'] : array();
+  $variables['attributes']['class'] = isset($variables['attributes']['class']) ? $variables['attributes']['class'] : array();
+  $variables['attributes']['class'] = array_merge(array('ecl-footer__section-list'), $variables['attributes']['class']);
   $attributes = $variables['attributes'];
   $heading = (isset($variables['heading'])) ? $variables['heading'] : '';
   global $language_url;
   $output = '';
   // Conditional classes.
-  if ($variables['attributes']['id'] == 'ecl-site-switcher') {
+  if (!empty($variables['attributes']['id']) && $variables['attributes']['id'] == 'ecl-site-switcher') {
     $class_li = 'ecl-site-switcher__option';
     $classes_a = ['ecl-site-switcher__link', 'ecl-link'];
   }
-  elseif ($variables['attributes']['id'] == 'ecl-footer-service-menu' || $variables['attributes']['id'] == 'ecl-footer-follow-ec-menu' || $variables['attributes']['id'] == 'ecl-footer-follow-us-menu') {
-    $attributes['class'][] = 'ecl-list--inline';
-    if ($variables['attributes']['id'] == 'ecl-footer-follow-us-menu') {
-      $attributes['class'][] = 'ecl-footer__social-links';
-    }
-    $class_li = 'ecl-footer__menu-item';
-    $classes_a = ['ecl-footer__link', 'ecl-link', 'ecl-link--inverted'];
-  }
   else {
-    $class_li = 'ecl-footer__menu-item';
-    $classes_a = ['ecl-footer__link', 'ecl-link', 'ecl-link--inverted'];
+    $class_li = 'ecl-footer__section-item';
+    $classes_a = ['ecl-footer__section-link', 'ecl-link', 'ecl-link--standalone'];
   }
   if (count($links) > 0) {
     // Treat the heading first if it is present to prepend it to the
@@ -58,7 +54,7 @@ function theme_menu_items_ec_corporate__lists($variables) {
     foreach ($links as $key => $link) {
       $class = array($key, $class_li);
       // Add active class to site switcher.
-      if ($i == $num_links && $variables['attributes']['id'] == 'ecl-site-switcher') {
+      if ($i == $num_links && !empty($variables['attributes']['id'] ) && $variables['attributes']['id'] == 'ecl-site-switcher') {
         $class[] = 'ecl-site-switcher__option--is-selected';
       }
       if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
@@ -66,14 +62,25 @@ function theme_menu_items_ec_corporate__lists($variables) {
         $class[] = 'active';
       }
       $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
+      // Set attributes class.
       if (array_key_exists('attributes', $link) && array_key_exists('class', $link['attributes'])) {
         $link['attributes']['class'] = array_merge($link['attributes']['class'], $classes_a);
       }
       else {
-        $link['attributes']['class'] = $classes_a;
+        if(!array_key_exists('attributes', $link)){
+          $link['attributes'] = array('class' => $classes_a);
+        }
+        else{
+          $link['attributes']['class'] = $classes_a;
+        }
+      }
+      if(isset($variables['links']['class'])){
+        $link['attributes']['class'] = $link['attributes']['class'] + $variables['links']['class'];
       }
       if (isset($link['href'])) {
         // Pass in $link as $options, they share the same keys.
+        // Set icons links.
+        HeaderFooterCorporateHelpers::setLinkIconsPrefixSuffix($link);
         $output .= l($link['title'], $link['href'], $link);
       }
       elseif (!empty($link['title'])) {

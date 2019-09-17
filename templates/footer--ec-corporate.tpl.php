@@ -21,7 +21,7 @@
             <?php print $ecl_footer_follow_us_menu; ?>
           </div>
           <div class="ecl-footer__identity-info ecl-col-12 ecl-col-md-4">
-            <?php print $ecl_footer_improved_menu; ?>
+            <?php print $ecl_footer_identity_info; ?>
           </div>
         </div>
       </div>

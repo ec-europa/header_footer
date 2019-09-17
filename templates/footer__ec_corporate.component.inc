@@ -11,58 +11,52 @@
 function header_footer_corporate_preprocess_footer__ec_corporate(&$variables) {
   // Custom footer middle.
   $variables['ecl_footer_follow_us_menu'] = theme('menu_items_ec_corporate__links', array(
-    'links' => menu_navigation_links('menu-footer-follow-us'),
     'heading' => array(
       'class' => array('ecl-footer__identity-label'),
       'level' => 'span',
       'text' => t('Follow us:'),
     ),
+    'links' => array(
+      'items' => menu_navigation_links('menu-footer-follow-us'),
+      'class' => array('ecl-footer__identity-link'),
+    ),
   ));
   // Custom footer right.
-  $ecl_footer_improved_menu = menu_navigation_links('menu-footer-right');
-  $variables['ecl_footer_improved_menu'] = theme('menu_items_ec_corporate__lists', array(
-    'links' => $ecl_footer_improved_menu,
-    'attributes' => array(
-      'id' => 'ecl-footer-improved-menu',
-      'class' => array('ecl-footer__menu'),
+  $variables['ecl_footer_identity_info'] = theme('menu_items_ec_corporate__links', array(
+    'links' => array(
+      'items' => menu_navigation_links('menu-footer-right'),
+      'class' => array('ecl-footer__identity-link'),
     ),
   ));
   // Corporate footer left.
-  $ecl_footer_ec_menu = menu_navigation_links('menu-nexteuropa-site-links');
   $variables['ecl_footer_ec_menu'] = theme('menu_items_ec_corporate__lists', array(
-    'links' => $ecl_footer_ec_menu,
+    'links' => array('items' => menu_navigation_links('menu-nexteuropa-site-links')),
     'heading' => array(
       'text' => t('European Commission'),
       'level' => 'h1',
       'class' => array('ecl-footer__section-title'),
     ),
-    'attributes' => array(
-      'id' => 'ecl-footer-improved-menu',
-      'class' => array('ecl-footer__menu'),
-    ),
   ));
   
   // Corporate footer middle.
-  $ecl_footer_follow_ec_menu = menu_navigation_links('menu-nexteuropa-social-media');
-  $variables['ecl_footer_follow_ec_menu'] = theme('menu_items_ec_corporate__links', array(
-    'links' => $ecl_footer_follow_ec_menu,
-    'attributes' => array(
-      'id' => 'ecl-footer-follow-ec-menu',
-      'class' => array('ecl-footer__menu', 'ecl-footer__social-links'),
+  $variables['ecl_footer_follow_ec_menu'] = theme('menu_items_ec_corporate__lists', array(
+    'links' => array(
+      'items' => menu_navigation_links('menu-nexteuropa-social-media'),
+      'class' => array('ecl-footer__section-link')
     ),
     'heading' => array(
       'text' => t('Follow the European Commission'),
       'level' => 'h1',
       'class' => array('ecl-footer__section-title'),
     ),
+    'attributes' => array(
+      'class' => array('ecl-footer__section-list--inline'))
   ));
   // Corporate footer right.
-  $ecl_footer_eu_menu = menu_navigation_links('menu-nexteuropa-inst-links');
-  $variables['ecl_footer_eu_menu'] = theme('menu_items_ec_corporate__links', array(
-    'links' => $ecl_footer_eu_menu,
-    'attributes' => array(
-      'id' => 'ecl-footer-eu-menu',
-      'class' => array('ecl-footer__menu'),
+  $variables['ecl_footer_eu_menu'] = theme('menu_items_ec_corporate__lists', array(
+    'links' => array(
+      'items' => menu_navigation_links('menu-nexteuropa-inst-links'),
+      'class' => array('ecl-footer__section-link')
     ),
     'heading' => array(
       'text' => t('European Union'),
@@ -71,12 +65,10 @@ function header_footer_corporate_preprocess_footer__ec_corporate(&$variables) {
     ),
   ));
   // Service footer menu.
-  $ecl_footer_service_menu = menu_navigation_links('menu-nexteuropa-service-links');
-  $variables['ecl_footer_service_menu'] = theme('menu_items_ec_corporate__lists', array(
-    'links' => $ecl_footer_service_menu,
-    'attributes' => array(
-      'id' => 'ecl-footer-service-menu',
-      'class' => array('ecl-footer__menu'),
+  $variables['ecl_footer_service_menu'] = theme('menu_items_ec_corporate__links', array(
+    'links' => array(
+      'items' => menu_navigation_links('menu-nexteuropa-service-links'),
+      'class' => array('ecl-footer__common-link')
     ),
   ));
 }

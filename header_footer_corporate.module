@@ -30,7 +30,7 @@ function header_footer_corporate_theme() {
       'template' => 'breadcrumb--ec-corporate',
     ),
     'menu_items_ec_corporate__lists' => array(
-      'file' => 'includes/menu_items_ec_corporate__lists.theme.inc',
+      'file' => 'themes/menu_items_ec_corporate__lists.theme.inc',
       'arguments' => array(
         'variables' => array(
           'links' => array(
@@ -95,10 +95,10 @@ function header_footer_corporate_theme_registry_alter(&$theme_registry) {
   // ################
   // Redefine the theme_button() function.
   $theme_registry['button']['function'] = '_header_footer_corporate_theme_button';
-  $theme_registry['button']['includes'] = array($module_path . '/includes/button.theme.inc');
+  $theme_registry['button']['includes'] = array($module_path . '/themes/button.theme.inc');
   // Redefine the theme_easy_breadcrumb() from easy_breadcrumb.module.
   $theme_registry['easy_breadcrumb']['function'] = '_header_footer_corporate_theme_breadcrumb';
-  $theme_registry['easy_breadcrumb']['includes'] = array($module_path . '/includes/easy_breadcrumb.theme.inc');
+  $theme_registry['easy_breadcrumb']['includes'] = array($module_path . '/themes/easy_breadcrumb.theme.inc');
 }
 
 /**
@@ -138,8 +138,8 @@ function header_footer_corporate_form_menu_edit_item_alter(&$form, &$form_state,
   // Set predefined values for the menu "Footer - Follow us".
   if($form['parent']['#default_value'] == 'menu-footer-follow-us:0'){
     $options = array();
-    foreach(HeaderFooterCorporateHelpers::getSocialMediaNetworksValues() as $opt){
-      $options[$opt['title']] = $opt['title'];
+    foreach(HeaderFooterCorporateHelpers::getSocialMediaNetworksValues() as $name){
+      $options[$name] = $name;
     }
     
     $form['original_item']['#value']['options']['attributes']['class'] = array();

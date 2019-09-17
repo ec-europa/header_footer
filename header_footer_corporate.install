@@ -150,7 +150,7 @@ function header_footer_corporate_enable() {
         ),
       ),
       array(
-        'link_title' => 'Other social media',
+        'link_title' => 'Other social networks',
         'link_path' => 'http://ec.europa.eu/dgs/communication/services/journalist/social-media_en.htm',
         'menu_name' => 'menu-nexteuropa-social-media',
         'weight' => 2,
@@ -238,7 +238,7 @@ function header_footer_corporate_enable() {
   t('Cookies');
   t('Legal notic');
   t('Contact');
-  t('Other social media');
+  t('Other social networks');
 
   // Save menu group into menu_custom table.
   foreach ($dt_menus as $menu) {

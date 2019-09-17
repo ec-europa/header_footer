@@ -7,10 +7,6 @@
 ?>
 
 <?php print render($heading_markup); ?>
-
 <?php foreach($links as $link): ?>
-  <a href="<?php print $link['href'];?>" class="ecl-footer__identity-link ecl-link ecl-link--standalone ecl-link--icon ecl-link--icon-before">
-    <?php print $link['icon']; ?>
-    <span class="ecl-link__label"><?php print $link['title']; ?></span>
-  </a>
+  <?php print l($link['title'], $link['href'], $link); ?>
 <?php endforeach; ?>
