@@ -16,9 +16,9 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
   $breadcrumb = $variables['breadcrumb'];
   // Clean data.
   foreach($breadcrumb as &$b){
-    $class = '';
+    $class = array('ecl-breadcrumb__link', 'ecl-link ecl-link--standalone');
     if(isset($b['class'])){
-      $class = implode(' ', $b['class']);
+      $class = $class + $b['class'];
       unset($b['class']);
     }
     $b['options'] = array(
@@ -32,7 +32,7 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
     'content' => variable_get('site_name'),
     'options' => array(
       'attributes' => array(
-        'class' => 'ecl-breadcrumb__link ecl-link ecl-link--standalone',
+        'class' => array('ecl-breadcrumb__link', 'ecl-link ecl-link--standalone'),
       ),
     ),
     'url' => variable_get('site_frontpage', 'node'),
@@ -43,22 +43,24 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
       'content' => $value['link']['title'],
       'options' => array(
         'attributes' => array(
-          'class' => 'ecl-breadcrumb__link ecl-link ecl-link--standalone',
+          'class' => array('ecl-breadcrumb__link', 'ecl-link ecl-link--standalone'),
         ),
       ),
       'url' => $value['link']['href'],
     ));
   }
-  // Remove last level to set page_title.
-  $variables['page_title'] = array_pop($breadcrumb)['content'];
+  // Copy last level to set page_title.
+  $copy_last = array_slice($breadcrumb, -1);
+  $variables['page_title'] = array_pop($copy_last)['content'];
+  
   // Used in loop templating.
   $variables['i'] = 0;
   $variables['count'] = count($breadcrumb);
-  // Change ECLv2.11: Adding link adapted to website usages.
-  if($variables['count'] > 1){
-    $last_breadcrumb = array_pop($breadcrumb);
-    $last_breadcrumb['options']['attributes']['class'] .= ' ecl-breadcrumb__current-page';
-    $breadcrumb[] = $last_breadcrumb;
-  }
+  
+  // Classify current element.
+  $last_breadcrumb = array_pop($breadcrumb);
+  $last_breadcrumb['options']['attributes']['class'][] = '';
+  $breadcrumb[] = $last_breadcrumb;
+  
   $variables['breadcrumb'] = $breadcrumb;
 }
