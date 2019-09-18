@@ -173,6 +173,8 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
   switch($hook){
     case 'page':
     case 'maintenance_page':
+      $variables['header__ec_corporate'] =
+      $variables['footer__ec_corporate'] = '';
       if (!path_is_admin(current_path())) {
         // JS.
         drupal_add_js('https://unpkg.com/svg4everybody@2.1.9/dist/svg4everybody.js', array(
