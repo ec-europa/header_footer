@@ -1,6 +1,3 @@
-
-
-
 # Header Footer Corporate
 
 ## Description
@@ -16,17 +13,19 @@ You just have to print them at the right place (before and after the main conten
     </div>
     <?php print $footer__ec_corporate; ?>
 
-## How to include it in my website ?
+The module uses [ECL](https://ec.europa.eu/component-library/ec/) since v1.0.8
+
+## How to include the module using [Toolkit](https://github.com/ec-europa/toolkit) ?
 
 Copy it in your **resources/site.make** file :
 
     projects[header_footer_corporate][subdir] = custom/ec_europa
     projects[header_footer_corporate][download][type] = git
     projects[header_footer_corporate][download][url] = "https://github.com/ec-europa/header_footer_corporate.git"
-    projects[header_footer_corporate][download][tag] = "v1.0.7"
+    projects[header_footer_corporate][download][tag] = "v1.0.8"
 and run the command `./toolkit/phing build-subsite-dev`
 
-> *"v1.0.7" is just an example
+> *"v1.0.8" is just an example
 It is better to specify the tag to download, to know in your sources what version of the module you had downloaded.*
 
 ## Manageable links
