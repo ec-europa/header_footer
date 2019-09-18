@@ -96,9 +96,12 @@ function header_footer_corporate_enable() {
       ->execute();
   }
   
+  // Reset corporate menus. 
+  _reset_menu_to_config('menu-nexteuropa-site-links');
+  _reset_menu_to_config('menu-nexteuropa-service-links');
+  _reset_menu_to_config('menu-nexteuropa-inst-links');
   // Copy footer links from custom menus (used in MARE sites) to our menus.
   _footer__custom_right_copy_links();
-  
   // Breadcrumb: Update the root link path.
   _breadcrumb__main_link();
 }
