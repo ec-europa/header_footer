@@ -180,8 +180,8 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
           'scope' => 'footer',
           'group' => JS_THEME,
         ));
-        drupal_add_js(HeaderFooterCorporateHelpers::getAssetsPath('path').'/scripts/ecl-ec-preset-website.js', array(
-          'type' => 'file',
+        drupal_add_js(HeaderFooterCorporateHelpers::getAssetsPath('path').'/scripts/ecl-ec-preset-legacy-website.js', array(
+          'type' => 'external',
           'scope' => 'footer',
           'group' => JS_THEME,
         ));
@@ -191,15 +191,15 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
           'group' => JS_THEME,
         ));
         // CSS.
-        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path').'/styles/ecl-ec-preset-website.css',
+        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path').'/styles/ecl-ec-preset-legacy-website.css',
           array(
-            'type' => 'file',
+            'type' => 'external',
             'group' => 300, // more than CSS_THEME (=100) to not be overrided.
             'weight' => 100,
           ));
-        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path').'/styles/ecl-ec-preset-website-print.css',
+        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path').'/styles/ecl-ec-preset-legacy-website-print.css',
           array(
-            'type' => 'file',
+            'type' => 'external',
             'group' => 300, // more than CSS_THEME (=100) to not be overrided.
             'weight' => 100,
             'media' => 'print',

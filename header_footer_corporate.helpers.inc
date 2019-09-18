@@ -73,21 +73,9 @@ abstract class HeaderFooterCorporateHelpers {
   
   /**
    * Get assets path.
-   * 
-   * It should be :
-   * https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website.
    */
   public static function getAssetsPath($type = 'url') {
-    // return 'https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website';
-    switch($type){
-      case 'path':
-        return drupal_get_path('module', 'header_footer_corporate') . '/assets/europa';
-        break;
-      case 'url':
-        global $base_url;
-        return $base_url . '/' . drupal_get_path('module', 'header_footer_corporate') .'/assets/europa';
-        break;
-    }
+    return 'https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website';
   }
     
 }
