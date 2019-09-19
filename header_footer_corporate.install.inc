@@ -15,28 +15,24 @@ function _get_links_config(){
         'link_path' => 'https://ec.europa.eu/YOUR_DG/rss.xml',
         'menu_name' => 'menu-footer-follow-us',
         'weight' => 0,
-        'expanded' => 0,
       ),
       array(
         'link_title' => 'Twitter',
         'link_path' => 'https://twitter.com/YOUR_DG',
         'menu_name' => 'menu-footer-follow-us',
-        'weight' => 0,
-        'expanded' => 0,
+        'weight' => 1,
       ),
       array(
         'link_title' => 'Facebook',
         'link_path' => 'https://www.facebook.com/YOUR_DG',
         'menu_name' => 'menu-footer-follow-us',
-        'weight' => 1,
-        'expanded' => 0,
+        'weight' => 2,
       ),
       array(
         'link_title' => 'YouTube',
         'link_path' => 'https://www.youtube.com/user/YOUR_DG',
         'menu_name' => 'menu-footer-follow-us',
-        'weight' => 1,
-        'expanded' => 0,
+        'weight' => 3,
       ),
     ),
     array(
@@ -45,7 +41,6 @@ function _get_links_config(){
         'link_path' => 'https://ec.europa.eu/info/index_[language:language-content:language]',
         'menu_name' => 'menu-nexteuropa-site-links',
         'weight' => 0,
-        'expanded' => 0,
         'menu_token_enabled' => 1,
         'customized' => 1,
         'options' => array(
@@ -67,21 +62,19 @@ function _get_links_config(){
         'link_path' => 'https://www.facebook.com/EuropeanCommission',
         'menu_name' => 'menu-nexteuropa-social-media',
         'weight' => 0,
-        'expanded' => 0,
       ),
       array(
         'link_title' => 'Twitter',
         'link_path' => 'https://twitter.com/eu_commission',
         'menu_name' => 'menu-nexteuropa-social-media',
         'weight' => 1,
-        'expanded' => 0,
       ),
       array(
         'link_title' => 'Other social networks',
         'link_path' => 'http://ec.europa.eu/dgs/communication/services/journalist/social-media_en.htm',
         'menu_name' => 'menu-nexteuropa-social-media',
         'weight' => 2,
-        'expanded' => 0,
+        'customized' => 1,
       ),
     ),
     array(
@@ -90,14 +83,14 @@ function _get_links_config(){
         'link_path' => 'https://europa.eu/european-union/index',
         'menu_name' => 'menu-nexteuropa-inst-links',
         'weight' => 0,
-        'expanded' => 0,
+        'customized' => 1,
       ),
       array(
         'link_title' => 'EU institutions',
         'link_path' => 'https://europa.eu/european-union/about-eu/institutions-bodies',
         'menu_name' => 'menu-nexteuropa-inst-links',
         'weight' => 1,
-        'expanded' => 0,
+        'customized' => 1,
       ),
     ),
     array(
@@ -106,49 +99,49 @@ function _get_links_config(){
         'link_path' => 'https://ec.europa.eu/info/about-commissions-new-web-presence',
         'menu_name' => 'menu-nexteuropa-service-links',
         'weight' => -100,
-        'expanded' => 0,
+        'customized' => 1,
       ),
       array(
         'link_title' => 'Language policy',
         'link_path' => 'https://ec.europa.eu/info/language-policy',
         'menu_name' => 'menu-nexteuropa-service-links',
         'weight' => -90,
-        'expanded' => 0,
+        'customized' => 1,
       ),
       array(
         'link_title' => 'Resources for partners',
         'link_path' => 'http://ec.europa.eu/info/resources-partners',
         'menu_name' => 'menu-nexteuropa-service-links',
         'weight' => -80,
-        'expanded' => 0,
+        'customized' => 1,
       ),
       array(
         'link_title' => 'Cookies',
         'link_path' => 'https://ec.europa.eu/info/cookies',
         'menu_name' => 'menu-nexteuropa-service-links',
         'weight' => -70,
-        'expanded' => 0,
+        'customized' => 1,
       ),
       array(
         'link_title' => 'Privacy policy',
         'link_path' => 'https://ec.europa.eu/info/privacy-policy',
         'menu_name' => 'menu-nexteuropa-service-links',
         'weight' => -60,
-        'expanded' => 0,
+        'customized' => 1,
       ),
       array(
         'link_title' => 'Legal notice',
         'link_path' => 'https://ec.europa.eu/info/legal-notice',
         'menu_name' => 'menu-nexteuropa-service-links',
         'weight' => -50,
-        'expanded' => 0,
+        'customized' => 1,
       ),
       array(
         'link_title' => 'Contact',
         'link_path' => 'https://ec.europa.eu/info/contact',
         'menu_name' => 'menu-nexteuropa-service-links',
         'weight' => -40,
-        'expanded' => 0,
+        'customized' => 1,
       ),
     ),
   );
@@ -166,6 +159,63 @@ function _get_links_config_of_menu($menu_name){
       else{
         return $config_menu;
       }
+    }
+  }
+}
+
+/**
+ * Get translation used in the module.
+ */
+function _get_translations($link_title){
+  $data = array(
+    'European Commission' => array(
+      'bg' => 'Европейска комисия',
+      'cs' => 'Evropská komise',
+      'da' => 'Europa-Kommissionen',
+      'de' => 'Europäische Kommission',
+      'et' => 'Euroopa Komisjon',
+      'el' => 'Ευρωπαϊκή Επιτροπή',
+      'en' => 'European Commission',
+      'es' => 'Comisión Europea',
+      'fr' => 'Commission européenne',
+      'it' => 'Commissione europea',
+      'lv' => 'Eiropas Komisija',
+      'lt' => 'Europos Komisija',
+      'hu' => 'Európai Bizottság',
+      'mt' => 'Il-Kummissjoni Ewropea',
+      'nl' => 'Europese Commissie',
+      'pl' => 'Komisja Europejska',
+      'pt' => 'Comissão Europeia',
+      'ro' => 'Comisia Europeană',
+      'fi' => 'Euroopan komissio',
+      'sk' => 'Európska komisia',
+      'sl' => 'Evropska komisija',
+      'sv' => 'Europeiska kommissionen',
+    ),
+    'Other social networks' => array(
+      'en' => 'Other social networks',
+      'fr' => 'Autres réseaux sociaux',
+    )
+  );
+  return empty($link_title) ? array() : $data[$link_title];
+}
+
+/**
+ * Set translations of menu_item.
+ */
+function _set_translations($mlid, $link_title){
+  $translations = _get_translations($link_title);
+  if(empty($translations)){
+    break;
+  }
+  // Loop.
+  $languages = language_list('enabled')[1];
+  foreach($languages as $lang_code => $language_object){
+    if ($lang_code == language_default('language')) {
+      continue;
+    }
+    if(!empty($translations[$lang_code])){
+      i18n_string_translation_update('menu:item:'.$mlid.':title', $translations[$lang_code], $lang_code, $link['link_title']);
     }
   }
 }
@@ -235,7 +285,7 @@ function _footer__custom_right_copy_links(){
  * Breadcrumb: Update path of the Info website (using token).
  */
 function _breadcrumb__main_link(){
-  // The European Comission website is always the root of our breadcrumb.
+  // The European Commission website is always the root of our breadcrumb.
   $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name AND weight=0", array(':menu_name' => 'menu-breadcrumb-menu'))->fetchAll();
   if(!empty($mlids)){
     $path = 'https://ec.europa.eu/info/index_[language:language-content:language]';
@@ -331,30 +381,7 @@ function _create_breadcrumb_root(){
     );
     $root_mlid = menu_link_save($root_menu_item_default_data);
     // Set translations.
-    $translations = array(
-      'bg' => 'Европейска комисия',
-      'cs' => 'Evropská komise',
-      'da' => 'Europa-Kommissionen',
-      'de' => 'Europäische Kommission',
-      'et' => 'Euroopa Komisjon',
-      'el' => 'Ευρωπαϊκή Επιτροπή',
-      'en' => 'European Commission',
-      'es' => 'Comisión Europea',
-      'fr' => 'Commission européenne',
-      'it' => 'Commissione europea',
-      'lv' => 'Eiropas Komisija',
-      'lt' => 'Europos Komisija',
-      'hu' => 'Európai Bizottság',
-      'mt' => 'Il-Kummissjoni Ewropea',
-      'nl' => 'Europese Commissie',
-      'pl' => 'Komisja Europejska',
-      'pt' => 'Comissão Europeia',
-      'ro' => 'Comisia Europeană',
-      'fi' => 'Euroopan komissio',
-      'sk' => 'Európska komisia',
-      'sl' => 'Evropska komisija',
-      'sv' => 'Europeiska kommissionen',
-    );
+    $translations = _get_translations('European Commission');
     foreach(array_keys(language_list('enabled')[1]) as $lang_code){
       i18n_string_translation_update('menu:item:' . $root_mlid . ':title', $translations[$lang_code], $lang_code, $root_title);
     }
