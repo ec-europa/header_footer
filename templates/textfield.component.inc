@@ -9,9 +9,10 @@
  * Implements hook_process_HOOK().
  */
 function header_footer_corporate_process_textfield(&$variables) {
+  global $language;
   if(!empty($variables['element']['#ecl-header_footer_corporate']['header'])){
     $element = &$variables['element'];
-    $element['#field_prefix'] = '<label class="ecl-search-form__label ecl-form-label" for="edit-querytext">'.t('Search').'</label>';
+    $element['#field_prefix'] = '<label class="ecl-search-form__label ecl-form-label" for="edit-querytext">'.i18n_string_translate('blocks:nexteuropa_europa_search:nexteuropa_europa_search_form:title', 'Search', array('langcode' => $language->language)).'</label>';
     unset($element['#title']);
     $element['#attributes'] = array(
       'class' =>
