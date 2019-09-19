@@ -1,3 +1,4 @@
+
 # Header Footer Corporate
 
 ## Description
@@ -33,3 +34,5 @@ It is better to specify the tag to download, to know in your sources what versio
 Social links of the footer are manageable in `/admin/structure/menu/manage/menu-footer-follow-us`.
 ### Right footer links
 Links of the right footer are manageable in `/admin/structure/menu/manage/menu-footer-right`.
+### Breadcrumb
+The breadcrumb menu is manageable in `/admin/structure/menu/manage/menu-breadcrumb-menu`. The path root have to be in  Language neutral and its translations by Localization not Translation: it means to not create new menu items in different languages.

@@ -235,18 +235,22 @@ function _footer__custom_right_copy_links(){
  * Breadcrumb: Update path of the Info website (using token).
  */
 function _breadcrumb__main_link(){
+  // The European Comission website is always the root of our breadcrumb.
   $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name AND weight=0", array(':menu_name' => 'menu-breadcrumb-menu'))->fetchAll();
   if(!empty($mlids)){
     $path = 'https://ec.europa.eu/info/index_[language:language-content:language]';
     foreach($mlids as $record){
       $menu_item = menu_link_load($record->mlid);
-      $menu_item['link_path'] = $path;
-      $menu_item['menu_token_enabled'] = 1;
-      $menu_item['options']['menu_token_link_path'] = $path;
-      menu_link_save($menu_item);
+      if($menu_item['link_title'] == 'European Commission'){
+        $menu_item['link_path'] = $path;
+        $menu_item['menu_token_enabled'] = 1;
+        $menu_item['options']['menu_token_link_path'] = $path;
+        menu_link_save($menu_item);
+      }
     }
   }
 }
+
 /**
  * Reset menu according actual config.
  */
@@ -262,5 +266,97 @@ function _reset_menu_to_config($menu_name){
   $items = _get_links_config_of_menu($menu_name);
   foreach($items as $link){
     menu_link_save($link);
+  }
+}
+
+/**
+ * Clean custom attributes of each item.
+ */
+function _delete_menu_items_attributes($menu_name){
+  // Delete existing attributes of each menu items.
+  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $menu_name))->fetchAll();
+  if(!empty($mlids)){
+    foreach($mlids as $record){
+      $menu_item = menu_link_load($record->mlid);
+      $menu_item['options'] = array();
+      menu_link_save($menu_item);
+    }
+  }
+}
+
+/**
+ * Create breadcrumb root in LANGUAGE_NONE and its translations.
+ */
+function _create_breadcrumb_root(){
+  // Find if we have to create root item.
+  $is_root_save_needed = FALSE;
+  $menu_name = 'menu-breadcrumb-menu';
+  $root_title = 'European Commission';
+  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $menu_name))->fetchAll();
+  if(!empty($mlids)){
+    foreach($mlids as $record){
+      $menu_item = menu_link_load($record->mlid);
+      if($menu_item['link_title'] == $root_title ){
+        if($menu_item['language'] != 'und' || $menu_item['hidden'] != 0){
+          $is_root_save_needed = TRUE;
+        }
+      }
+    }
+  }
+  else{
+    $is_root_save_needed = TRUE;
+  }
+  if($is_root_save_needed){
+    // Create item.
+    $root_menu_item_default_data = array(
+      'link_title' => $root_title,
+      'link_path' => 'https://ec.europa.eu/info/index_[language:language-content:language]',
+      'menu_name' => $menu_name,
+      'weight' => 0,
+      'expanded' => 0,
+      'menu_token_enabled' => 1,
+      'customized' => 1,
+      'language' => 'und',
+      'options' => array(
+        'menu_token_link_path' => 'https://ec.europa.eu/info/index_[language:language-content:language]',
+        'menu_token_data' => array(),
+        'menu_token_options' => array(
+          'title_localize' => 0,
+          'clear' => 0,
+        ),
+        'attributes' => array(
+          'title' => '',
+        ),
+      ),
+    );
+    $root_mlid = menu_link_save($root_menu_item_default_data);
+    // Set translations.
+    $translations = array(
+      'bg' => 'Европейска комисия',
+      'cs' => 'Evropská komise',
+      'da' => 'Europa-Kommissionen',
+      'de' => 'Europäische Kommission',
+      'et' => 'Euroopa Komisjon',
+      'el' => 'Ευρωπαϊκή Επιτροπή',
+      'en' => 'European Commission',
+      'es' => 'Comisión Europea',
+      'fr' => 'Commission européenne',
+      'it' => 'Commissione europea',
+      'lv' => 'Eiropas Komisija',
+      'lt' => 'Europos Komisija',
+      'hu' => 'Európai Bizottság',
+      'mt' => 'Il-Kummissjoni Ewropea',
+      'nl' => 'Europese Commissie',
+      'pl' => 'Komisja Europejska',
+      'pt' => 'Comissão Europeia',
+      'ro' => 'Comisia Europeană',
+      'fi' => 'Euroopan komissio',
+      'sk' => 'Európska komisia',
+      'sl' => 'Evropska komisija',
+      'sv' => 'Europeiska kommissionen',
+    );
+    foreach(array_keys(language_list('enabled')[1]) as $lang_code){
+      i18n_string_translation_update('menu:item:' . $root_mlid . ':title', $translations[$lang_code], $lang_code, $root_title);
+    }
   }
 }

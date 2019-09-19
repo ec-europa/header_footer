@@ -24,7 +24,7 @@ function header_footer_corporate_enable() {
   t('Legal notice');
   t('Contact');
 
-  // Save menu group into menu_custom table.
+  // Save menu group into menu_custom table (from 'menu' module).
   $config_menus = array(
     array(
       'menu_name' => 'menu-nexteuropa-site-links',
@@ -60,7 +60,7 @@ function header_footer_corporate_enable() {
   foreach ($config_menus as $menu) {
     // Look the table first if the data does exist.
     $exists = db_query("SELECT title FROM {menu_custom} WHERE menu_name=:menu_name", array(':menu_name' => $menu['menu_name']))->fetchField();
-    // Save the record if the data does not exist.
+    // Create the menu by saving data if it does not exist.
     if (!$exists) {
       menu_save($menu);
     }
@@ -96,14 +96,16 @@ function header_footer_corporate_enable() {
       ->execute();
   }
   
-  // Reset corporate menus. 
+  // Reset corporate menus.
   _reset_menu_to_config('menu-nexteuropa-site-links');
-  _reset_menu_to_config('menu-nexteuropa-service-links');
+  _reset_menu_to_config('menu-nexteuropa-social-media');
   _reset_menu_to_config('menu-nexteuropa-inst-links');
+  _reset_menu_to_config('menu-nexteuropa-service-links');
   // Copy footer links from custom menus (used in MARE sites) to our menus.
   _footer__custom_right_copy_links();
   // Breadcrumb: Update the root link path.
   _breadcrumb__main_link();
+  _create_breadcrumb_root();
 }
 
 /**
@@ -128,9 +130,18 @@ function header_footer_corporate_update_7003() {
 }
 
 /**
- * Footer corporate : Reset menu items.
+ * Footer corporate : Reset corporates menus.
  */
 function header_footer_corporate_update_7004() {
-  _reset_menu_to_config('menu-nexteuropa-service-links');
+  _reset_menu_to_config('menu-nexteuropa-site-links');
+  _reset_menu_to_config('menu-nexteuropa-social-media');
   _reset_menu_to_config('menu-nexteuropa-inst-links');
+  _reset_menu_to_config('menu-nexteuropa-service-links');
+}
+
+/**
+ * Footer custom : Unset custom classes.
+ */
+function header_footer_corporate_update_7005() {
+  _delete_menu_items_attributes('menu-footer-follow-us');
 }

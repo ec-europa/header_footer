@@ -9,6 +9,7 @@
  * Implements hook_preprocess_HOOK().
  */
 function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables, $hook) {
+  global $language;
   // We have $breadcrumb without "Breadcrumb menu" items. So we add the homepage
   // to them and update the last item to flag it as current-page.
   // Menu items [123] + Homepage [homepage] + Breadcrumbs [456].
@@ -38,15 +39,26 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
     'url' => variable_get('site_frontpage', 'node'),
   ));
   // [123][homepage][456].
-  foreach(menu_tree_all_data('menu-breadcrumb-menu') as $value){
+  foreach(menu_tree('menu-breadcrumb-menu') as $mlid => $value){
+    if(! is_int($mlid)){
+      continue;
+    }
+    // Filter enabled items.
+    if(!empty($value['#original_link']['hidden'])){
+      continue;
+    }
+    if(!in_array($value['#original_link']['language'], array(LANGUAGE_NONE, $language->language, language_default('language')))){
+      continue;
+    }
+    
     array_unshift($breadcrumb, array(
-      'content' => $value['link']['title'],
+      'content' => $value['#original_link']['title'],
       'options' => array(
         'attributes' => array(
           'class' => array('ecl-breadcrumb__link', 'ecl-link ecl-link--standalone'),
         ),
       ),
-      'url' => $value['link']['href'],
+      'url' => $value['#original_link']['href'],
     ));
   }
   // Copy last level to set page_title.
