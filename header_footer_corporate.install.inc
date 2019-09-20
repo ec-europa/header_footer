@@ -206,7 +206,7 @@ function _get_translations($link_title){
 function _set_translations($mlid, $link_title){
   $translations = _get_translations($link_title);
   if(empty($translations)){
-    break;
+    return;
   }
   // Loop.
   $languages = language_list('enabled')[1];
