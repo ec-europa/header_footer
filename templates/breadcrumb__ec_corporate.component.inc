@@ -39,6 +39,7 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
     'url' => variable_get('site_frontpage', 'node'),
   ));
   // [123][homepage][456].
+  $static_breadcrumb = array();
   foreach(menu_tree('menu-breadcrumb-menu') as $mlid => $value){
     if(! is_int($mlid)){
       continue;
@@ -51,7 +52,7 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
       continue;
     }
     
-    array_unshift($breadcrumb, array(
+    $static_breadcrumb[] = array(
       'content' => $value['#original_link']['title'],
       'options' => array(
         'attributes' => array(
@@ -59,8 +60,10 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
         ),
       ),
       'url' => $value['#original_link']['href'],
-    ));
+    );
   }
+  $breadcrumb = $static_breadcrumb + $breadcrumb;
+    
   // Copy last level to set page_title.
   $copy_last = array_slice($breadcrumb, -1);
   $variables['page_title'] = array_pop($copy_last)['content'];
