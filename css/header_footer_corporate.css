@@ -1,7 +1,7 @@
 .ecl-breadcrumb__current-page {
   color: #bfd0e4 !important;
 }
-/* Cancel oec_resp theme overrides.*/
+/* Cancel ec_resp theme overrides.*/
 html {
   font-size: medium;
 }
@@ -10,6 +10,11 @@ html {
 }
 .ecl-footer__identity-title{
   color: inherit;
+}
+.ecl-site-header a:hover,
+.ecl-page-header a:hover,
+.ecl-footer a:hover {
+  text-decoration: none;
 }
 .ecl-footer a:visited {
   color: #fff;
