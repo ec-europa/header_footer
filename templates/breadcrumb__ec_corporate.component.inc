@@ -10,9 +10,10 @@
  */
 function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables, $hook) {
   global $language;
-  // We have $breadcrumb without "Breadcrumb menu" items. So we add the homepage
-  // to them and update the last item to flag it as current-page.
+  // We have $breadcrumb without static items from "Breadcrumb menu".
+  // We add this static items and programatically add the homepage link.
   // Menu items [123] + Homepage [homepage] + Breadcrumbs [456].
+
   // [456].
   $breadcrumb = $variables['breadcrumb'];
   // Clean data.
@@ -38,6 +39,7 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
     ),
     'url' => variable_get('site_frontpage', 'node'),
   ));
+
   // [123][homepage][456].
   $static_breadcrumb = array();
   foreach(menu_tree('menu-breadcrumb-menu') as $mlid => $value){
@@ -62,7 +64,9 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
       'url' => $value['#original_link']['href'],
     );
   }
-  $breadcrumb = $static_breadcrumb + $breadcrumb;
+  foreach(array_reverse($static_breadcrumb) as $static_b){
+    array_unshift($breadcrumb, $static_b);
+  }
     
   // Copy last level to set page_title.
   $copy_last = array_slice($breadcrumb, -1);
