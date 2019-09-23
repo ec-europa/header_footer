@@ -1,15 +1,19 @@
+.ecl-breadcrumb__current-page {
+  color: #bfd0e4 !important;
+}
+/* Cancel oec_resp theme overrides.*/
 html {
   font-size: medium;
 }
 .ecl-page-header h1 {
   color: inherit;
 }
-.ecl-breadcrumb__current-page {
-  color: #bfd0e4 !important;
-}
 .ecl-footer__identity-title{
   color: inherit;
 }
 .ecl-footer a:visited {
   color: #fff;
+}
+.ecl-footer__identity a:visited {
+  color: #004494;
 }
