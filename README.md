@@ -23,10 +23,10 @@ Copy it in your **resources/site.make** file :
     projects[header_footer_corporate][subdir] = custom/ec_europa
     projects[header_footer_corporate][download][type] = git
     projects[header_footer_corporate][download][url] = "https://github.com/ec-europa/header_footer_corporate.git"
-    projects[header_footer_corporate][download][tag] = "v1.0.8"
+    projects[header_footer_corporate][download][tag] = "v1.0.9"
 and run the command `./toolkit/phing build-subsite-dev`
 
-> *"v1.0.8" is just an example
+> *"v1.0.9" is just an example
 It is better to specify the tag to download, to know in your sources what version of the module you had downloaded.*
 
 ## Manageable links
