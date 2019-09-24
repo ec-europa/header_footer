@@ -8,7 +8,7 @@
 <footer class="ecl-footer ecl-footer--custom">
   <?php
   // Custom footer: Non mandatory menus.
-  if(!empty($ecl_footer_follow_us_menu) || !empty($ecl_footer_improved_men) ): ?>
+  if (!empty($ecl_footer_follow_us_menu) || !empty($ecl_footer_improved_men)): ?>
     <div class="ecl-footer__identity">
       <div class="ecl-container">
         <div class="ecl-row">
@@ -27,7 +27,8 @@
       </div>
     </div>
   <?php endif; ?>
-  <?php //Corporate footer. ?>
+  <?php
+// Corporate footer.?>
   <div class="ecl-footer__sections">
     <div class="ecl-container">
       <div class="ecl-row">

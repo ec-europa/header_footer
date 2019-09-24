@@ -26,7 +26,7 @@ function header_footer_corporate_preprocess_menu_link(&$variables) {
       // If the current page is not on the main menu.
     ) {
       $menu_item_state = '';
-      // Cancel the active class
+      // Cancel the active class.
     } // end of workaround
     $variables['element']['#attributes']['class'][] = $menu_item_state;
   }

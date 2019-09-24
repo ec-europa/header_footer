@@ -10,10 +10,10 @@
  */
 function header_footer_corporate_preprocess_header__ec_corporate(&$variables) {
   global $language;
-  
+
   // Test if multilingual.
   $variables['is_multilingual_website'] = count(language_list('enabled')[1]) > 1;
-  if($variables['is_multilingual_website']){
+  if ($variables['is_multilingual_website']) {
     // Language switcher.
     $variables['language_switcher_url'] = url(
       'language-selector/site-language', array(
@@ -29,10 +29,10 @@ function header_footer_corporate_preprocess_header__ec_corporate(&$variables) {
 
   // Search form.
   $search_form = drupal_get_form('nexteuropa_europa_search_search_form');
-  
+
   $variables['ecl_search_block'] = drupal_render($search_form);
   // Remove the hardcoded DIV in form.inc.
-  $variables['ecl_search_block'] = preg_replace('/'.preg_quote('<div>', '/').'/', '', $variables['ecl_search_block'], 1); 
+  $variables['ecl_search_block'] = preg_replace('/' . preg_quote('<div>', '/') . '/', '', $variables['ecl_search_block'], 1);
   $variables['ecl_search_block'] = str_replace('</div></form>', '</form>', $variables['ecl_search_block']);
   $variables['ecl_search_block'] = str_replace('form-item form-type-textfield form-item-QueryText', 'ecl-form-group ecl-form-group--text-input', $variables['ecl_search_block']);
   $easy_breadcrumb_block = module_invoke('easy_breadcrumb', 'block_view', 'easy_breadcrumb');

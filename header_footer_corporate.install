@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains install/update/enable hooks.
@@ -61,33 +62,33 @@ function header_footer_corporate_enable() {
       ->condition('i18n_mode', 0)
       ->execute();
   }
-  
+
   // Breadcrumb: Update/Create the root link path.
   _breadcrumb__main_link();
-  
+
   // Reset corporate menus.
   _reset_menu_to_config('menu-nexteuropa-site-links');
   _reset_menu_to_config('menu-nexteuropa-social-media');
   _reset_menu_to_config('menu-nexteuropa-inst-links');
   _reset_menu_to_config('menu-nexteuropa-service-links');
-  
+
   // Initialize Follow us menu items if necessary.
   $menu_name = 'menu-footer-follow-us';
   $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $menu_name))->fetchAll();
-  if(empty($mlids)){
+  if (empty($mlids)) {
     _reset_menu_to_config($menu_name);
   }
   // Custom menu right 'menu-footer-right':
   // Copy links from existing menu (used in MARE sites) into our menus.
   _footer__custom_right_copy_links();
-  
+
   // Set all translations menu items.
   foreach (_get_links_config() as $link_group) {
     foreach ($link_group as $link) {
       $mlids = db_query("SELECT mlid from {menu_links} WHERE link_title=:link_title AND menu_name=:menu_name", array(':link_title' => $link['link_title'], ':menu_name' => $link['menu_name']))->fetchAll();
-      foreach($mlids as $menu_item){
+      foreach ($mlids as $menu_item) {
         // Set menu_items translations.
-        if(!empty($link['customized'])){
+        if (!empty($link['customized'])) {
           _set_translations(array(
             'text_original' => $link['link_title'],
             'context' => 'menu_item',

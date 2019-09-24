@@ -14,7 +14,7 @@ function header_footer_corporate_preprocess_footer__ec_corporate(&$variables) {
     'heading' => array(
       'class' => array('ecl-footer__identity-label'),
       'level' => 'span',
-      'text' => t('Follow us').':',
+      'text' => t('Follow us:'),
     ),
     'links' => array(
       'items' => menu_navigation_links('menu-footer-follow-us'),
@@ -37,12 +37,12 @@ function header_footer_corporate_preprocess_footer__ec_corporate(&$variables) {
       'class' => array('ecl-footer__section-title'),
     ),
   ));
-  
+
   // Corporate footer middle.
   $variables['ecl_footer_follow_ec_menu'] = theme('menu_items_ec_corporate__lists', array(
     'links' => array(
       'items' => menu_navigation_links('menu-nexteuropa-social-media'),
-      'class' => array('ecl-footer__section-link')
+      'class' => array('ecl-footer__section-link'),
     ),
     'heading' => array(
       'text' => t('Follow the European Commission'),
@@ -50,13 +50,14 @@ function header_footer_corporate_preprocess_footer__ec_corporate(&$variables) {
       'class' => array('ecl-footer__section-title'),
     ),
     'attributes' => array(
-      'class' => array('ecl-footer__section-list--inline'))
+      'class' => array('ecl-footer__section-list--inline'),
+    ),
   ));
   // Corporate footer right.
   $variables['ecl_footer_eu_menu'] = theme('menu_items_ec_corporate__lists', array(
     'links' => array(
       'items' => menu_navigation_links('menu-nexteuropa-inst-links'),
-      'class' => array('ecl-footer__section-link')
+      'class' => array('ecl-footer__section-link'),
     ),
     'heading' => array(
       'text' => t('European Union'),
@@ -68,7 +69,7 @@ function header_footer_corporate_preprocess_footer__ec_corporate(&$variables) {
   $variables['ecl_footer_service_menu'] = theme('menu_items_ec_corporate__links', array(
     'links' => array(
       'items' => menu_navigation_links('menu-nexteuropa-service-links'),
-      'class' => array('ecl-footer__common-link')
+      'class' => array('ecl-footer__common-link'),
     ),
   ));
 }

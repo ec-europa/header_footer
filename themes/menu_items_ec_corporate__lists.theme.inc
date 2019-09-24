@@ -4,6 +4,7 @@
  * @file
  * Redefines theme_links().
  */
+
 use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
 
 /**
@@ -27,7 +28,10 @@ function theme_menu_items_ec_corporate__lists($variables) {
   }
   else {
     $class_li = 'ecl-footer__section-item';
-    $classes_a = ['ecl-footer__section-link', 'ecl-link', 'ecl-link--standalone'];
+    $classes_a = array('ecl-footer__section-link',
+      'ecl-link',
+      'ecl-link--standalone',
+    );
   }
   if (count($links) > 0) {
     // Treat the heading first if it is present to prepend it to the
@@ -54,7 +58,7 @@ function theme_menu_items_ec_corporate__lists($variables) {
     foreach ($links as $key => $link) {
       $class = array($key, $class_li);
       // Add active class to site switcher.
-      if ($i == $num_links && !empty($variables['attributes']['id'] ) && $variables['attributes']['id'] == 'ecl-site-switcher') {
+      if ($i == $num_links && !empty($variables['attributes']['id']) && $variables['attributes']['id'] == 'ecl-site-switcher') {
         $class[] = 'ecl-site-switcher__option--is-selected';
       }
       if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page()))
@@ -67,14 +71,14 @@ function theme_menu_items_ec_corporate__lists($variables) {
         $link['attributes']['class'] = array_merge($link['attributes']['class'], $classes_a);
       }
       else {
-        if(!array_key_exists('attributes', $link)){
+        if (!array_key_exists('attributes', $link)) {
           $link['attributes'] = array('class' => $classes_a);
         }
-        else{
+        else {
           $link['attributes']['class'] = $classes_a;
         }
       }
-      if(isset($variables['links']['class'])){
+      if (isset($variables['links']['class'])) {
         $link['attributes']['class'] = $link['attributes']['class'] + $variables['links']['class'];
       }
       if (isset($link['href'])) {

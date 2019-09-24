@@ -7,7 +7,7 @@
 
 /**
  * Returns HTML for a button.
- * 
+ *
  * Inspired from form.inc:theme_button().
  */
 function _header_footer_corporate_theme_button(&$variables) {
@@ -15,7 +15,7 @@ function _header_footer_corporate_theme_button(&$variables) {
   $element['#attributes']['type'] = 'submit';
   if (isset($element['#ecl-buttontype'])) {
     $key = array_search('btn-search', $element['#attributes']['class']);
-    if($key !== FALSE){
+    if ($key !== FALSE) {
       unset($element['#attributes']['class'][$key]);
     }
   }
