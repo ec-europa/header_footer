@@ -14,7 +14,7 @@ function header_footer_corporate_preprocess_footer__ec_corporate(&$variables) {
     'heading' => array(
       'class' => array('ecl-footer__identity-label'),
       'level' => 'span',
-      'text' => t('Follow us:'),
+      'text' => t('Follow us').':',
     ),
     'links' => array(
       'items' => menu_navigation_links('menu-footer-follow-us'),

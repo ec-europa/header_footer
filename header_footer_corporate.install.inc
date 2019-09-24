@@ -199,9 +199,9 @@ function _get_translations($params = array()){
       )
     ),
     'default' => array(
-      'Follow us:' => array(
-        'en' => 'Follow us:',
-        'fr' => 'Nous suivre:',
+      'Follow us' => array(
+        'en' => 'Follow us',
+        'fr' => 'Nous suivre',
       ),
       'European Commission' => array(
         'en' => 'European Commission',
