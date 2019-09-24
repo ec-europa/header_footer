@@ -12,19 +12,7 @@ include_once 'header_footer_corporate.install.inc';
  * Add ECL menus.
  */
 function header_footer_corporate_enable() {
-  t('Other social networks');
-  t('European Commission website');
-  t('EU institutions');
-  t('European Union');
-  t("About the Commission's new web presence");
-  t("Language policy");
-  t('Resources for partners');
-  t('Cookies');
-  t('Privacy policy');
-  t('Legal notice');
-  t('Contact');
-
-  // Save menu group into menu_custom table (from 'menu' module).
+  // Create menus saving menu group into menu_custom table (from 'menu' module).
   $config_menus = array(
     array(
       'menu_name' => 'menu-nexteuropa-site-links',
@@ -64,30 +52,6 @@ function header_footer_corporate_enable() {
     if (empty($title)) {
       menu_save($menu);
     }
-  }
-
-  foreach (_get_links_config() as $link_group) {
-    foreach ($link_group as $link) {
-      // Look the table first if the data does exist.
-      $mlid = db_query("SELECT mlid from {menu_links} WHERE link_title=:link_title AND link_path=:link_path", array(':link_title' => $link['link_title'], ':link_path' => $link['link_path']))->fetchField();
-      // Save the record if the data does not exist.
-      if (empty($mlid)) {
-        $mlid = menu_link_save($link);
-      }
-      // Set translations.
-      $translations = _set_translations($mlid, $link['link_title']);
-    }
-  }
-  
-  $menus = array(
-    'menu-footer-right',
-    'menu-footer-follow-us',
-    'menu-nexteuropa-inst-links',
-    'menu-nexteuropa-service-links',
-    'menu-nexteuropa-site-links',
-    'menu-nexteuropa-social-media',
-  );
-  foreach ($menus as $menu) {
     // Add params 'Translate and Localize' to the menu.
     db_update('menu_custom')
       ->fields(array(
@@ -98,16 +62,44 @@ function header_footer_corporate_enable() {
       ->execute();
   }
   
+  // Breadcrumb: Update/Create the root link path.
+  _breadcrumb__main_link();
+  
   // Reset corporate menus.
   _reset_menu_to_config('menu-nexteuropa-site-links');
   _reset_menu_to_config('menu-nexteuropa-social-media');
   _reset_menu_to_config('menu-nexteuropa-inst-links');
   _reset_menu_to_config('menu-nexteuropa-service-links');
-  // Copy footer links from custom menus (used in MARE sites) to our menus.
+  
+  // Initialize Follow us menu items if necessary.
+  $menu_name = 'menu-footer-follow-us';
+  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $menu_name))->fetchAll();
+  if(empty($mlids)){
+    _reset_menu_to_config($menu_name);
+  }
+  // Custom menu right 'menu-footer-right':
+  // Copy links from existing menu (used in MARE sites) into our menus.
   _footer__custom_right_copy_links();
-  // Breadcrumb: Update the root link path.
-  _breadcrumb__main_link();
-  _create_breadcrumb_root();
+  
+  // Set all translations menu items.
+  foreach (_get_links_config() as $link_group) {
+    foreach ($link_group as $link) {
+      $mlids = db_query("SELECT mlid from {menu_links} WHERE link_title=:link_title AND menu_name=:menu_name", array(':link_title' => $link['link_title'], ':menu_name' => $link['menu_name']))->fetchAll();
+      foreach($mlids as $menu_item){
+        // Set menu_items translations.
+        if(!empty($link['customized'])){
+          _set_translations(array(
+            'text_original' => $link['link_title'],
+            'context' => 'menu_item',
+            'mlid' => $menu_item->mlid,
+          ));
+        }
+      }
+    }
+  }
+
+  // Set interface translations.
+  _set_translations(array('context' => 'default'));
 }
 
 /**

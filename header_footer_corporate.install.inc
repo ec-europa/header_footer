@@ -166,56 +166,114 @@ function _get_links_config_of_menu($menu_name){
 /**
  * Get translation used in the module.
  */
-function _get_translations($link_title){
+function _get_translations($params = array()){
   $data = array(
-    'European Commission' => array(
-      'bg' => 'Европейска комисия',
-      'cs' => 'Evropská komise',
-      'da' => 'Europa-Kommissionen',
-      'de' => 'Europäische Kommission',
-      'et' => 'Euroopa Komisjon',
-      'el' => 'Ευρωπαϊκή Επιτροπή',
-      'en' => 'European Commission',
-      'es' => 'Comisión Europea',
-      'fr' => 'Commission européenne',
-      'it' => 'Commissione europea',
-      'lv' => 'Eiropas Komisija',
-      'lt' => 'Europos Komisija',
-      'hu' => 'Európai Bizottság',
-      'mt' => 'Il-Kummissjoni Ewropea',
-      'nl' => 'Europese Commissie',
-      'pl' => 'Komisja Europejska',
-      'pt' => 'Comissão Europeia',
-      'ro' => 'Comisia Europeană',
-      'fi' => 'Euroopan komissio',
-      'sk' => 'Európska komisia',
-      'sl' => 'Evropska komisija',
-      'sv' => 'Europeiska kommissionen',
+    'menu_item' => array(
+      'European Commission' => array(
+        'bg' => 'Европейска комисия',
+        'cs' => 'Evropská komise',
+        'da' => 'Europa-Kommissionen',
+        'de' => 'Europäische Kommission',
+        'et' => 'Euroopa Komisjon',
+        'el' => 'Ευρωπαϊκή Επιτροπή',
+        'en' => 'European Commission',
+        'es' => 'Comisión Europea',
+        'fr' => 'Commission européenne',
+        'it' => 'Commissione europea',
+        'lv' => 'Eiropas Komisija',
+        'lt' => 'Europos Komisija',
+        'hu' => 'Európai Bizottság',
+        'mt' => 'Il-Kummissjoni Ewropea',
+        'nl' => 'Europese Commissie',
+        'pl' => 'Komisja Europejska',
+        'pt' => 'Comissão Europeia',
+        'ro' => 'Comisia Europeană',
+        'fi' => 'Euroopan komissio',
+        'sk' => 'Európska komisia',
+        'sl' => 'Evropska komisija',
+        'sv' => 'Europeiska kommissionen',
+      ),
+      'Other social networks' => array(
+        'en' => 'Other social networks',
+        'fr' => 'Autres réseaux sociaux',
+      )
     ),
-    'Other social networks' => array(
-      'en' => 'Other social networks',
-      'fr' => 'Autres réseaux sociaux',
-    )
+    'default' => array(
+      'Follow us:' => array(
+        'en' => 'Follow us:',
+        'fr' => 'Nous suivre:',
+      ),
+      'European Commission' => array(
+        'en' => 'European Commission',
+        'fr' => 'Commission Européenne',
+      ),
+      'Follow the European Commission' => array(
+        'en' => 'Follow the European Commission',
+        'fr' => 'Suivre la Commission Européenne',
+      ),
+      'European Union' => array(
+        'en' => 'European Union',
+        'fr' => 'Union Européenne',
+      ),
+    ),
   );
-  return empty($link_title) ? array() : $data[$link_title];
+  if(empty($params)){
+    return $data;
+  }
+  elseif(isset($params['context'])){
+    if(empty($params['text_original'])){
+      return $data[$params['context']];
+    }
+    else{
+      return $data[$params['context']][$params['text_original']];
+    }
+  }
 }
 
 /**
  * Set translations of menu_item.
  */
-function _set_translations($mlid, $link_title){
-  $translations = _get_translations($link_title);
+function _set_translations($data = array()){
+  $translations = _get_translations($data);
   if(empty($translations)){
-    return;
+    return FALSE;
   }
-  // Loop.
+  // Set all translations of one context with recursive call.
+  if(!isset($data['text_original']) && isset($data['context'])){
+    foreach(array_keys($translations) as $text_original){
+      _set_translations(array(
+        'text_original' => $text_original,
+        'context' => $data['context'],
+      ));
+    }
+    return TRUE;
+  }
+  
+  // Set one translation .
   $languages = language_list('enabled')[1];
   foreach($languages as $lang_code => $language_object){
     if ($lang_code == language_default('language')) {
       continue;
     }
     if(!empty($translations[$lang_code])){
-      i18n_string_translation_update('menu:item:'.$mlid.':title', $translations[$lang_code], $lang_code, $link['link_title']);
+      $context = 'default'; // Built-in interface.
+      if($data['context'] == 'menu_item'){
+        if(!empty($data['mlid'])){
+          $context = 'menu:item:'.$data['mlid'].':title';
+          i18n_string_translation_update($context, $translations[$lang_code], $lang_code, $data['text_original']);
+        }
+      }
+      else{
+        // Without context, have to use Local and not i18n.
+        // Translate strings.
+        $report = array(
+          'skips'=> 0,
+          'updates'=> 0,
+          'deletes'=> 0,
+          'additions'=> 0
+        );
+        _locale_import_one_string_db($report, $lang_code, '', $data['text_original'], $translations[$lang_code], 'default', '', LOCALE_IMPORT_OVERWRITE);
+      }
     }
   }
 }
@@ -282,26 +340,6 @@ function _footer__custom_right_copy_links(){
 }
 
 /**
- * Breadcrumb: Update path of the Info website (using token).
- */
-function _breadcrumb__main_link(){
-  // The European Commission website is always the root of our breadcrumb.
-  $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name AND weight=0", array(':menu_name' => 'menu-breadcrumb-menu'))->fetchAll();
-  if(!empty($mlids)){
-    $path = 'https://ec.europa.eu/info/index_[language:language-content:language]';
-    foreach($mlids as $record){
-      $menu_item = menu_link_load($record->mlid);
-      if($menu_item['link_title'] == 'European Commission'){
-        $menu_item['link_path'] = $path;
-        $menu_item['menu_token_enabled'] = 1;
-        $menu_item['options']['menu_token_link_path'] = $path;
-        menu_link_save($menu_item);
-      }
-    }
-  }
-}
-
-/**
  * Reset menu according actual config.
  */
 function _reset_menu_to_config($menu_name){
@@ -335,32 +373,35 @@ function _delete_menu_items_attributes($menu_name){
 }
 
 /**
- * Create breadcrumb root in LANGUAGE_NONE and its translations.
+ * Breadcrumb: Create/Update breadcrumb root and its translations.
  */
-function _create_breadcrumb_root(){
-  // Find if we have to create root item.
-  $is_root_save_needed = FALSE;
-  $menu_name = 'menu-breadcrumb-menu';
+function _breadcrumb__main_link(){
+  // The European Commission website is always the root of our breadcrumb.
+  
+  //Update case:
+  $path = 'https://ec.europa.eu/info/index_[language:language-content:language]';
   $root_title = 'European Commission';
+  $menu_name = 'menu-breadcrumb-menu';
   $mlids = db_query("SELECT mlid from {menu_links} WHERE menu_name=:menu_name", array(':menu_name' => $menu_name))->fetchAll();
   if(!empty($mlids)){
     foreach($mlids as $record){
       $menu_item = menu_link_load($record->mlid);
-      if($menu_item['link_title'] == $root_title ){
-        if($menu_item['language'] != 'und' || $menu_item['hidden'] != 0){
-          $is_root_save_needed = TRUE;
+      if($menu_item['link_title'] == $root_title){
+        if($menu_item['language'] == 'und'  && $menu_item['hidden'] == 0){
+          // Update the link.
+          $menu_item['link_path'] = $path;
+          $menu_item['menu_token_enabled'] = 1;
+          $menu_item['options']['menu_token_link_path'] = $path;
+          $root_mlid = menu_link_save($menu_item);
         }
       }
     }
   }
   else{
-    $is_root_save_needed = TRUE;
-  }
-  if($is_root_save_needed){
-    // Create item.
+    // Needs to create item.
     $root_menu_item_default_data = array(
       'link_title' => $root_title,
-      'link_path' => 'https://ec.europa.eu/info/index_[language:language-content:language]',
+      'link_path' => $path,
       'menu_name' => $menu_name,
       'weight' => 0,
       'expanded' => 0,
@@ -368,7 +409,7 @@ function _create_breadcrumb_root(){
       'customized' => 1,
       'language' => 'und',
       'options' => array(
-        'menu_token_link_path' => 'https://ec.europa.eu/info/index_[language:language-content:language]',
+        'menu_token_link_path' => $path,
         'menu_token_data' => array(),
         'menu_token_options' => array(
           'title_localize' => 0,
@@ -380,10 +421,10 @@ function _create_breadcrumb_root(){
       ),
     );
     $root_mlid = menu_link_save($root_menu_item_default_data);
-    // Set translations.
-    $translations = _get_translations('European Commission');
-    foreach(array_keys(language_list('enabled')[1]) as $lang_code){
-      i18n_string_translation_update('menu:item:' . $root_mlid . ':title', $translations[$lang_code], $lang_code, $root_title);
-    }
   }
+  _set_translations(array(
+    'text_original' => $root_title,
+    'context' => 'menu_item',
+    'mlid' => $root_mlid,
+  ));
 }
