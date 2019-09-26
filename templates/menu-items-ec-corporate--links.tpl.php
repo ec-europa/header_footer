@@ -7,6 +7,7 @@
 ?>
 
 <?php print \render($heading_markup); ?>
-<?php foreach ($links as $link): ?>
+
+<?php foreach ($links['items'] as $link): ?>
   <?php print \l($link['title'], $link['href'], $link); ?>
 <?php endforeach; ?>

@@ -38,5 +38,4 @@ function header_footer_corporate_preprocess_menu_items_ec_corporate__links(&$var
     $link['attributes']['class'] = array_merge($link['attributes']['class'], $variables['links']['class']);
     HeaderFooterCorporateHelpers::setLinkIconsPrefixSuffix($link);
   }
-  $variables['links'] = $variables['links']['items'];
 }
