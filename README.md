@@ -1,3 +1,4 @@
+
 Gives available variables `$header__ec_corporate` and `$footer__ec_corporate`  in your custom theme's *page.tpl.php* file and *maintenance-page.tpl.php*.
 You just have to print them at the right place (before and after the main content).
 
@@ -50,8 +51,9 @@ Links of the right footer are manageable in `/admin/structure/menu/manage/menu-f
 The breadcrumb menu is manageable in `/admin/structure/menu/manage/menu-breadcrumb-menu`.
 Here is how the breadcrumb is built:
 
-[fixed items from `menu-breadcrumb-menu`] **>** [Homepage *(programmatically built)*] **>** [Dynamic breadcrumb *(provided by easy_breadcrumb)*]
-
-> Each fixed item have to be in **Language neutral** and its translations by
-> Localization not Translation: it means to not create new menu items in
-> different languages.
+ 1. fixed items from `menu-breadcrumb-menu`
+ Each fixed item have to be in **Language neutral** and its translations by Localization not Translation: it means to not create different menu items in different languages.
+ 2. Homepage
+ If EasyBreadcrumb setting "*Include the front page as a segment in the breadcrumb*" available in `/admin/config/user-interface/easy-breadcrumb` is not checked, the link is **programmatically built**
+  3. Dynamic breadcrumb
+  Provided by easy_breadcrumb.
