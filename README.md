@@ -1,4 +1,3 @@
-
 Gives available variables `$header__ec_corporate` and `$footer__ec_corporate`  in your custom theme's *page.tpl.php* file and *maintenance-page.tpl.php*.
 You just have to print them at the right place (before and after the main content).
 
@@ -10,21 +9,23 @@ You just have to print them at the right place (before and after the main conten
     </div>
     <?php print $footer__ec_corporate; ?>
 
+The module uses [ECL](https://ec.europa.eu/component-library/ec/)
+
 ## Header structure
 |  |  | |
 |--|--|--|
-| **Site header** | Logo | Language switcher | Search bar |
-| **Page header** | Breadcrumb | | |
+| **Site header :** | Logo | Language switcher | Search bar |
+| **Page header :** | Breadcrumb | | |
 |  | Page title | | |
 
 ## Footer structure
 | | | | |
 |--|--|--|--|
-| **CUSTOM** | Site name  | `menu-footer-follow-us` | `menu-footer-right` |
-| **CORPORATE** | `'menu-nexteuropa-site-links'` | `'menu-nexteuropa-social-media'` | `'menu-nexteuropa-inst-links'` | 
+| **CUSTOM :** *(can be edited)*| Site name  | `menu-footer-follow-us` | `menu-footer-right` |
+| **CORPORATE :** *(have not to be edited)* | `'menu-nexteuropa-site-links'` | `'menu-nexteuropa-social-media'` | `'menu-nexteuropa-inst-links'` | 
 
 
-# How to include it in my website ?
+#  How to include the module using [Toolkit](https://github.com/ec-europa/toolkit) ?
 
 Copy it in your **resources/site.make** file :
 
@@ -34,11 +35,17 @@ Copy it in your **resources/site.make** file :
     projects[header_footer_corporate][download][tag] = "v1.0.10"
 and run the command `./toolkit/phing build-subsite-dev`
 
-> *"v1.0.10" is just an example
-It is better to specify the tag to download, to know in your sources what version of the module you had downloaded.*
-
 # Manageable links
+
 ## Social links
 Social links of the footer are manageable in `/admin/structure/menu/manage/menu-footer-follow-us`.
+
 ## Right footer links
 Links of the right footer are manageable in `/admin/structure/menu/manage/menu-footer-right`.
+
+##  Breadcrumb
+The breadcrumb menu is manageable in `/admin/structure/menu/manage/menu-breadcrumb-menu`.
+
+> The **root path** have to be in **Language neutral** and its translations by
+> Localization not Translation: it means to not create new menu items in
+> different languages.
