@@ -16,7 +16,12 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
   // [456].
   $breadcrumb = $variables['breadcrumb'];
   // Clean data.
-  foreach ($breadcrumb as &$b) {
+  foreach ($breadcrumb as $key => &$b) {
+    // Unset item when no 'url' and not the last item.
+    if(!isset($b['url']) && next($breadcrumb) !== FALSE){
+      unset($breadcrumb[$key]);
+      continue;
+    }
     $class = array('ecl-breadcrumb__link', 'ecl-link ecl-link--standalone');
     if (isset($b['class'])) {
       $class = $class + $b['class'];
