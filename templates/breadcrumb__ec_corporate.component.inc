@@ -34,15 +34,18 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
     );
   }
   // [homepage][456].
-  array_unshift($breadcrumb, array(
-    'content' => variable_get('site_name'),
-    'options' => array(
-      'attributes' => array(
-        'class' => array('ecl-breadcrumb__link', 'ecl-link ecl-link--standalone'),
+  // Add programatically the homepage if there is no EasyBreadcrumb setting.
+  if(!variable_get('easy_breadcrumb-include_home_segment', FALSE)){
+    array_unshift($breadcrumb, array(
+      'content' => variable_get('site_name'),
+      'options' => array(
+        'attributes' => array(
+          'class' => array('ecl-breadcrumb__link', 'ecl-link ecl-link--standalone'),
+        ),
       ),
-    ),
-    'url' => variable_get('site_frontpage', 'node'),
-  ));
+      'url' => variable_get('site_frontpage', 'node'),
+    ));
+  }
 
   // [123][homepage][456].
   $static_breadcrumb = array();
