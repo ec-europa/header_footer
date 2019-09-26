@@ -12,7 +12,7 @@ use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
  */
 function header_footer_corporate_preprocess_menu_items_ec_corporate__links(&$variables) {
   if (empty($variables['links']['items'])) {
-    continue;
+    return;
   }
 
   // Set heading markup.
