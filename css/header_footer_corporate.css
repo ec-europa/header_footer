@@ -16,6 +16,7 @@ html {
 .ecl-footer a:hover {
   text-decoration: none;
 }
+.ecl-breadcrumb__link.active,
 .ecl-footer a:visited {
   color: #fff;
 }
