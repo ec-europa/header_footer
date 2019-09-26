@@ -27,13 +27,16 @@ The module uses [ECL](https://ec.europa.eu/component-library/ec/)
 
 #  How to include the module using [Toolkit](https://github.com/ec-europa/toolkit) ?
 
-Copy it in your **resources/site.make** file :
+ 1. Copy it in your **resources/site.make** file :
 
     projects[header_footer_corporate][subdir] = custom/ec_europa
     projects[header_footer_corporate][download][type] = git
     projects[header_footer_corporate][download][url] = "https://github.com/ec-europa/header_footer_corporate.git"
     projects[header_footer_corporate][download][tag] = "v1.0.10"
-and run the command `./toolkit/phing build-subsite-dev`
+> *"v1.0.10" is just an example
+It is better to hardcode the tag to not have unwanted updates when you will rebuild your subsite.*
+
+ 2. Run the command `./toolkit/phing build-subsite-dev`
 
 # Manageable links
 
@@ -47,7 +50,7 @@ Links of the right footer are manageable in `/admin/structure/menu/manage/menu-f
 The breadcrumb menu is manageable in `/admin/structure/menu/manage/menu-breadcrumb-menu`.
 Here is how the breadcrumb is built:
 
-[fixed items from `menu-breadcrumb-menu`] > [Homepage (programatically built)] > [Dynamic breadcrumb (provided by easy_breadcrumb)]
+[fixed items from `menu-breadcrumb-menu`] **>** [Homepage *(programmatically built)*] **>** [Dynamic breadcrumb *(provided by easy_breadcrumb)*]
 
 > Each fixed item have to be in **Language neutral** and its translations by
 > Localization not Translation: it means to not create new menu items in
