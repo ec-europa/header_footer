@@ -5,6 +5,9 @@
 #### Addons
 + Adding version in .info file.
 
+#### Bug fix
+- PHP notices when empty menu items.
+
 ## v1.0.9 (2019-09-24)
 #### Addons
 + Translations are setted in `header_footer_corporate.install.inc`. Do not hesitate to add/update if you know some missing translations.

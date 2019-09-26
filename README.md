@@ -45,7 +45,10 @@ Links of the right footer are manageable in `/admin/structure/menu/manage/menu-f
 
 ##  Breadcrumb
 The breadcrumb menu is manageable in `/admin/structure/menu/manage/menu-breadcrumb-menu`.
+Here is how the breadcrumb is built:
 
-> The **root path** have to be in **Language neutral** and its translations by
+[fixed items from `menu-breadcrumb-menu`] > [Homepage (programatically built)] > [Dynamic breadcrumb (provided by easy_breadcrumb)]
+
+> Each fixed item have to be in **Language neutral** and its translations by
 > Localization not Translation: it means to not create new menu items in
 > different languages.
