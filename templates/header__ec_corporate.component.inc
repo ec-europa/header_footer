@@ -12,7 +12,7 @@ function header_footer_corporate_preprocess_header__ec_corporate(&$variables) {
   global $language;
 
   // Test if multilingual.
-  $variables['is_multilingual_website'] = count(language_list('enabled')[1]) > 1;
+  $variables['is_multilingual_website'] = count(language_list('enabled')[1]) > 1 && module_exists('language_selector_site');
   if ($variables['is_multilingual_website']) {
     // Language switcher.
     $variables['language_switcher_url'] = url(
