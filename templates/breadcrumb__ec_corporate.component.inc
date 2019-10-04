@@ -18,7 +18,7 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
   // Clean data.
   foreach ($breadcrumb as $key => &$b) {
     // Unset item when no 'url' and not the last item.
-    if(!isset($b['url']) && next($breadcrumb) !== FALSE){
+    if(empty($b['url']) && next($breadcrumb) !== FALSE || empty($b['content'])){
       unset($breadcrumb[$key]);
       continue;
     }
@@ -81,10 +81,6 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
   // Copy last level to set page_title.
   $copy_last = array_slice($breadcrumb, -1);
   $variables['page_title'] = array_pop($copy_last)['content'];
-
-  // Used in loop templating.
-  $variables['i'] = 0;
-  $variables['count'] = count($breadcrumb);
 
   // Classify current element.
   $last_breadcrumb = array_pop($breadcrumb);
