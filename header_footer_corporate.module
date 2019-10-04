@@ -106,6 +106,24 @@ function header_footer_corporate_theme_registry_alter(&$theme_registry) {
 /**
  * Implenents hook_form_FORM_ID_alter().
  */
+function header_footer_corporate_form__easy_breadcrumb_general_settings_form_alter(&$form, &$form_state, $form_id) {
+  $form['easy_breadcrumb']['#description'] = t('<i>Some settings had been removed by <b>Header Footer Corporate</b> module because it is not used in the Corporate breadcrumb.</i>');
+  $form['easy_breadcrumb']['easy_breadcrumb-disable_drupal_breadcrumb']['#access'] = FALSE;
+  $form['easy_breadcrumb']['easy_breadcrumb-include_title_segment']['#access'] = FALSE;
+  $form['easy_breadcrumb']['easy_breadcrumb-title_from_page_when_available']['#access'] = FALSE;
+  $form['easy_breadcrumb']['easy_breadcrumb-title_segment_as_link']['#access'] = FALSE;
+  $form['easy_breadcrumb']['easy_breadcrumb-capitalizator_mode']['#access'] = FALSE;
+  $form['easy_breadcrumb']['easy_breadcrumb-segments_separator']['#access'] = FALSE;
+  $form['easy_breadcrumb']['easy_breadcrumb-capitalizator_ignored_words']['#access'] = FALSE;
+  $form['easy_breadcrumb']['easy_breadcrumb-home_segment_title']['#states'] = array(
+      'invisible' => array(
+        ':input[name="easy_breadcrumb-include_home_segment"]' => array('checked' => FALSE),
+  ));
+}
+
+/**
+ * Implenents hook_form_FORM_ID_alter().
+ */
 function header_footer_corporate_form_nexteuropa_europa_search_search_form_alter(&$form, &$form_state, $form_id) {
   global $language;
   // Form element.
