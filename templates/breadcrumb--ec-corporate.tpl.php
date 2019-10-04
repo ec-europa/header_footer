@@ -13,7 +13,8 @@ use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
     <nav class="ecl-page-header__breadcrumb ecl-breadcrumb" aria-label="<?php print \t('You are here:'); ?>" data-ecl-breadcrumb="true">
       <ol class="ecl-breadcrumb__container">
         <?php foreach ($breadcrumb as $value): ?>
-          <?php if (next($breadcrumb) !== FALSE): ?>
+          <?php $i++; ?>
+          <?php if ($i < $count - 1): ?>
             <?php // Parent path. ?>
             <li class="ecl-breadcrumb__segment" data-ecl-breadcrumb-item="static" aria-hidden="false">
               <?php print \l($value['content'], $value['url'], $value['options']); ?>

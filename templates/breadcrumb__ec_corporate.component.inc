@@ -10,15 +10,20 @@
  */
 function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables, $hook) {
   global $language;
+  // Used in loop templating.	
+  $variables['i'] = $i = -1;	
+  
   // We have $breadcrumb without static items from "Breadcrumb menu".
   // We add this static items and programatically add the homepage link.
   // Menu items [123] + Homepage [homepage] + Breadcrumbs [456].
   // [456].
   $breadcrumb = $variables['breadcrumb'];
+  $variables['count'] = $count = count($variables['breadcrumb']);
   // Clean data.
   foreach ($breadcrumb as $key => &$b) {
+    $i++;
     // Unset item when no 'url' and not the last item.
-    if(empty($b['url']) && next($breadcrumb) !== FALSE || empty($b['content'])){
+    if(empty($b['url']) && ($i < $count - 1) || empty($b['content'])){
       unset($breadcrumb[$key]);
       continue;
     }
@@ -88,4 +93,5 @@ function header_footer_corporate_preprocess_breadcrumb__ec_corporate(&$variables
   $breadcrumb[] = $last_breadcrumb;
 
   $variables['breadcrumb'] = $breadcrumb;
+  $variables['count'] = count($breadcrumb);
 }
