@@ -11,5 +11,5 @@
  * Redefine the theme_easy_breadcrumb().
  */
 function _header_footer_corporate_theme_breadcrumb(&$variables) {
-  return theme('breadcrumb__ec_corporate', $variables);
+  return theme('breadcrumb_ec_corporate', $variables);
 }

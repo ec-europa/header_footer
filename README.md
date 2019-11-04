@@ -1,14 +1,19 @@
 
-Gives available variables `$header__ec_corporate` and `$footer__ec_corporate`  in your custom theme's *page.tpl.php* file and *maintenance-page.tpl.php*.
+
+Gives available variables `$header_ec_corporate` and `$footer_ec_corporate`  in your custom theme's *page.tpl.php* file and *maintenance-page.tpl.php*.
 You just have to print them at the right place (before and after the main content).
 
-    <?php print $header__ec_corporate; ?>
-    <div>
-	    ...
-	    My template's content
-	    ...
-    </div>
-    <?php print $footer__ec_corporate; ?>
+    <?php if (isset($header_ec_corporate)): ?>
+	  <?php print $header_ec_corporate; ?>
+    <?php endif; ?>
+    
+	<!-- Template content -->
+	...
+	<!-- /Template content -->
+	
+    <?php if (isset($footer_ec_corporate)): ?>
+	  <?php print $footer_ec_corporate; ?>
+    <?php endif; ?>
 
 The module uses [ECL](https://ec.europa.eu/component-library/ec/)
 
@@ -33,8 +38,8 @@ The module uses [ECL](https://ec.europa.eu/component-library/ec/)
     projects[header_footer_corporate][subdir] = custom/ec_europa
     projects[header_footer_corporate][download][type] = git
     projects[header_footer_corporate][download][url] = "https://github.com/ec-europa/header_footer_corporate.git"
-    projects[header_footer_corporate][download][tag] = "v1.0.10"
-> *"v1.0.10" is just an example
+    projects[header_footer_corporate][download][tag] = "v2.0"
+> *"v2.0" is just an example
 It is better to hardcode the tag to not have unwanted updates when you will rebuild your subsite.*
 
  2. Run the command `./toolkit/phing build-subsite-dev`
