@@ -1,0 +1,21 @@
+#edit-header-footer-corporate-design {display: flex; max-width: 100%;}
+#edit-header-footer-corporate-design .form-item-header-footer-corporate--design {
+  padding: 10px;
+}
+#edit-header-footer-corporate-design input[type='radio']{
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.form-item-header-footer-corporate--design img {
+  max-width: 100%;
+  border: 3px solid transparent;
+  cursor: pointer;
+}
+#edit-header-footer-corporate-design input[type='radio']:checked + label img {
+  border-color: #ffd617;
+}
+ 
+#edit-header-footer-corporate-design input[type='radio']:not(:checked) + label img:hover{
+  border-color: #ffd61757;
+}

@@ -154,6 +154,54 @@ function header_footer_corporate_form_menu_edit_item_alter(&$form, &$form_state,
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function header_footer_corporate_form_system_themes_admin_form_alter(&$form, &$form_state, $form_id) {
+  // Adding Header Footer Corporate settings.
+  $fieldset_name = 'header_footer_corporate';
+  $prefix = $fieldset_name . '__';
+  $form[$fieldset_name] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Header Footer Corporate',
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#weight' => 5,
+  );
+  
+  $options = array();
+  foreach( array(
+      'core' => array(
+        'title' => 'Core',
+        'img' => 'https://wikis.ec.europa.eu/download/attachments/6824781/01.%20Core%20-%20example%20-%20desktop.png?version=5&modificationDate=1571404512753&api=v2',
+        ),
+      'standardised' => array(
+        'title' => 'Standardised',
+        'img' => 'https://wikis.ec.europa.eu/download/attachments/6824798/02.%20Standardised%20-%20example%20-%20desktop.png?version=4&modificationDate=1571404444731&api=v2',
+        ),
+      'harmonised' => array(
+        'title' => 'Harmonised',
+        'img' => 'https://wikis.ec.europa.eu/download/attachments/6824805/03.%20Harmonised%201%20-%20example%20-%20desktop.png?version=2&modificationDate=1571404561781&api=v2',
+        ),
+      )  as $value => $data){
+    $options[$value] = '<img src="'.$data['img'].'" title="'.$data['title'].'"/>';
+  }
+    
+  $field_name = $prefix . 'design';
+  $form[$fieldset_name][$field_name] = array(
+    '#type' => 'radios',
+    '#title' => t('Design'),
+    '#default_value' => variable_get($field_name, 'standardised'),
+    '#options' => $options,
+    '#description' => t('The design according <a href="https://wikis.ec.europa.eu/display/WEBGUIDE/01.+EC+branded+websites+design" target="_blank">DGCOM</a>'),
+  );
+  
+  $form = system_settings_form($form);
+  if(isset($form['admin_theme']['actions'])){
+    unset($form['admin_theme']['actions']);
+  }
+}
+
+/**
  * Implements hook_context_load_alter().
  */
 function header_footer_corporate_context_load_alter(&$context) {
@@ -228,6 +276,15 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
         $variables['footer_ec_corporate'] = theme('footer_ec_corporate', array(
           'site_name' => $variables['site_name'],
         ));
+      }
+      else{
+        drupal_add_css(drupal_get_path('module', 'header_footer_corporate') . '/css/header_footer_corporate.admin.css',
+        array(
+          // More than CSS_THEME (=100) to not be overrided.
+            'group' => 300,
+            'weight' => 101,
+            'cache' => FALSE,
+          ));
       }
       break;
   }
