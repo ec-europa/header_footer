@@ -8,7 +8,7 @@
 /**
  * Implements hook_process_HOOK().
  */
-function header_footer_corporate_process_textfield(&$variables) {
+function header_footer_corporate_preprocess_textfield(&$variables) {
   global $language;
   if (!empty($variables['element']['#ecl-header_footer_corporate']['header'])) {
     $element = &$variables['element'];
@@ -21,5 +21,14 @@ function header_footer_corporate_process_textfield(&$variables) {
           'ecl-text-input',
         ),
     );
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function header_footer_corporate_preprocess_form_element(&$variables) {
+  if(!empty($variables['element']['#ecl-header_footer_corporate'])){
+    $variables['element']['#title_display'] = 'none';
   }
 }

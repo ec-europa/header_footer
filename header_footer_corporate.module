@@ -22,17 +22,17 @@ foreach ($regex as $name => $regex) {
  */
 function header_footer_corporate_theme() {
   return array(
-    'header__ec_corporate' => array(
+    'header_ec_corporate' => array(
       'template' => 'header--ec-corporate',
     ),
-    'footer__ec_corporate' => array(
+    'footer_ec_corporate' => array(
       'template' => 'footer--ec-corporate',
     ),
-    'breadcrumb__ec_corporate' => array(
-      'template' => 'breadcrumb--ec-corporate',
+    'breadcrumb_ec_corporate' => array(
+      'template' => 'breadcrumb-ec-corporate',
     ),
-    'menu_items_ec_corporate__lists' => array(
-      'file' => 'themes/menu_items_ec_corporate__lists.theme.inc',
+    'menu_items_ec_corporate_lists' => array(
+      'file' => 'themes/menu_items_ec_corporate_lists.theme.inc',
       'arguments' => array(
         'variables' => array(
           'links' => array(
@@ -49,8 +49,8 @@ function header_footer_corporate_theme() {
         ),
       ),
     ),
-    'menu_items_ec_corporate__links' => array(
-      'template' => 'menu-items-ec-corporate--links',
+    'menu_items_ec_corporate_links' => array(
+      'template' => 'menu-items-ec-corporate-links',
       'arguments' => array(
         'variables' => array(
           'links' => array(
@@ -195,8 +195,8 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
   switch ($hook) {
     case 'page':
     case 'maintenance_page':
-      $variables['header__ec_corporate'] =
-      $variables['footer__ec_corporate'] = '';
+      $variables['header_ec_corporate'] =
+      $variables['footer_ec_corporate'] = '';
       if (!path_is_admin(current_path())) {
         // JS.
         drupal_add_js('https://unpkg.com/svg4everybody@2.1.9/dist/svg4everybody.js', array(
@@ -240,10 +240,10 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
           ));
 
         // Define custom variables to be used in .tpl files.
-        $variables['header__ec_corporate'] = theme('header__ec_corporate', array(
+        $variables['header_ec_corporate'] = theme('header_ec_corporate', array(
           'site_name' => $variables['site_name'],
         ));
-        $variables['footer__ec_corporate'] = theme('footer__ec_corporate', array(
+        $variables['footer_ec_corporate'] = theme('footer_ec_corporate', array(
           'site_name' => $variables['site_name'],
         ));
       }
