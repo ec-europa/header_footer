@@ -1,5 +1,22 @@
 
+
 # Changelog
+
+## v2.0 (2019-11-05)
+#### Addons
++ Adding version in .info file.
++ Hiding useless EasyBreadcrumb settings in admin form.
+
+#### Bug fix
+- Atomium compatibility
+	- needs to rename templates for v1.x users
+		- menu_items_ec_corporate__lists :arrow_right: menu_items_ec_corporate_lists
+		- menu_items_ec_corporate__links :arrow_right: menu_items_ec_corporate_links
+		- breadcrumb__ec_corporate :arrow_right: breadcrumb_ec_corporate
+		- header__ec_corporate :arrow_right: header_ec_corporate
+		- footer__ec_corporate :arrow_right: footer_ec_corporate
+		- `$header__ec_corporate` :arrow_right: `$header_ec_corporate`
+		- `$footer__ec_corporate` :arrow_right: `$footer_ec_corporate`
 
 ## v1.0.10 (2019-09-26)
 #### Addons

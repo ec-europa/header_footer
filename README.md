@@ -1,7 +1,7 @@
 
 
-Gives available variables `$header_ec_corporate` and `$footer_ec_corporate`  in your custom theme's *page.tpl.php* file and *maintenance-page.tpl.php*.
-You just have to print them at the right place (before and after the main content).
+Gives available variables `$header_ec_corporate` and `$footer_ec_corporate`  in your custom theme's ***page.tpl.php*** file and ***maintenance-page.tpl.php***.
+You just have to print them at the right place (before and after the main content) :
 
     <?php if (isset($header_ec_corporate)): ?>
 	  <?php print $header_ec_corporate; ?>
@@ -15,7 +15,7 @@ You just have to print them at the right place (before and after the main conten
 	  <?php print $footer_ec_corporate; ?>
     <?php endif; ?>
 
-The module uses [ECL](https://ec.europa.eu/component-library/ec/)
+The module uses [ECL](https://ec.europa.eu/component-library/ec/) version 2.
 
 ## Header structure
 |  |  | |
