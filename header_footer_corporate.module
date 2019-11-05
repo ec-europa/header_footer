@@ -164,7 +164,7 @@ function header_footer_corporate_form_system_themes_admin_form_alter(&$form, &$f
     '#type' => 'fieldset',
     '#title' => 'Header Footer Corporate',
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
     '#weight' => 5,
   );
   
@@ -190,9 +190,9 @@ function header_footer_corporate_form_system_themes_admin_form_alter(&$form, &$f
   $form[$fieldset_name][$field_name] = array(
     '#type' => 'radios',
     '#title' => t('Design'),
-    '#default_value' => variable_get($field_name, 'standardised'),
+    '#default_value' => variable_get($field_name, 'core'),
     '#options' => $options,
-    '#description' => t('The design according <a href="https://wikis.ec.europa.eu/display/WEBGUIDE/01.+EC+branded+websites+design" target="_blank">DGCOM</a>'),
+    '#description' => t('<a href="https://wikis.ec.europa.eu/display/WEBGUIDE/01.+EC+branded+websites+design" target="_blank">DGCOM</a> designs'),
   );
   
   $form = system_settings_form($form);
