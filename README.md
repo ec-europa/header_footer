@@ -34,11 +34,13 @@ The module uses [ECL](https://ec.europa.eu/component-library/ec/) version 2.
 #  How to include the module using [Toolkit](https://github.com/ec-europa/toolkit) ?
 
  1. Copy it in your **resources/site.make** file :
+```
+projects[header_footer][subdir] = custom/ec_europa
+projects[header_footer][download][type] = git
+projects[header_footer][download][url] = "https://github.com/ec-europa/header_footer.git"
+projects[header_footer][download][tag] = "v2.0"
+```
 
-    projects[header_footer][subdir] = custom/ec_europa
-    projects[header_footer][download][type] = git
-    projects[header_footer][download][url] = "https://github.com/ec-europa/header_footer.git"
-    projects[header_footer][download][tag] = "v2.0"
 > *"v2.0" is just an example
 It is better to hardcode the tag to not have unwanted updates when you will rebuild your subsite.*
 
@@ -60,5 +62,5 @@ Here is how the breadcrumb is built:
  Each fixed item have to be in **Language neutral** and its translations by Localization not Translation: it means to not create different menu items in different languages.
  2. Homepage
  If EasyBreadcrumb setting "*Include the front page as a segment in the breadcrumb*" available in `/admin/config/user-interface/easy-breadcrumb` is not checked, the link is **programmatically built**
-  3. Dynamic breadcrumb
-  Provided by easy_breadcrumb.
+ 3. Dynamic breadcrumb
+ Provided by easy_breadcrumb.
