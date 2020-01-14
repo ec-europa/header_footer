@@ -10,7 +10,7 @@ use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
 /**
  * Implements hook_preprocess_HOOK().
  */
-function header_footer_corporate_preprocess_menu_items_ec_corporate_links(&$variables) {
+function header_footer_preprocess_menu_items_ec_links(&$variables) {
   if (empty($variables['links']['items'])) {
     return;
   }

@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_HOOK().
  */
-function header_footer_corporate_preprocess_breadcrumb_ec_corporate(&$variables, $hook) {
+function header_footer_preprocess_breadcrumb_ec(&$variables, $hook) {
   global $language;
   // We have $breadcrumb without static items from "Breadcrumb menu".
   // We add this static items and programatically add the homepage link.

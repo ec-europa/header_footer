@@ -12,7 +12,7 @@ use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
  *
  * Same as theme_links() in /includes/themes.inc but with some changes.
  */
-function theme_menu_items_ec_corporate_lists($variables) {
+function theme_menu_items_ec_lists($variables) {
   $links = $variables['links']['items'];
   $variables['attributes'] = isset($variables['attributes']) ? $variables['attributes'] : array();
   $variables['attributes']['class'] = isset($variables['attributes']['class']) ? $variables['attributes']['class'] : array();

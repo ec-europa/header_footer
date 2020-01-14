@@ -1,5 +1,5 @@
-name = FPFIS - Header and Footer corporate
-description = Gives variables $header_ec_corporate and $footer_ec_corporate in page.tpl.php.
+name = FPFIS - Header and Footer
+description = Gives variables $header_ec and $footer_ec in page.tpl.php.
 core = 7.x
 package = FPFIS
 features[features_api][] = api:2

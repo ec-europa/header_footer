@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Templating for the header EC corporate.
+ * Templating for the header EC.
  */
 
 use HeaderFooterCorporate\HeaderFooterCorporateHelpers;

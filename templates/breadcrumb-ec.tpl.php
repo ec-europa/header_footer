@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Templating for the breadcrumb EC corporate.
+ * Templating for the breadcrumb EC.
  */
 
 use HeaderFooterCorporate\HeaderFooterCorporateHelpers;

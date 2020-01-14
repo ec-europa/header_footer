@@ -5,14 +5,14 @@
  * Contains install/update/enable hooks.
  */
 
-include_once 'header_footer_corporate.install.inc';
+include_once 'header_footer.install.inc';
 
 /**
  * Implements hook_enable().
  *
  * Add ECL menus.
  */
-function header_footer_corporate_enable() {
+function header_footer_enable() {
   // Create menus saving menu group into menu_custom table (from 'menu' module).
   $config_menus = array(
     array(
@@ -66,7 +66,7 @@ function header_footer_corporate_enable() {
   // Breadcrumb: Update/Create the root link path.
   _breadcrumb__main_link();
 
-  // Reset corporate menus.
+  // Reset menus.
   _reset_menu_to_config('menu-nexteuropa-site-links');
   _reset_menu_to_config('menu-nexteuropa-social-media');
   _reset_menu_to_config('menu-nexteuropa-inst-links');
@@ -106,28 +106,28 @@ function header_footer_corporate_enable() {
 /**
  * Corporate footer left links: Two links relative to EC homepage become once.
  */
-function header_footer_corporate_update_7001() {
+function header_footer_update_7001() {
   _reset_menu_to_config('menu-nexteuropa-site-links');
 }
 
 /**
  * Footer links: Copy links from custom menus (used in MARE sites) to our menus.
  */
-function header_footer_corporate_update_7002() {
+function header_footer_update_7002() {
   _footer__custom_right_copy_links();
 }
 
 /**
  * Breadcrumb main link path.
  */
-function header_footer_corporate_update_7003() {
+function header_footer_update_7003() {
   _breadcrumb__main_link();
 }
 
 /**
- * Footer corporate : Reset corporates menus.
+ * Footer : Reset menus.
  */
-function header_footer_corporate_update_7004() {
+function header_footer_update_7004() {
   _reset_menu_to_config('menu-nexteuropa-site-links');
   _reset_menu_to_config('menu-nexteuropa-social-media');
   _reset_menu_to_config('menu-nexteuropa-inst-links');
@@ -137,6 +137,6 @@ function header_footer_corporate_update_7004() {
 /**
  * Footer custom : Unset custom classes.
  */
-function header_footer_corporate_update_7005() {
+function header_footer_update_7005() {
   _delete_menu_items_attributes('menu-footer-follow-us');
 }

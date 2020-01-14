@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Templating for the footer EC corporate.
+ * Templating for the footer EC.
  */
 ?>
 <footer class="ecl-footer ecl-footer--custom">
