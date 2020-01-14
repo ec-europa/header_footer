@@ -2,6 +2,10 @@
 
 # Changelog
 
+## v3.0 (2020-01-14)
+#### QA
+~ Removing 'corporate' from the module.
+
 ## v2.0 (2019-11-05)
 #### Addons
 + Adding version in .info file.
