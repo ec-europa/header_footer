@@ -13,6 +13,12 @@ include_once 'header_footer.install.inc';
  * Add ECL menus.
  */
 function header_footer_enable() {
+  // Do nothing if header_footer_corporate is enabled.
+  if(module_exists('header_footer_corporate')) {
+    module_disable('header_footer_corporate');
+    return false;
+  }
+
   // Create menus saving menu group into menu_custom table (from 'menu' module).
   $config_menus = array(
     array(
