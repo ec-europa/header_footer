@@ -13,7 +13,9 @@ use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
     <?php foreach ($breadcrumb as $value): ?>
       <?php if ($i < $count - 1): ?>
         <li class="ecl-breadcrumb__segment" data-ecl-breadcrumb-item="static" aria-hidden="false">
-          <?php print \l($value['content'], $value['url'], $value['options']); ?>
+          <?php if (!empty($value['content']) && !empty($value['url'])) : ?>
+            <?php print \l($value['content'], $value['url'], $value['options']); ?>
+          <?php endif; ?>
           <svg focusable="false" aria-hidden="true"
             role="presentation" class="ecl-breadcrumb__icon ecl-icon ecl-icon--xs ecl-icon--rotate-90">
             <use xlink:href="<?php print HeaderFooterCorporateHelpers::getAssetsPath(); ?>/images/icons/sprites/icons.svg#ui--corner-arrow"></use>
