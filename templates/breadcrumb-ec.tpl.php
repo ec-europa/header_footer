@@ -5,7 +5,7 @@
  * Templating for the breadcrumb EC.
  */
 
-use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
+use HeaderFooter\HeaderFooterHelpers;
 
 ?>
 <nav class="ecl-page-header__breadcrumb ecl-breadcrumb" aria-label="<?php print \t('You are here:'); ?>" data-ecl-breadcrumb="true">
@@ -18,7 +18,7 @@ use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
           <?php endif; ?>
           <svg focusable="false" aria-hidden="true"
             role="presentation" class="ecl-breadcrumb__icon ecl-icon ecl-icon--xs ecl-icon--rotate-90">
-            <use xlink:href="<?php print HeaderFooterCorporateHelpers::getAssetsPath(); ?>/images/icons/sprites/icons.svg#ui--corner-arrow"></use>
+            <use xlink:href="<?php print HeaderFooterHelpers::getAssetsPath(); ?>/images/icons/sprites/icons.svg#ui--corner-arrow"></use>
           </svg>
         </li>
         <?php else: ?>
