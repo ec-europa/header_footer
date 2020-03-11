@@ -38,8 +38,8 @@ The module uses [ECL](https://ec.europa.eu/component-library/ec/) version 2.
     projects[header_footer_corporate][subdir] = custom/ec_europa
     projects[header_footer_corporate][download][type] = git
     projects[header_footer_corporate][download][url] = "https://github.com/ec-europa/header_footer_corporate.git"
-    projects[header_footer_corporate][download][tag] = "v2.0"
-> *"v2.0" is just an example
+    projects[header_footer_corporate][download][tag] = "2.2"
+> *"2.2" is just an example
 It is better to hardcode the tag to not have unwanted updates when you will rebuild your subsite.*
 
  2. Run the command `./toolkit/phing build-subsite-dev`
