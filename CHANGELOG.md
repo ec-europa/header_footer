@@ -5,8 +5,6 @@
 #### Addons
 + Adding i18n_menu as required module in .info file.
 + Adding 'templates' in the templates uri in function hook_theme().
-#### Update
-~ Using "2.2" tag rather than "v2.2"
 
 ## v2.0 (2019-11-05)
 #### Addons
