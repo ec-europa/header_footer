@@ -23,10 +23,10 @@ foreach ($regex as $name => $regex) {
 function header_footer_corporate_theme() {
   return array(
     'header_ec_corporate' => array(
-      'template' => 'templates/header--ec-corporate',
+      'template' => 'templates/header-ec-corporate',
     ),
     'footer_ec_corporate' => array(
-      'template' => 'templates/footer--ec-corporate',
+      'template' => 'templates/footer-ec-corporate',
     ),
     'breadcrumb_ec_corporate' => array(
       'template' => 'templates/breadcrumb-ec-corporate',
