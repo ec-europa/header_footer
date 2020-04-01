@@ -5,7 +5,7 @@
  * Redefines theme_links().
  */
 
-use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
+use HeaderFooter\HeaderFooterHelpers;
 
 /**
  * Returns HTML for a set of links.
@@ -84,7 +84,7 @@ function theme_menu_items_ec_lists($variables) {
       if (isset($link['href'])) {
         // Pass in $link as $options, they share the same keys.
         // Set icons links.
-        HeaderFooterCorporateHelpers::setLinkIconsPrefixSuffix($link);
+        HeaderFooterHelpers::setLinkIconsPrefixSuffix($link);
         $output .= l($link['title'], $link['href'], $link);
       }
       elseif (!empty($link['title'])) {

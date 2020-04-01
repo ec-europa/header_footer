@@ -1,6 +1,6 @@
 <?php
 
-namespace HeaderFooterCorporate;
+namespace HeaderFooter;
 
 /**
  * Contains all Helpers functions used in the module.
@@ -8,7 +8,7 @@ namespace HeaderFooterCorporate;
  * The target is to centralize code called more than once
  * in different places or to externalize rules for better understanding.
  */
-abstract class HeaderFooterCorporateHelpers {
+abstract class HeaderFooterHelpers {
 
   /**
    * Return the array of Social Media networks values.

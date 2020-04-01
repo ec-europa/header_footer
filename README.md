@@ -30,7 +30,7 @@ The module uses [ECL](https://ec.europa.eu/component-library/ec/) version 2.
 | | | | |
 |--|--|--|--|
 | **CUSTOM :** *(can be edited)*| Site name  | `menu-footer-follow-us` | `menu-footer-right` |
-| **CORPORATE :** *(have not to be edited)* | `'menu-nexteuropa-site-links'` | `'menu-nexteuropa-social-media'` | `'menu-nexteuropa-inst-links'` | 
+| **NEXTEUROPA :** *(have not to be edited)* | `'menu-nexteuropa-site-links'` | `'menu-nexteuropa-social-media'` | `'menu-nexteuropa-inst-links'` | 
 
 
 #  How to include the module using [Toolkit](https://github.com/ec-europa/toolkit) ?

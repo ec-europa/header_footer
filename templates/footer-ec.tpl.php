@@ -28,7 +28,7 @@
     </div>
   <?php endif; ?>
   <?php
-// Corporate footer.?>
+// Nexteuropa footer.?>
   <div class="ecl-footer__sections">
     <div class="ecl-container">
       <div class="ecl-row">

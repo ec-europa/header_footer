@@ -11,8 +11,12 @@ include_once 'header_footer.install.inc';
  * Implements hook_enable().
  */
 function header_footer_enable() {
-  // Do nothing if header_footer_corporate is enabled.
+  // Manage enabled old module "header_footer_corporate".
   if(module_exists('header_footer_corporate')) {
+    // Get old schema_version to do new updates.
+    $old_version = drupal_get_installed_schema_version('header_footer_corporate');
+    drupal_set_installed_schema_version('header_footer', $old_version);
+    // Disable old_module.
     module_disable('header_footer_corporate');
     return false;
   }
@@ -108,7 +112,7 @@ function header_footer_enable() {
 }
 
 /**
- * Corporate footer left links: Two links relative to EC homepage become once.
+ * Nexteuropa footer left links: Two links relative to EC homepage become once.
  */
 function header_footer_update_7001() {
   _reset_menu_to_config('menu-nexteuropa-site-links');

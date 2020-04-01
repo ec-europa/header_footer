@@ -28,7 +28,7 @@ function header_footer_preprocess_footer_ec(&$variables) {
       'class' => array('ecl-footer__identity-link'),
     ),
   ));
-  // Corporate footer left.
+  // Nexteuropa footer left.
   $variables['ecl_footer_ec_menu'] = theme('menu_items_ec_lists', array(
     'links' => array('items' => menu_navigation_links('menu-nexteuropa-site-links')),
     'heading' => array(
@@ -38,7 +38,7 @@ function header_footer_preprocess_footer_ec(&$variables) {
     ),
   ));
 
-  // Corporate footer middle.
+  // Nexteuropa footer middle.
   $variables['ecl_footer_follow_ec_menu'] = theme('menu_items_ec_lists', array(
     'links' => array(
       'items' => menu_navigation_links('menu-nexteuropa-social-media'),
@@ -53,7 +53,7 @@ function header_footer_preprocess_footer_ec(&$variables) {
       'class' => array('ecl-footer__section-list--inline'),
     ),
   ));
-  // Corporate footer right.
+  // Nexteuropa footer right.
   $variables['ecl_footer_eu_menu'] = theme('menu_items_ec_lists', array(
     'links' => array(
       'items' => menu_navigation_links('menu-nexteuropa-inst-links'),
