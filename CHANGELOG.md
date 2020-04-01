@@ -1,6 +1,10 @@
 
 
 # Changelog
+## 2.2 (2020-11-03)
+#### Addons
++ Adding i18n_menu as required module in .info file.
++ Adding 'templates' in the templates uri in function hook_theme().
 
 ## v3.0 (2020-01-14)
 #### QA

@@ -9,8 +9,6 @@ include_once 'header_footer.install.inc';
 
 /**
  * Implements hook_enable().
- *
- * Add ECL menus.
  */
 function header_footer_enable() {
   // Do nothing if header_footer_corporate is enabled.

@@ -3,17 +3,19 @@
 Gives available variables `$header_ec` and `$footer_ec`  in your custom theme's ***page.tpl.php*** file and ***maintenance-page.tpl.php***.
 You just have to print them at the right place (before and after the main content) :
 
-    <?php if (isset($header_ec)): ?>
-	  <?php print $header_ec; ?>
-    <?php endif; ?>
+```
+<?php if (isset($header_ec)): ?>
+  <?php print $header_ec; ?>
+<?php endif; ?>
     
-	<!-- Template content -->
-	...
-	<!-- /Template content -->
+<!-- Template content -->
+...
+<!-- /Template content -->
 	
-    <?php if (isset($footer_ec)): ?>
-	  <?php print $footer_ec; ?>
-    <?php endif; ?>
+<?php if (isset($footer_ec)): ?>
+  <?php print $footer_ec; ?>
+<?php endif; ?>
+```
 
 The module uses [ECL](https://ec.europa.eu/component-library/ec/) version 2.
 
@@ -38,10 +40,10 @@ The module uses [ECL](https://ec.europa.eu/component-library/ec/) version 2.
 projects[header_footer][subdir] = custom/ec_europa
 projects[header_footer][download][type] = git
 projects[header_footer][download][url] = "https://github.com/ec-europa/header_footer.git"
-projects[header_footer][download][tag] = "v2.0"
+projects[header_footer][download][tag] = "v3.0"
 ```
 
-> *"v2.0" is just an example
+> *"v3.0" is just an example
 It is better to hardcode the tag to not have unwanted updates when you will rebuild your subsite.*
 
  2. Run the command `./toolkit/phing build-subsite-dev`

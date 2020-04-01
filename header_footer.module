@@ -5,7 +5,7 @@
  * Drupal needs this blank file.
  */
 
-use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
+use HeaderFooter\HeaderFooterHelpers;
 
 include_once 'header_footer.helpers.inc';
 
@@ -23,13 +23,13 @@ foreach ($regex as $name => $regex) {
 function header_footer_theme() {
   return array(
     'header_ec' => array(
-      'template' => 'header--ec',
+      'template' => 'templates/header-ec',
     ),
     'footer_ec' => array(
-      'template' => 'footer--ec',
+      'template' => 'templates/footer-ec',
     ),
     'breadcrumb_ec' => array(
-      'template' => 'breadcrumb-ec',
+      'template' => 'templates/breadcrumb-ec',
     ),
     'menu_items_ec_lists' => array(
       'file' => 'themes/menu_items_ec_lists.theme.inc',
@@ -107,7 +107,7 @@ function header_footer_theme_registry_alter(&$theme_registry) {
  * Implenents hook_form_FORM_ID_alter().
  */
 function header_footer_form__easy_breadcrumb_general_settings_form_alter(&$form, &$form_state, $form_id) {
-  $form['easy_breadcrumb']['#description'] = t('<i>Some settings had been removed by <b>Header Footer Corporate</b> module because it is not used in the Corporate breadcrumb.</i>');
+  $form['easy_breadcrumb']['#description'] = t('<i>Some settings had been removed by <b>Header Footer</b> module because it is not used in the breadcrumb.</i>');
   $form['easy_breadcrumb']['easy_breadcrumb-disable_drupal_breadcrumb']['#access'] = FALSE;
   $form['easy_breadcrumb']['easy_breadcrumb-include_title_segment']['#access'] = FALSE;
   $form['easy_breadcrumb']['easy_breadcrumb-title_from_page_when_available']['#access'] = FALSE;
@@ -148,7 +148,7 @@ function header_footer_form_nexteuropa_europa_search_search_form_alter(&$form, &
   $form['search_input_group']['europa_search_submit']['#value'] =
   '<span class="ecl-button__container">' .
   '<span class="ecl-button__label" data-ecl-label="true">' . i18n_string_translate('blocks:nexteuropa_europa_search:nexteuropa_europa_search_form:title', 'Search', array('langcode' => $language->language)) . '</span>' .
-  '<svg focusable="false" aria-hidden="true" data-ecl-icon="true" class="ecl-button__icon ecl-button__icon--after ecl-icon ecl-icon--xs"><use xlink:href="' . HeaderFooterCorporateHelpers::getAssetsPath() . '/images/icons/sprites/icons.svg#general--search"></use></svg>' .
+  '<svg focusable="false" aria-hidden="true" data-ecl-icon="true" class="ecl-button__icon ecl-button__icon--after ecl-icon ecl-icon--xs"><use xlink:href="' . HeaderFooterHelpers::getAssetsPath() . '/images/icons/sprites/icons.svg#general--search"></use></svg>' .
   '</span></button>';
 }
 
@@ -159,7 +159,7 @@ function header_footer_form_menu_edit_item_alter(&$form, &$form_state, $form_id)
   // Set predefined values for the menu "Footer - Follow us".
   if ($form['parent']['#default_value'] == 'menu-footer-follow-us:0') {
     $options = array();
-    foreach (HeaderFooterCorporateHelpers::getSocialMediaNetworksValues() as $name) {
+    foreach (HeaderFooterHelpers::getSocialMediaNetworksValues() as $name) {
       $options[$name] = $name;
     }
 
@@ -174,13 +174,13 @@ function header_footer_form_menu_edit_item_alter(&$form, &$form_state, $form_id)
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function header_footer_corporate_form_system_themes_admin_form_alter(&$form, &$form_state, $form_id) {
-  // Adding Header Footer Corporate settings.
-  $fieldset_name = 'header_footer_corporate';
+function header_footer_form_system_themes_admin_form_alter(&$form, &$form_state, $form_id) {
+  // Adding Header Footer settings.
+  $fieldset_name = 'header_footer';
   $prefix = $fieldset_name . '__';
   $form[$fieldset_name] = array(
     '#type' => 'fieldset',
-    '#title' => 'Header Footer Corporate',
+    '#title' => 'Header Footer',
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#weight' => 5,
@@ -252,7 +252,7 @@ function header_footer_preprocess(&$variables, $hook) {
           'scope' => 'footer',
           'group' => JS_THEME,
         ));
-        drupal_add_js(HeaderFooterCorporateHelpers::getAssetsPath('path') . '/scripts/ecl-ec-preset-legacy-website.js', array(
+        drupal_add_js(HeaderFooterHelpers::getAssetsPath('path') . '/scripts/ecl-ec-preset-legacy-website.js', array(
           'type' => 'external',
           'scope' => 'footer',
           'group' => JS_THEME,
@@ -263,14 +263,14 @@ function header_footer_preprocess(&$variables, $hook) {
           'group' => JS_THEME,
         ));
         // CSS.
-        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path') . '/styles/ecl-ec-preset-legacy-website.css',
+        drupal_add_css(HeaderFooterHelpers::getAssetsPath('path') . '/styles/ecl-ec-preset-legacy-website.css',
           array(
             'type' => 'external',
         // More than CSS_THEME (=100) to not be overrided.
             'group' => 300,
             'weight' => 100,
           ));
-        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path') . '/styles/ecl-ec-preset-legacy-website-print.css',
+        drupal_add_css(HeaderFooterHelpers::getAssetsPath('path') . '/styles/ecl-ec-preset-legacy-website-print.css',
           array(
             'type' => 'external',
         // More than CSS_THEME (=100) to not be overrided.
@@ -296,7 +296,7 @@ function header_footer_preprocess(&$variables, $hook) {
         ));
       }
       else{
-        drupal_add_css(drupal_get_path('module', 'header_footer_corporate') . '/css/header_footer_corporate.admin.css',
+        drupal_add_css(drupal_get_path('module', 'header_footer') . '/css/header_footer.admin.css',
         array(
           // More than CSS_THEME (=100) to not be overrided.
             'group' => 300,
