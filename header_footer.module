@@ -191,16 +191,23 @@ function header_footer_form_system_themes_admin_form_alter(&$form, &$form_state,
       'core' => array(
         'title' => 'Core',
         'img' => 'https://wikis.ec.europa.eu/download/attachments/6824781/01.%20Core%20-%20example%20-%20desktop.png?version=5&modificationDate=1571404512753&api=v2',
-        ),
+      ),
       'standardised' => array(
         'title' => 'Standardised',
         'img' => 'https://wikis.ec.europa.eu/download/attachments/6824798/02.%20Standardised%20-%20example%20-%20desktop.png?version=4&modificationDate=1571404444731&api=v2',
-        ),
-      'harmonised' => array(
-        'title' => 'Harmonised',
+      ),
+      'harmonised_group1' => array(
+        'title' => 'Harmonised Group 1',
         'img' => 'https://wikis.ec.europa.eu/download/attachments/6824805/03.%20Harmonised%201%20-%20example%20-%20desktop.png?version=2&modificationDate=1571404561781&api=v2',
-        ),
-      )  as $value => $data){
+      ),
+      'harmonised_group2' => array(
+        'title' => 'Harmonised Group 2',
+        'img' => 'https://wikis.ec.europa.eu/download/attachments/6824805/03.%20Harmonised%202%20-%20example%20-%20desktop.png?version=4&modificationDate=1572965104939&api=v2',
+      ),'harmonised_group3' => array(
+        'title' => 'Harmonised Group 3',
+        'img' => '',
+      ),
+    )  as $value => $data){
     $options[$value] = '<img src="'.$data['img'].'" title="'.$data['title'].'"/>';
   }
     
@@ -304,6 +311,14 @@ function header_footer_preprocess(&$variables, $hook) {
             'cache' => FALSE,
           ));
       }
+      break;
+  }
+
+  // Suggest templates according website design setting.
+  switch($hook){
+    case 'footer_ec':
+    case 'header_ec':
+      $variables['theme_hook_suggestions'][] = $hook . '__header_footer_' . variable_get('header_footer__design', 'core');
       break;
   }
 }
