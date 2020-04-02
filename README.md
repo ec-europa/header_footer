@@ -66,3 +66,7 @@ Here is how the breadcrumb is built:
  If EasyBreadcrumb setting "*Include the front page as a segment in the breadcrumb*" available in `/admin/config/user-interface/easy-breadcrumb` is not checked, the link is **programmatically built**
  3. Dynamic breadcrumb
  Provided by easy_breadcrumb.
+
+# Design
+
+You can choose the design in /admin/appearance > HEADER FOOTER > Design according [DGCOM designs](https://wikis.ec.europa.eu/display/WEBGUIDE/01.+EC+branded+websites+design)
