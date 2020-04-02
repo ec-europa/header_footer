@@ -4,15 +4,15 @@ Gives available variables `$header_ec` and `$footer_ec`  in your custom theme's 
 You just have to print them at the right place (before and after the main content) :
 
 ```
-<?php if (isset($header_ec)): ?>
+<?php if (isset($header_ec)) : ?>
   <?php print $header_ec; ?>
 <?php endif; ?>
     
 <!-- Template content -->
 ...
 <!-- /Template content -->
-	
-<?php if (isset($footer_ec)): ?>
+    
+<?php if (isset($footer_ec)) : ?>
   <?php print $footer_ec; ?>
 <?php endif; ?>
 ```

@@ -27,8 +27,7 @@
       </div>
     </div>
   <?php endif; ?>
-  <?php
-// Nexteuropa footer.?>
+  <?php /* Nexteuropa footer */ ?>
   <div class="ecl-footer__sections">
     <div class="ecl-container">
       <div class="ecl-row">

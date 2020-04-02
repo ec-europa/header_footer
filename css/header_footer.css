@@ -2,28 +2,28 @@
   color: #bfd0e4 !important;
 }
 /* Cancel ec_resp theme overrides.*/
-html{
+html {
   font-size: medium;
 }
-.ecl-search-form__text-input{
+.ecl-search-form__text-input {
   height: auto;
   box-shadow: none !important;
 }
-.ecl-page-header h1{
+.ecl-page-header h1 {
   color: inherit;
 }
-.ecl-footer__identity-title{
+.ecl-footer__identity-title {
   color: inherit;
 }
 .ecl-site-header a:hover,
 .ecl-page-header a:hover,
-.ecl-footer a:hover{
+.ecl-footer a:hover {
   text-decoration: none;
 }
 .ecl-breadcrumb__link.active,
-.ecl-footer a:visited{
+.ecl-footer a:visited {
   color: #fff;
 }
-.ecl-footer__identity a:visited{
+.ecl-footer__identity a:visited {
   color: #004494;
 }

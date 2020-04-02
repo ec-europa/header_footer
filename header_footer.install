@@ -12,13 +12,13 @@ include_once 'header_footer.install.inc';
  */
 function header_footer_enable() {
   // Manage enabled old module "header_footer_corporate".
-  if(module_exists('header_footer_corporate')) {
+  if (module_exists('header_footer_corporate')) {
     // Get old schema_version to do new updates.
     $old_version = drupal_get_installed_schema_version('header_footer_corporate');
     drupal_set_installed_schema_version('header_footer', $old_version);
     // Disable old_module.
     module_disable('header_footer_corporate');
-    return false;
+    return FALSE;
   }
 
   // Create menus saving menu group into menu_custom table (from 'menu' module).
@@ -62,7 +62,7 @@ function header_footer_enable() {
     if (empty($title)) {
       menu_save($menu);
     }
-    if($i18n_menu_exists) {
+    if ($i18n_menu_exists) {
       // Add params 'Translate and Localize' to the menu.
       db_update('menu_custom')
         ->fields(array(
@@ -94,7 +94,7 @@ function header_footer_enable() {
   _footer__custom_right_copy_links();
 
   // Set all translations menu items.
-  if($i18n_menu_exists) {
+  if ($i18n_menu_exists) {
     foreach (_get_links_config() as $link_group) {
       foreach ($link_group as $link) {
         $mlids = db_query("SELECT mlid from {menu_links} WHERE link_title=:link_title AND menu_name=:menu_name", array(':link_title' => $link['link_title'], ':menu_name' => $link['menu_name']))->fetchAll();

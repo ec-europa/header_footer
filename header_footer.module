@@ -116,9 +116,10 @@ function header_footer_form__easy_breadcrumb_general_settings_form_alter(&$form,
   $form['easy_breadcrumb']['easy_breadcrumb-segments_separator']['#access'] = FALSE;
   $form['easy_breadcrumb']['easy_breadcrumb-capitalizator_ignored_words']['#access'] = FALSE;
   $form['easy_breadcrumb']['easy_breadcrumb-home_segment_title']['#states'] = array(
-      'invisible' => array(
-        ':input[name="easy_breadcrumb-include_home_segment"]' => array('checked' => FALSE),
-  ));
+    'invisible' => array(
+      ':input[name="easy_breadcrumb-include_home_segment"]' => array('checked' => FALSE),
+    ),
+  );
 }
 
 /**
@@ -186,32 +187,32 @@ function header_footer_form_system_themes_admin_form_alter(&$form, &$form_state,
     '#collapsed' => TRUE,
     '#weight' => 5,
   );
-  
+
   $options = array();
-  foreach( array(
-      'core' => array(
-        'title' => 'Core',
-        'img' => 'https://wikis.ec.europa.eu/download/attachments/6824781/01.%20Core%20-%20example%20-%20desktop.png?version=5&modificationDate=1571404512753&api=v2',
-      ),
-      'standardised' => array(
-        'title' => 'Standardised',
-        'img' => 'https://wikis.ec.europa.eu/download/attachments/6824798/02.%20Standardised%20-%20example%20-%20desktop.png?version=4&modificationDate=1571404444731&api=v2',
-      ),
-      'harmonised_group1' => array(
-        'title' => 'Harmonised Group 1',
-        'img' => 'https://wikis.ec.europa.eu/download/attachments/6824805/03.%20Harmonised%201%20-%20example%20-%20desktop.png?version=2&modificationDate=1571404561781&api=v2',
-      ),
-      'harmonised_group2' => array(
-        'title' => 'Harmonised Group 2',
-        'img' => 'https://wikis.ec.europa.eu/download/attachments/6824805/03.%20Harmonised%202%20-%20example%20-%20desktop.png?version=4&modificationDate=1572965104939&api=v2',
-      ),'harmonised_group3' => array(
-        'title' => 'Harmonised Group 3',
-        'img' => '',
-      ),
-    )  as $value => $data){
-    $options[$value] = '<img src="'.$data['img'].'" title="'.$data['title'].'"/>';
+  foreach (array(
+    'core' => array(
+      'title' => 'Core',
+      'img' => 'https://wikis.ec.europa.eu/download/attachments/6824781/01.%20Core%20-%20example%20-%20desktop.png?version=5&modificationDate=1571404512753&api=v2',
+    ),
+    'standardised' => array(
+      'title' => 'Standardised',
+      'img' => 'https://wikis.ec.europa.eu/download/attachments/6824798/02.%20Standardised%20-%20example%20-%20desktop.png?version=4&modificationDate=1571404444731&api=v2',
+    ),
+    'harmonised_group1' => array(
+      'title' => 'Harmonised Group 1',
+      'img' => 'https://wikis.ec.europa.eu/download/attachments/6824805/03.%20Harmonised%201%20-%20example%20-%20desktop.png?version=2&modificationDate=1571404561781&api=v2',
+    ),
+    'harmonised_group2' => array(
+      'title' => 'Harmonised Group 2',
+      'img' => 'https://wikis.ec.europa.eu/download/attachments/6824805/03.%20Harmonised%202%20-%20example%20-%20desktop.png?version=4&modificationDate=1572965104939&api=v2',
+    ), 'harmonised_group3' => array(
+      'title' => 'Harmonised Group 3',
+      'img' => '',
+    ),
+  ) as $value => $data) {
+    $options[$value] = '<img src="' . $data['img'] . '" title="' . $data['title'] . '"/>';
   }
-    
+
   $field_name = $prefix . 'design';
   $form[$fieldset_name][$field_name] = array(
     '#type' => 'radios',
@@ -220,9 +221,9 @@ function header_footer_form_system_themes_admin_form_alter(&$form, &$form_state,
     '#options' => $options,
     '#description' => t('<a href="https://wikis.ec.europa.eu/display/WEBGUIDE/01.+EC+branded+websites+design" target="_blank">DGCOM</a> designs'),
   );
-  
+
   $form = system_settings_form($form);
-  if(isset($form['admin_theme']['actions'])){
+  if (isset($form['admin_theme']['actions'])) {
     unset($form['admin_theme']['actions']);
   }
 }
@@ -303,20 +304,20 @@ function header_footer_preprocess(&$variables, $hook) {
           'site_name' => $variables['site_name'],
         ));
       }
-      else{
+      else {
         drupal_add_css(drupal_get_path('module', 'header_footer') . '/css/header_footer.admin.css',
         array(
           // More than CSS_THEME (=100) to not be overrided.
-            'group' => 300,
-            'weight' => 101,
-            'cache' => FALSE,
-          ));
+          'group' => 300,
+          'weight' => 101,
+          'cache' => FALSE,
+        ));
       }
       break;
   }
 
   // Suggest templates according website design setting.
-  switch($hook){
+  switch ($hook) {
     case 'footer_ec':
     case 'header_ec':
       $variables['theme_hook_suggestions'][] = $hook . '__header_footer_' . variable_get('header_footer__design', 'core');

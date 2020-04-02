@@ -17,9 +17,9 @@ function header_footer_preprocess_textfield(&$variables) {
     unset($element['#title']);
     $element['#attributes'] = array(
       'class' => array(
-          'ecl-search-form__text-input',
-          'ecl-text-input',
-        ),
+        'ecl-search-form__text-input',
+        'ecl-text-input',
+      ),
     );
   }
 }
@@ -28,7 +28,7 @@ function header_footer_preprocess_textfield(&$variables) {
  * Implements hook_preprocess_HOOK().
  */
 function header_footer_preprocess_form_element(&$variables) {
-  if(!empty($variables['element']['#ecl-header_footer'])){
+  if (!empty($variables['element']['#ecl-header_footer'])) {
     $variables['element']['#title_display'] = 'none';
   }
 }
