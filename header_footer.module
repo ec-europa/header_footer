@@ -145,9 +145,10 @@ function header_footer_form_nexteuropa_europa_search_search_form_alter(&$form, &
     'ecl-search-form__button',
     'ecl-button--search',
   );
+  $search_label = module_exists('i18n_string') ? i18n_string_translate('blocks:nexteuropa_europa_search:nexteuropa_europa_search_form:title', 'Search', array('langcode' => $language->language)) : 'Search';
   $form['search_input_group']['europa_search_submit']['#value'] =
   '<span class="ecl-button__container">' .
-  '<span class="ecl-button__label" data-ecl-label="true">' . i18n_string_translate('blocks:nexteuropa_europa_search:nexteuropa_europa_search_form:title', 'Search', array('langcode' => $language->language)) . '</span>' .
+  '<span class="ecl-button__label" data-ecl-label="true">' . $search_label . '</span>' .
   '<svg focusable="false" aria-hidden="true" data-ecl-icon="true" class="ecl-button__icon ecl-button__icon--after ecl-icon ecl-icon--xs"><use xlink:href="' . HeaderFooterHelpers::getAssetsPath() . '/images/icons/sprites/icons.svg#general--search"></use></svg>' .
   '</span></button>';
 }

@@ -4,7 +4,6 @@ core = 7.x
 package = FPFIS
 features[features_api][] = api:2
 files[] = header_footer.helpers.inc
-dependencies[] = i18n_menu
 dependencies[] = easy_breadcrumb
 dependencies[] = nexteuropa_europa_search
 version = "7.x-3.0"

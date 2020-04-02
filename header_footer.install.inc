@@ -235,6 +235,10 @@ function _get_translations($params = array()) {
  * Set translations of menu_item.
  */
 function _set_translations($data = array()) {
+  $i18n_menu_exists = module_exists('i18n_menu');
+  if (!$i18n_menu_exists) {
+    return FALSE;
+  }
   $translations = _get_translations($data);
   if (empty($translations)) {
     return FALSE;
@@ -322,15 +326,18 @@ function _footer__custom_right_copy_links() {
           menu_link_save($new_menu_item);
 
           // Migrate translations.
-          $languages = language_list('enabled')[1];
-          foreach ($languages as $lang_code => $language_object) {
-            if ($lang_code == language_default('language')) {
-              continue;
-            }
-
-            $translation_value = i18n_string_translate('menu:item:' . $old_menu_item['mlid'] . ':title', $old_menu_item['link_title'], array('langcode' => $lang_code));
-            if ($translation_value != $old_menu_item['link_title']) {
-              i18n_string_translation_update('menu:item:' . $new_menu_item['mlid'] . ':title', $translation_value, $lang_code, $old_menu_item['link_title']);
+          $i18n_menu_exists = module_exists('i18n_string');
+          if($i18n_menu_exists){
+            $languages = language_list('enabled')[1];
+            foreach ($languages as $lang_code => $language_object) {
+              if ($lang_code == language_default('language')) {
+                continue;
+              }
+  
+              $translation_value = i18n_string_translate('menu:item:' . $old_menu_item['mlid'] . ':title', $old_menu_item['link_title'], array('langcode' => $lang_code));
+              if ($translation_value != $old_menu_item['link_title']) {
+                i18n_string_translation_update('menu:item:' . $new_menu_item['mlid'] . ':title', $translation_value, $lang_code, $old_menu_item['link_title']);
+              }
             }
           }
         }
