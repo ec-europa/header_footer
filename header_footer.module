@@ -320,7 +320,7 @@ function header_footer_preprocess(&$variables, $hook) {
   switch ($hook) {
     case 'footer_ec':
     case 'header_ec':
-      $variables['theme_hook_suggestions'][] = $hook . '__header_footer_' . variable_get('header_footer__design', 'core');
+      $variables['theme_hook_suggestions'][] = $hook . '__' . variable_get('header_footer__design', 'core');
       break;
   }
 }
