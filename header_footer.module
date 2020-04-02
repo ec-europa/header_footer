@@ -23,13 +23,13 @@ foreach ($regex as $name => $regex) {
 function header_footer_theme() {
   return array(
     'header_ec' => array(
-      'template' => 'templates/header-ec',
+      'template' => 'header-ec',
     ),
     'footer_ec' => array(
-      'template' => 'templates/footer-ec',
+      'template' => 'footer-ec',
     ),
     'breadcrumb_ec' => array(
-      'template' => 'templates/breadcrumb-ec',
+      'template' => 'breadcrumb-ec',
     ),
     'menu_items_ec_lists' => array(
       'file' => 'themes/menu_items_ec_lists.theme.inc',
