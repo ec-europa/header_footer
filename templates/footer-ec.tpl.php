@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Templating for the footer EC corporate.
+ * Templating for the footer EC.
  */
 ?>
 <footer class="ecl-footer ecl-footer--custom">
@@ -27,8 +27,7 @@
       </div>
     </div>
   <?php endif; ?>
-  <?php
-// Corporate footer.?>
+  <?php /* Nexteuropa footer */ ?>
   <div class="ecl-footer__sections">
     <div class="ecl-container">
       <div class="ecl-row">

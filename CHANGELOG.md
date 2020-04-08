@@ -1,7 +1,14 @@
 
 
 # Changelog
-## 2.2 (2020-11-03)
+## v3.0 (2020-01-14)
+#### QA
+~ Removing 'corporate' from the module.
+#### Addons
+~ Adding design settings (in /admin/appearance).
+~ Removing i18n_menu as required module in .info file. Only check the usage with coding conditions.
+
+## v2.2 (2020-11-03)
 #### Addons
 + Adding i18n_menu as required module in .info file.
 + Adding 'templates' in the templates uri in function hook_theme().

@@ -1,0 +1,11 @@
+name = FPFIS - Header and Footer
+description = Gives variables $header_ec and $footer_ec in page.tpl.php.
+core = 7.x
+package = FPFIS
+features[features_api][] = api:2
+files[] = header_footer.helpers.inc
+dependencies[] = easy_breadcrumb
+dependencies[] = nexteuropa_europa_search
+version = "7.x-3.0"
+php = 5.6
+multisite_version = 2.5

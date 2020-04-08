@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_HOOK().
  */
-function header_footer_corporate_preprocess_menu_link(&$variables) {
+function header_footer_preprocess_menu_link(&$variables) {
   /* Check if the url in the menu is present in the current page alias
   in order to add active class on LI items. */
   $current_node_alias = drupal_get_path_alias();

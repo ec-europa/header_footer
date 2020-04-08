@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Templating for the menu items EC corporate displayed as links.
+ * Templating for the menu items EC displayed as links.
  */
 ?>
 

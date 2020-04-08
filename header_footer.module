@@ -5,9 +5,9 @@
  * Drupal needs this blank file.
  */
 
-use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
+use HeaderFooter\HeaderFooterHelpers;
 
-include_once 'header_footer_corporate.helpers.inc';
+include_once 'header_footer.helpers.inc';
 
 // Import differents '.component.inc' files (as Atomium theme) from templates/.
 $directory = new RecursiveDirectoryIterator(__DIR__ . '/templates/');
@@ -20,19 +20,19 @@ foreach ($regex as $name => $regex) {
 /**
  * Implements hook_theme().
  */
-function header_footer_corporate_theme() {
+function header_footer_theme() {
   return array(
-    'header_ec_corporate' => array(
-      'template' => 'templates/header-ec-corporate',
+    'header_ec' => array(
+      'template' => 'header-ec',
     ),
-    'footer_ec_corporate' => array(
-      'template' => 'templates/footer-ec-corporate',
+    'footer_ec' => array(
+      'template' => 'footer-ec',
     ),
-    'breadcrumb_ec_corporate' => array(
-      'template' => 'templates/breadcrumb-ec-corporate',
+    'breadcrumb_ec' => array(
+      'template' => 'breadcrumb-ec',
     ),
-    'menu_items_ec_corporate_lists' => array(
-      'file' => 'themes/menu_items_ec_corporate_lists.theme.inc',
+    'menu_items_ec_lists' => array(
+      'file' => 'themes/menu_items_ec_lists.theme.inc',
       'arguments' => array(
         'variables' => array(
           'links' => array(
@@ -49,8 +49,8 @@ function header_footer_corporate_theme() {
         ),
       ),
     ),
-    'menu_items_ec_corporate_links' => array(
-      'template' => 'menu-items-ec-corporate-links',
+    'menu_items_ec_links' => array(
+      'template' => 'menu-items-ec-links',
       'arguments' => array(
         'variables' => array(
           'links' => array(
@@ -75,12 +75,12 @@ function header_footer_corporate_theme() {
 /**
  * Implements hook_theme_registry_alter().
  */
-function header_footer_corporate_theme_registry_alter(&$theme_registry) {
+function header_footer_theme_registry_alter(&$theme_registry) {
   // ################
   // Add templates in custom modules :
   // Source : https://www.drupal.org/docs/7/creating-custom-modules/howtos/using-template-tplphp-files-in-your-own-module.
   // Defined path to the current module.
-  $module_path = drupal_get_path('module', 'header_footer_corporate');
+  $module_path = drupal_get_path('module', 'header_footer');
   // Find all .tpl.php files in this module's folder recursively.
   $template_file_objects = drupal_find_theme_templates($theme_registry, '.tpl.php', $module_path);
   // Iterate through all found template file objects.
@@ -96,18 +96,18 @@ function header_footer_corporate_theme_registry_alter(&$theme_registry) {
 
   // ################
   // Redefine the theme_button() function.
-  $theme_registry['button']['function'] = '_header_footer_corporate_theme_button';
+  $theme_registry['button']['function'] = '_header_footer_theme_button';
   $theme_registry['button']['includes'] = array($module_path . '/themes/button.theme.inc');
   // Redefine the theme_easy_breadcrumb() from easy_breadcrumb.module.
-  $theme_registry['easy_breadcrumb']['function'] = '_header_footer_corporate_theme_breadcrumb';
+  $theme_registry['easy_breadcrumb']['function'] = '_header_footer_theme_breadcrumb';
   $theme_registry['easy_breadcrumb']['includes'] = array($module_path . '/themes/easy_breadcrumb.theme.inc');
 }
 
 /**
  * Implenents hook_form_FORM_ID_alter().
  */
-function header_footer_corporate_form__easy_breadcrumb_general_settings_form_alter(&$form, &$form_state, $form_id) {
-  $form['easy_breadcrumb']['#description'] = t('<i>Some settings had been removed by <b>Header Footer Corporate</b> module because it is not used in the Corporate breadcrumb.</i>');
+function header_footer_form__easy_breadcrumb_general_settings_form_alter(&$form, &$form_state, $form_id) {
+  $form['easy_breadcrumb']['#description'] = t('<i>Some settings had been removed by <b>Header Footer</b> module because it is not used in the breadcrumb.</i>');
   $form['easy_breadcrumb']['easy_breadcrumb-disable_drupal_breadcrumb']['#access'] = FALSE;
   $form['easy_breadcrumb']['easy_breadcrumb-include_title_segment']['#access'] = FALSE;
   $form['easy_breadcrumb']['easy_breadcrumb-title_from_page_when_available']['#access'] = FALSE;
@@ -116,15 +116,16 @@ function header_footer_corporate_form__easy_breadcrumb_general_settings_form_alt
   $form['easy_breadcrumb']['easy_breadcrumb-segments_separator']['#access'] = FALSE;
   $form['easy_breadcrumb']['easy_breadcrumb-capitalizator_ignored_words']['#access'] = FALSE;
   $form['easy_breadcrumb']['easy_breadcrumb-home_segment_title']['#states'] = array(
-      'invisible' => array(
-        ':input[name="easy_breadcrumb-include_home_segment"]' => array('checked' => FALSE),
-  ));
+    'invisible' => array(
+      ':input[name="easy_breadcrumb-include_home_segment"]' => array('checked' => FALSE),
+    ),
+  );
 }
 
 /**
  * Implenents hook_form_FORM_ID_alter().
  */
-function header_footer_corporate_form_nexteuropa_europa_search_search_form_alter(&$form, &$form_state, $form_id) {
+function header_footer_form_nexteuropa_europa_search_search_form_alter(&$form, &$form_state, $form_id) {
   global $language;
   // Form element.
   $form['#attributes']['class'] = array(
@@ -137,7 +138,7 @@ function header_footer_corporate_form_nexteuropa_europa_search_search_form_alter
   $form['search_input_group']['#suffix'] = '';
   // Textfield.
   // Flag to contextualize in HOOK_process_textfield.
-  $form['search_input_group']['QueryText']['#ecl-header_footer_corporate']['header'] = TRUE;
+  $form['search_input_group']['QueryText']['#ecl-header_footer']['header'] = TRUE;
   // Button (also managed in button.theme.inc).
   $form['search_input_group']['europa_search_submit']['#ecl-buttontype'] = 'button';
   $form['search_input_group']['europa_search_submit']['#attributes']['class'] = array(
@@ -145,21 +146,22 @@ function header_footer_corporate_form_nexteuropa_europa_search_search_form_alter
     'ecl-search-form__button',
     'ecl-button--search',
   );
+  $search_label = module_exists('i18n_string') ? i18n_string_translate('blocks:nexteuropa_europa_search:nexteuropa_europa_search_form:title', 'Search', array('langcode' => $language->language)) : 'Search';
   $form['search_input_group']['europa_search_submit']['#value'] =
   '<span class="ecl-button__container">' .
-  '<span class="ecl-button__label" data-ecl-label="true">' . i18n_string_translate('blocks:nexteuropa_europa_search:nexteuropa_europa_search_form:title', 'Search', array('langcode' => $language->language)) . '</span>' .
-  '<svg focusable="false" aria-hidden="true" data-ecl-icon="true" class="ecl-button__icon ecl-button__icon--after ecl-icon ecl-icon--xs"><use xlink:href="' . HeaderFooterCorporateHelpers::getAssetsPath() . '/images/icons/sprites/icons.svg#general--search"></use></svg>' .
+  '<span class="ecl-button__label" data-ecl-label="true">' . $search_label . '</span>' .
+  '<svg focusable="false" aria-hidden="true" data-ecl-icon="true" class="ecl-button__icon ecl-button__icon--after ecl-icon ecl-icon--xs"><use xlink:href="' . HeaderFooterHelpers::getAssetsPath() . '/images/icons/sprites/icons.svg#general--search"></use></svg>' .
   '</span></button>';
 }
 
 /**
  * Implenents hook_form_FORM_ID_alter().
  */
-function header_footer_corporate_form_menu_edit_item_alter(&$form, &$form_state, $form_id) {
+function header_footer_form_menu_edit_item_alter(&$form, &$form_state, $form_id) {
   // Set predefined values for the menu "Footer - Follow us".
   if ($form['parent']['#default_value'] == 'menu-footer-follow-us:0') {
     $options = array();
-    foreach (HeaderFooterCorporateHelpers::getSocialMediaNetworksValues() as $name) {
+    foreach (HeaderFooterHelpers::getSocialMediaNetworksValues() as $name) {
       $options[$name] = $name;
     }
 
@@ -172,9 +174,64 @@ function header_footer_corporate_form_menu_edit_item_alter(&$form, &$form_state,
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function header_footer_form_system_themes_admin_form_alter(&$form, &$form_state, $form_id) {
+  // Adding Header Footer settings.
+  $fieldset_name = 'header_footer';
+  $prefix = $fieldset_name . '__';
+  $form[$fieldset_name] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Header Footer',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#weight' => 5,
+  );
+
+  $options = array();
+  foreach (array(
+    'core' => array(
+      'title' => 'Core',
+      'img' => 'https://wikis.ec.europa.eu/download/attachments/6824781/01.%20Core%20-%20example%20-%20desktop.png?version=5&modificationDate=1571404512753&api=v2',
+    ),
+    'standardised' => array(
+      'title' => 'Standardised',
+      'img' => 'https://wikis.ec.europa.eu/download/attachments/6824798/02.%20Standardised%20-%20example%20-%20desktop.png?version=4&modificationDate=1571404444731&api=v2',
+    ),
+    'harmonised_group1' => array(
+      'title' => 'Harmonised Group 1',
+      'img' => 'https://wikis.ec.europa.eu/download/attachments/6824805/03.%20Harmonised%201%20-%20example%20-%20desktop.png?version=2&modificationDate=1571404561781&api=v2',
+    ),
+    'harmonised_group2' => array(
+      'title' => 'Harmonised Group 2',
+      'img' => 'https://wikis.ec.europa.eu/download/attachments/6824805/03.%20Harmonised%202%20-%20example%20-%20desktop.png?version=4&modificationDate=1572965104939&api=v2',
+    ), 'harmonised_group3' => array(
+      'title' => 'Harmonised Group 3',
+      'img' => '',
+    ),
+  ) as $value => $data) {
+    $options[$value] = '<img src="' . $data['img'] . '" title="' . $data['title'] . '"/>';
+  }
+
+  $field_name = $prefix . 'design';
+  $form[$fieldset_name][$field_name] = array(
+    '#type' => 'radios',
+    '#title' => t('Design'),
+    '#default_value' => variable_get($field_name, 'core'),
+    '#options' => $options,
+    '#description' => t('<a href="https://wikis.ec.europa.eu/display/WEBGUIDE/01.+EC+branded+websites+design" target="_blank">DGCOM</a> designs'),
+  );
+
+  $form = system_settings_form($form);
+  if (isset($form['admin_theme']['actions'])) {
+    unset($form['admin_theme']['actions']);
+  }
+}
+
+/**
  * Implements hook_context_load_alter().
  */
-function header_footer_corporate_context_load_alter(&$context) {
+function header_footer_context_load_alter(&$context) {
   // Remove breadcrumb and footer setted by platform.
   if ($context->name === 'site_wide') {
     if (isset($context->reactions['block']['blocks']['easy_breadcrumb-easy_breadcrumb'])) {
@@ -191,12 +248,12 @@ function header_footer_corporate_context_load_alter(&$context) {
 /**
  * Implements hook_preprocess().
  */
-function header_footer_corporate_preprocess(&$variables, $hook) {
+function header_footer_preprocess(&$variables, $hook) {
   switch ($hook) {
     case 'page':
     case 'maintenance_page':
-      $variables['header_ec_corporate'] =
-      $variables['footer_ec_corporate'] = '';
+      $variables['header_ec'] =
+      $variables['footer_ec'] = '';
       if (!path_is_admin(current_path())) {
         // JS.
         drupal_add_js('https://unpkg.com/svg4everybody@2.1.9/dist/svg4everybody.js', array(
@@ -204,7 +261,7 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
           'scope' => 'footer',
           'group' => JS_THEME,
         ));
-        drupal_add_js(HeaderFooterCorporateHelpers::getAssetsPath('path') . '/scripts/ecl-ec-preset-legacy-website.js', array(
+        drupal_add_js(HeaderFooterHelpers::getAssetsPath('path') . '/scripts/ecl-ec-preset-legacy-website.js', array(
           'type' => 'external',
           'scope' => 'footer',
           'group' => JS_THEME,
@@ -215,14 +272,14 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
           'group' => JS_THEME,
         ));
         // CSS.
-        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path') . '/styles/ecl-ec-preset-legacy-website.css',
+        drupal_add_css(HeaderFooterHelpers::getAssetsPath('path') . '/styles/ecl-ec-preset-legacy-website.css',
           array(
             'type' => 'external',
         // More than CSS_THEME (=100) to not be overrided.
             'group' => 300,
             'weight' => 100,
           ));
-        drupal_add_css(HeaderFooterCorporateHelpers::getAssetsPath('path') . '/styles/ecl-ec-preset-legacy-website-print.css',
+        drupal_add_css(HeaderFooterHelpers::getAssetsPath('path') . '/styles/ecl-ec-preset-legacy-website-print.css',
           array(
             'type' => 'external',
         // More than CSS_THEME (=100) to not be overrided.
@@ -231,7 +288,7 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
             'media' => 'print',
           ));
 
-        drupal_add_css(drupal_get_path('module', 'header_footer_corporate') . '/css/header_footer_corporate.css',
+        drupal_add_css(drupal_get_path('module', 'header_footer') . '/css/header_footer.css',
           array(
         // More than CSS_THEME (=100) to not be overrided.
             'group' => 300,
@@ -240,13 +297,30 @@ function header_footer_corporate_preprocess(&$variables, $hook) {
           ));
 
         // Define custom variables to be used in .tpl files.
-        $variables['header_ec_corporate'] = theme('header_ec_corporate', array(
+        $variables['header_ec'] = theme('header_ec', array(
           'site_name' => $variables['site_name'],
         ));
-        $variables['footer_ec_corporate'] = theme('footer_ec_corporate', array(
+        $variables['footer_ec'] = theme('footer_ec', array(
           'site_name' => $variables['site_name'],
         ));
       }
+      else {
+        drupal_add_css(drupal_get_path('module', 'header_footer') . '/css/header_footer.admin.css',
+        array(
+          // More than CSS_THEME (=100) to not be overrided.
+          'group' => 300,
+          'weight' => 101,
+          'cache' => FALSE,
+        ));
+      }
+      break;
+  }
+
+  // Suggest templates according website design setting.
+  switch ($hook) {
+    case 'footer_ec':
+    case 'header_ec':
+      $variables['theme_hook_suggestions'][] = $hook . '__' . variable_get('header_footer__design', 'core');
       break;
   }
 }

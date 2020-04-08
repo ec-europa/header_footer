@@ -5,12 +5,12 @@
  * Contains component file.
  */
 
-use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
+use HeaderFooter\HeaderFooterHelpers;
 
 /**
  * Implements hook_preprocess_HOOK().
  */
-function header_footer_corporate_preprocess_menu_items_ec_corporate_links(&$variables) {
+function header_footer_preprocess_menu_items_ec_links(&$variables) {
   if (empty($variables['links']['items'])) {
     return;
   }
@@ -36,6 +36,6 @@ function header_footer_corporate_preprocess_menu_items_ec_corporate_links(&$vari
       $link['attributes']['class'] = array();
     }
     $link['attributes']['class'] = array_merge($link['attributes']['class'], $variables['links']['class']);
-    HeaderFooterCorporateHelpers::setLinkIconsPrefixSuffix($link);
+    HeaderFooterHelpers::setLinkIconsPrefixSuffix($link);
   }
 }

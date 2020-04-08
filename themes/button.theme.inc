@@ -10,7 +10,7 @@
  *
  * Inspired from form.inc:theme_button().
  */
-function _header_footer_corporate_theme_button(&$variables) {
+function _header_footer_theme_button(&$variables) {
   $element = $variables['element'];
   $element['#attributes']['type'] = 'submit';
   if (isset($element['#ecl-buttontype'])) {

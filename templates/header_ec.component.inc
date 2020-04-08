@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_HOOK().
  */
-function header_footer_corporate_preprocess_header_ec_corporate(&$variables) {
+function header_footer_preprocess_header_ec(&$variables) {
   global $language;
 
   // Test if multilingual.

@@ -5,14 +5,22 @@
  * Contains install/update/enable hooks.
  */
 
-include_once 'header_footer_corporate.install.inc';
+include_once 'header_footer.install.inc';
 
 /**
  * Implements hook_enable().
- *
- * Add ECL menus.
  */
-function header_footer_corporate_enable() {
+function header_footer_enable() {
+  // Manage enabled old module "header_footer_corporate".
+  if (module_exists('header_footer_corporate')) {
+    // Get old schema_version to do new updates.
+    $old_version = drupal_get_installed_schema_version('header_footer_corporate');
+    drupal_set_installed_schema_version('header_footer', $old_version);
+    // Disable old_module.
+    module_disable('header_footer_corporate');
+    return FALSE;
+  }
+
   // Create menus saving menu group into menu_custom table (from 'menu' module).
   $config_menus = array(
     array(
@@ -46,6 +54,7 @@ function header_footer_corporate_enable() {
       'description' => 'Custom footer menu',
     ),
   );
+  $i18n_menu_exists = module_exists('i18n_menu');
   foreach ($config_menus as $menu) {
     // Look the table first if the data does exist.
     $title = db_query("SELECT title FROM {menu_custom} WHERE menu_name=:menu_name", array(':menu_name' => $menu['menu_name']))->fetchField();
@@ -53,20 +62,22 @@ function header_footer_corporate_enable() {
     if (empty($title)) {
       menu_save($menu);
     }
-    // Add params 'Translate and Localize' to the menu.
-    db_update('menu_custom')
-      ->fields(array(
-        'i18n_mode' => 5,
-      ))
-      ->condition('menu_name', $menu)
-      ->condition('i18n_mode', 0)
-      ->execute();
+    if ($i18n_menu_exists) {
+      // Add params 'Translate and Localize' to the menu.
+      db_update('menu_custom')
+        ->fields(array(
+          'i18n_mode' => 5,
+        ))
+        ->condition('menu_name', $menu)
+        ->condition('i18n_mode', 0)
+        ->execute();
+    }
   }
 
   // Breadcrumb: Update/Create the root link path.
   _breadcrumb__main_link();
 
-  // Reset corporate menus.
+  // Reset menus.
   _reset_menu_to_config('menu-nexteuropa-site-links');
   _reset_menu_to_config('menu-nexteuropa-social-media');
   _reset_menu_to_config('menu-nexteuropa-inst-links');
@@ -83,17 +94,19 @@ function header_footer_corporate_enable() {
   _footer__custom_right_copy_links();
 
   // Set all translations menu items.
-  foreach (_get_links_config() as $link_group) {
-    foreach ($link_group as $link) {
-      $mlids = db_query("SELECT mlid from {menu_links} WHERE link_title=:link_title AND menu_name=:menu_name", array(':link_title' => $link['link_title'], ':menu_name' => $link['menu_name']))->fetchAll();
-      foreach ($mlids as $menu_item) {
-        // Set menu_items translations.
-        if (!empty($link['customized'])) {
-          _set_translations(array(
-            'text_original' => $link['link_title'],
-            'context' => 'menu_item',
-            'mlid' => $menu_item->mlid,
-          ));
+  if ($i18n_menu_exists) {
+    foreach (_get_links_config() as $link_group) {
+      foreach ($link_group as $link) {
+        $mlids = db_query("SELECT mlid from {menu_links} WHERE link_title=:link_title AND menu_name=:menu_name", array(':link_title' => $link['link_title'], ':menu_name' => $link['menu_name']))->fetchAll();
+        foreach ($mlids as $menu_item) {
+          // Set menu_items translations.
+          if (!empty($link['customized'])) {
+            _set_translations(array(
+              'text_original' => $link['link_title'],
+              'context' => 'menu_item',
+              'mlid' => $menu_item->mlid,
+            ));
+          }
         }
       }
     }
@@ -104,30 +117,30 @@ function header_footer_corporate_enable() {
 }
 
 /**
- * Corporate footer left links: Two links relative to EC homepage become once.
+ * Nexteuropa footer left links: Two links relative to EC homepage become once.
  */
-function header_footer_corporate_update_7001() {
+function header_footer_update_7001() {
   _reset_menu_to_config('menu-nexteuropa-site-links');
 }
 
 /**
  * Footer links: Copy links from custom menus (used in MARE sites) to our menus.
  */
-function header_footer_corporate_update_7002() {
+function header_footer_update_7002() {
   _footer__custom_right_copy_links();
 }
 
 /**
  * Breadcrumb main link path.
  */
-function header_footer_corporate_update_7003() {
+function header_footer_update_7003() {
   _breadcrumb__main_link();
 }
 
 /**
- * Footer corporate : Reset corporates menus.
+ * Footer : Reset menus.
  */
-function header_footer_corporate_update_7004() {
+function header_footer_update_7004() {
   _reset_menu_to_config('menu-nexteuropa-site-links');
   _reset_menu_to_config('menu-nexteuropa-social-media');
   _reset_menu_to_config('menu-nexteuropa-inst-links');
@@ -137,6 +150,6 @@ function header_footer_corporate_update_7004() {
 /**
  * Footer custom : Unset custom classes.
  */
-function header_footer_corporate_update_7005() {
+function header_footer_update_7005() {
   _delete_menu_items_attributes('menu-footer-follow-us');
 }

@@ -8,7 +8,7 @@
 /**
  * Implements hook_preprocess_HOOK().
  */
-function header_footer_corporate_preprocess_breadcrumb_ec_corporate(&$variables, $hook) {
+function header_footer_preprocess_breadcrumb_ec(&$variables, $hook) {
   global $language;
   // We have $breadcrumb without static items from "Breadcrumb menu".
   // We add this static items and programatically add the homepage link.
@@ -18,7 +18,7 @@ function header_footer_corporate_preprocess_breadcrumb_ec_corporate(&$variables,
   // Clean data.
   foreach ($breadcrumb as $key => &$b) {
     // Unset item when no 'url' and not the last item.
-    if(!isset($b['url']) && next($breadcrumb) !== FALSE){
+    if (!isset($b['url']) && next($breadcrumb) !== FALSE) {
       unset($breadcrumb[$key]);
       continue;
     }
@@ -35,7 +35,7 @@ function header_footer_corporate_preprocess_breadcrumb_ec_corporate(&$variables,
   }
   // [homepage][456].
   // Add programatically the homepage if there is no EasyBreadcrumb setting.
-  if(!variable_get('easy_breadcrumb-include_home_segment', FALSE)){
+  if (!variable_get('easy_breadcrumb-include_home_segment', FALSE)) {
     array_unshift($breadcrumb, array(
       'content' => variable_get('site_name'),
       'options' => array(
