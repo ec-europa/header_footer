@@ -1,7 +1,10 @@
-
-
 # Changelog
-## 2.2 (2020-11-03)
+
+## v2.3 (2020-23-04)
+#### Addons
+- Update public static function getAssetsPath value
+
+## v2.2 (2020-11-03)
 #### Addons
 + Adding i18n_menu as required module in .info file.
 + Adding 'templates' in the templates uri in function hook_theme().
