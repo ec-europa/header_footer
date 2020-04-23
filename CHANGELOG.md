@@ -2,7 +2,7 @@
 
 ## v2.3 (2020-23-04)
 #### Addons
-- update public static function getAssetsPath value
+- Update public static function getAssetsPath value
 
 ## v2.2 (2020-11-03)
 #### Addons
