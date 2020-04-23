@@ -75,7 +75,7 @@ abstract class HeaderFooterCorporateHelpers {
    * Get assets path.
    */
   public static function getAssetsPath($type = 'url') {
-    return 'https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.11.0/ec-preset-legacy-website';
+    return 'https://cdn1.fpfis.tech.ec.europa.eu/ecl/v2.27.0/ec-preset-legacy-website';
   }
 
 }
