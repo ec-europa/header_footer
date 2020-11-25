@@ -12,6 +12,7 @@ use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
   <ol class="ecl-breadcrumb__container">
     <?php foreach ($breadcrumb as $value): ?>
       <?php if ($i < $count - 1): ?>
+
         <li class="ecl-breadcrumb__segment" data-ecl-breadcrumb-item="static" aria-hidden="false">
           <?php print $value; ?>
           <svg focusable="false" aria-hidden="true"
@@ -21,7 +22,7 @@ use HeaderFooterCorporate\HeaderFooterCorporateHelpers;
         </li>
         <?php else: ?>
           <?php // Last element is the current. ?>
-          <li class="ecl-breadcrumb__segment ecl-breadcrumb__current-page" aria-current="page" data-ecl-breadcrumb-item="static" aria-hidden="false"><?php print render($value); ?></li>
+          <li class="ecl-breadcrumb__segment" aria-current="page" data-ecl-breadcrumb-item="static" aria-hidden="false"><?php print render($value); ?></li>
         <?php endif; ?>
       <?php $i++; ?>
     <?php endforeach; ?>
