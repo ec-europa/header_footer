@@ -53,7 +53,6 @@ function header_footer_corporate_easy_breadcrumb_breadcrumb_alter(array &$breadc
 
   // Classify current element.
   $last_breadcrumb = array_pop($breadcrumb);
-  ddl($last_breadcrumb,'$last_breadcrumb');
    if(is_array($last_breadcrumb)) {
      $content = $last_breadcrumb['content'];
      $last_breadcrumb = array(
