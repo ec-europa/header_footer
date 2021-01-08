@@ -53,10 +53,13 @@ function header_footer_corporate_easy_breadcrumb_breadcrumb_alter(array &$breadc
 
   // Classify current element.
   $last_breadcrumb = array_pop($breadcrumb);
-   if(is_array($last_breadcrumb)) {
-     $content = $last_breadcrumb['content'];
-     $last_breadcrumb = array(
-      'content' => $content,
+  if(is_array($last_breadcrumb)) {
+    // https://github.com/ec-europa/header_footer/issues/28
+    // There is an issue here as easy_breacrumd retrieve the title
+    // from the url with language suffix so $last_breadcrumb['content']
+    // can't be used.
+    $last_breadcrumb = array(
+      'content' => drupal_get_title(),
       'class' => array('ecl-breadcrumb__current-page'),
     );
   }
