@@ -41,15 +41,6 @@ function header_footer_corporate_easy_breadcrumb_breadcrumb_alter(array &$breadc
     ));
   }
 
-  //Add European Commission segment.
-  if(!theme_get_setting('enable_interinstitutional_theme')) {
-        array_unshift($breadcrumb, array(
-        'content' =>  l(t('European Commission'),
-          url('https://ec.europa.eu/info/index',array('absolute'=>TRUE)),
-          array('attributes'=>array('class'=> 'ecl-breadcrumb__link ecl-link ecl-link--standalone'))),
-      ));
-    }
-
   // Clean data.
   foreach ($breadcrumb as $key => &$b) {
 
@@ -74,3 +65,55 @@ function header_footer_corporate_easy_breadcrumb_breadcrumb_alter(array &$breadc
   }
   $breadcrumb[] = $last_breadcrumb;
 }
+
+/**
+ * Implements hook_process_easy_breadcrumb().
+ */
+function header_footer_corporate_process_easy_breadcrumb(array &$variables) {
+  global $language;
+if(theme_get_setting('enable_interinstitutional_theme')) {
+  $menu_links = menu_tree('menu-breadcrumb-menu');
+  if (!empty($menu_links)) {
+    $new_menu_items = [];
+    foreach ($menu_links as $key => $menu_item) {
+      if (is_numeric($key)) {
+        $options = [
+          'attributes' =>
+          [
+            'class' =>
+            [
+              'ecl-breadcrumb__link',
+              'ecl-link',
+              'ecl-link--standalone',
+            ],
+          ],
+        ];
+        $url = drupal_parse_url($menu_item['#original_link']['link_path']);
+        $path = $url['path'];
+        if (!empty($url['query'])) {
+          $options['query'] = $url['query'];
+        }
+        if (!empty($url['fragment'])) {
+          $options['fragment'] = $url['fragment'];
+        }
+        if (valid_url($path)) {
+          $path = $path . '_' . $language->prefix;
+        }
+        $title = token_replace($menu_item['#title'], $menu_item, ['language' => $language]);
+        $new_menu_items[] = '<span itemprop="title">' . l($title, $path, $options) . '</span>';
+      }
+    }
+
+    if (!empty($new_menu_items)) {
+      if (empty($variables['breadcrumb'])) {
+        $variables['breadcrumb'] = $new_menu_items;
+      }
+      else {
+        $variables['breadcrumb'] = array_merge($new_menu_items, $variables['breadcrumb']);
+      }
+      $variables['segments_quantity'] = count($variables['breadcrumb']);
+    }
+  }
+}
+}
+
