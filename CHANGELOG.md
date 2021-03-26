@@ -1,4 +1,11 @@
 # Changelog
+## master-2.6 v3.3 (2021-26-03)
+#### Addons
+- Add European Commission segment.
+
+## master-2.6 v3.0 (2020-12-03)
+#### Bug fix
+- Fix breadcrumb_ec_corporate.component.inc after update easy_breadcrumb.
 
 ## v2.3 (2020-23-04)
 #### Addons
