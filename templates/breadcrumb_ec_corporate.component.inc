@@ -70,8 +70,8 @@ function header_footer_corporate_easy_breadcrumb_breadcrumb_alter(array &$breadc
  * Implements hook_process_easy_breadcrumb().
  */
 function header_footer_corporate_process_easy_breadcrumb(array &$variables) {
-  global $language;
   if(!theme_get_setting('enable_interinstitutional_theme')) {
+    global $language;
     $menu_links = menu_tree('menu-breadcrumb-menu');
     if (!empty($menu_links)) {
       $new_menu_items = [];
