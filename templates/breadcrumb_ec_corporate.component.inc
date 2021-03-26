@@ -71,7 +71,7 @@ function header_footer_corporate_easy_breadcrumb_breadcrumb_alter(array &$breadc
  */
 function header_footer_corporate_process_easy_breadcrumb(array &$variables) {
   global $language;
-if(theme_get_setting('enable_interinstitutional_theme')) {
+if(!theme_get_setting('enable_interinstitutional_theme')) {
   $menu_links = menu_tree('menu-breadcrumb-menu');
   if (!empty($menu_links)) {
     $new_menu_items = [];
