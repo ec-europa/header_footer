@@ -42,7 +42,7 @@ function header_footer_corporate_easy_breadcrumb_breadcrumb_alter(array &$breadc
   }
 
   //Add European Commission segment.
-  if(theme_get_setting('enable_interinstitutional_theme')) {
+  if(!theme_get_setting('enable_interinstitutional_theme')) {
         array_unshift($breadcrumb, array(
         'content' =>  l(t('European Commission'),
           url('https://ec.europa.eu/info/index',array('absolute'=>TRUE)),
