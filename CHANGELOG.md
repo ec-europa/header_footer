@@ -1,7 +1,9 @@
 # Changelog
-## master-2.6 v3.3 (2021-26-03)
+
+## master-2.6 v3.4 (2021-16-09)
 #### Addons
-- Add European Commission segment.
+- Load svg4everybody.js file instead of external call.
+- See https://unpkg.com/svg4everybody@2.1.9/dist/svg4everybody.js.
 
 ## master-2.6 v3.0 (2020-12-03)
 #### Bug fix
